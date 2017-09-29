@@ -12,7 +12,7 @@ module.exports = function () {
   const options = {
     name: 'galleries',
     Model,
-    paginate
+    // paginate
   };
 
   // Initialize our service with any options it requires

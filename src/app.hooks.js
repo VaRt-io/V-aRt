@@ -6,7 +6,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [logger()],
     update: [],
     patch: [],
     remove: []
