@@ -10,10 +10,10 @@ module.exports = function (app) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    // jpeg: {
-    //   type: DataTypes.BLOB,
-    //   allowNull: false
-    // },
+    jpeg: {
+      type: DataTypes.BLOB,
+      allowNull: false
+    },
     position: {
       type: DataTypes.INTEGER,
       allowNull: false
