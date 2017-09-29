@@ -26,7 +26,7 @@ module.exports = function () {
     });
 
     // Sync to the database
-    sequelize.sync({force: true});
+    sequelize.sync();
 
     return result;
   };
