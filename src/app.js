@@ -5,6 +5,15 @@ const cors = require('cors');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 
+// feathers-blob service
+const blobService = require('feathers-blob');
+// Here we initialize a FileSystem storage,
+// but you can use feathers-blob with any other
+// storage service like AWS or Google Drive.
+const fs = require('fs-blob-store');
+const blobStorage = fs(__dirname + '/uploads');
+
+
 const feathers = require('feathers');
 const configuration = require('feathers-configuration');
 const hooks = require('feathers-hooks');
@@ -47,6 +56,11 @@ app.configure(middleware);
 app.configure(authentication);
 // Set up our services (see `services/index.js`)
 app.configure(services);
+
+
+// Upload Service
+app.use('/uploads', blobService({Model: blobStorage}));
+
 // Configure a middleware for 404s and the error handler
 app.use(notFound());
 app.use(handler());
