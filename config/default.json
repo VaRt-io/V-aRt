@@ -6,7 +6,7 @@
     "default": 10,
     "max": 50
   },
-  "postgres": "postgres://Sif:@localhost:5432/clam_backend",
+  "postgres": "postgres://postgres:@localhost:5432/clam_backend",
   "authentication": {
     "secret": "50e932aa9f1ef15e8372ef3509a30b6be847d0d0c202a506fb0a52b6a68656cf937b16dda64e1cf8f3a396c84bb68590ab278be665f63896aa96d7c5116eb38096531e79bbb20f5d91e83258aacabed97533c48706de9c181818f688c3863acb8cecc2bbb525919a8faf34f5a9f2ac6dcf39836790f0a24275fe65550c51262d09d43e433d58f8f310abe5ad321ceb09281d8278c4dc9aa06532c0db20fd5fcaca20a33b7b29fac97256404de9dfc3be91fda4bc45f0a9af9e3a35d8163d1bbced32c9541a37b51bc5f417ae1b66b51ec82ff75fb27e9a47811c80f3722083a015e3dfaa6db12c5b6fa351d9b3722c4d3b3a26f7fc626fa843cbc237e73d5256",
     "strategies": [
