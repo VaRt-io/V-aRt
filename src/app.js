@@ -100,7 +100,9 @@ app.get('/s3/images', (req, res, next) => {
       console.log(err);
     } else {
       console.log('got objects', data);
-      res.json(data);
+      console.log(data);
+      const mappedURLs = data.Contents.map((object) => `https://s3.amazonaws.com/clam-images/${object.Key}`);
+      res.json(mappedURLs);
     }
   });
 })
