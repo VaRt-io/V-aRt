@@ -20,9 +20,7 @@ module.exports = function (app) {
 
   galleries.associate = function (models) { // eslint-disable-line no-unused-vars
     const users = models.users;
-    const images = models.images;
     galleries.belongsTo(users);
-    galleries.hasMany(images);
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
   };
