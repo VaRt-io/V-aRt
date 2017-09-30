@@ -68,7 +68,7 @@ app.configure(services);
 const s3 = new AWS.S3({
   accessKeyId: 'AKIAI4NXXMVNEKPISIMQ',
   secretAccessKey: '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'
-})
+});
 
 const blobStore = S3BlobStore({
   client: s3,
@@ -79,23 +79,33 @@ const blobService = BlobService({
   Model: blobStore
 });
 // TODO: programatically create blob and store galleryId & position as key-values pairs
-app.get('/s3/images', (req, res, next) => {
-  const blob = {
-    uri: getBase64DataURI(new Buffer('hello world'), 'text/plain')
-  }
 
-  blobService.create(blob).then(function (result) {
-    console.log('Stored blob with result:**', result);
-    res.json(result);
-  }).catch(err => {
-    console.error(err);
+app.get('/s3/gallery/:id', (req, res, next) => {
+  const params = {Bucket: 'stanky-clams', Key: `${req.params.id}/aword`, ACL: 'public-read', Body: 'Hello World!'};
+  s3.upload(params, function(err, data) {
+    if (err)
+      console.log(err);
+    else
+      console.log('Successfully uploaded data to ' + params.Bucket + '/' + params.Key);
+    res.json(data);
   });
-})
+});
 
 // TODO: programatically get all images
 
+// TODO: programatically get all images from a specific gallery (using key value pairs)
 
-// TODO: programatically get all images from a specific gallery
+// TODO: programatically get a specific image
+
+// app.get('/s3/images/:name', (req, res, next) => {
+//   blobService.get(req.params.name)
+//     .then(function (result) {
+//       console.log(result);
+//       res.json(result);
+//     }).catch(function(err) {
+//       console.log(err);
+//     });
+// });
 
 
 
