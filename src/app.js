@@ -78,8 +78,8 @@ const s3 = new AWS.S3({
 // const blobService = BlobService({
 //   Model: blobStore
 // });
-// TODO: programatically create blob and store galleryId & position as key-values pairs
-
+// TODO: programatically upload blob and store galleryId & position as key-values pairs
+// /s3/galleries/images
 // app.put('/s3/galleries/:id', (req, res, next) => {
 //   const params = {Bucket: 'stanky-clams', Key: `${req.params.id}/aword`, ACL: 'public-read', Body: 'Hello World!'};
 //   s3.upload(params, function(err, data) {
@@ -93,7 +93,7 @@ const s3 = new AWS.S3({
 
 // TODO: programatically get all image urls (currently this is get all objects)
 
-app.get('/s3/images', (req, res, next) => {
+app.get('/s3/galleries/images', (req, res, next) => {
   const params = {Bucket: 'stanky-clams'};
   s3.listObjects(params, (err, data) => {
     if (err) {
