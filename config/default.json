@@ -65,5 +65,9 @@
       "httpOnly": false,
       "secure": false
     }
+  },
+  "s3": {
+    "clientID": "test1",
+    "secret": "test2"
   }
 }
