@@ -93,7 +93,7 @@ app.get('/s3/images', (req, res, next) => {
     if (err) {
       console.log(err);
     } else {
-      const mappedURLs = data.Contents.map((object) => `https://s3.amazonaws.com/clam-images/${object.Key}`);
+      const mappedURLs = data.Contents.map((object) => `https://s3.amazonaws.com/stanky-clams/${object.Key}`);
       res.json(mappedURLs);
     }
   });
@@ -108,13 +108,13 @@ app.get('/s3/images', (req, res, next) => {
 app.service('/s3/images/new').before({
   create: [
     function(hook) {
+      console.log('hook data**', hook.data);
       if (!hook.data.uri && hook.params.file){
         const file = hook.params.file;
         const uri = dauria.getBase64DataURI(file.buffer, file.mimetype);
         hook.data = {uri: uri};
       }
       hook.params.s3 = { ACL: 'public-read' };
-      console.log(hook.data);
     }
   ]
 });
