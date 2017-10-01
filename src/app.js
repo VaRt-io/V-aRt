@@ -5,18 +5,6 @@ const cors = require('cors');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 
-// feathers-blob service
-const {getBase64DataURI} = require('dauria');
-const AWS = require('aws-sdk');
-const S3BlobStore = require('s3-blob-store');
-const BlobService = require('feathers-blob');
-// Here we initialize a FileSystem storage,
-// but you can use feathers-blob with any other
-// storage service like AWS or Google Drive.
-// const fs = require('fs-blob-store');
-// const blobStorage = fs(__dirname + '/uploads');
-
-
 const feathers = require('feathers');
 const configuration = require('feathers-configuration');
 const hooks = require('feathers-hooks');
@@ -24,6 +12,9 @@ const rest = require('feathers-rest');
 const socketio = require('feathers-socketio');
 
 const handler = require('feathers-errors/handler');
+const multer = require('multer');
+const multipartMiddleware = multer();
+const dauria = require('dauria');
 const notFound = require('feathers-errors/not-found');
 
 const middleware = require('./middleware');
@@ -60,6 +51,9 @@ app.configure(authentication);
 // Set up our services (see `services/index.js`)
 app.configure(services);
 
+const AWS = require('aws-sdk');
+const BlobService = require('feathers-blob');
+const S3BlobStore = require('s3-blob-store');
 
 // Upload Service
 // app.use('/uploads', BlobService({Model: blobStorage}));
@@ -70,14 +64,14 @@ const s3 = new AWS.S3({
   secretAccessKey: 'TOsQ3mJAUU/fkB4C2cSKLP5tBgqjqZXRSUwLnb1Z'
 });
 
-// const blobStore = S3BlobStore({
-//   client: s3,
-//   bucket: 'stanky-clams'
-// });
+const blobStore = S3BlobStore({
+  client: s3,
+  bucket: 'stanky-clams'
+});
 
-// const blobService = BlobService({
-//   Model: blobStore
-// });
+const blobService = BlobService({
+  Model: blobStore
+});
 // TODO: programatically upload blob and store galleryId & position as key-values pairs
 // /s3/galleries/images
 // app.put('/s3/galleries/:id', (req, res, next) => {
@@ -93,19 +87,19 @@ const s3 = new AWS.S3({
 
 // TODO: programatically get all image urls (currently this is get all objects)
 
-app.get('/s3/galleries/images', (req, res, next) => {
-  const params = {Bucket: 'stanky-clams'};
-  s3.listObjects(params, (err, data) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('got objects', data);
-      console.log(data);
-      const mappedURLs = data.Contents.map((object) => `https://s3.amazonaws.com/clam-images/${object.Key}`);
-      res.json(mappedURLs);
-    }
-  });
-})
+// app.get('/s3/galleries/images', (req, res, next) => {
+//   const params = {Bucket: 'stanky-clams'};
+//   s3.listObjects(params, (err, data) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log('got objects', data);
+//       console.log(data);
+//       const mappedURLs = data.Contents.map((object) => `https://s3.amazonaws.com/clam-images/${object.Key}`);
+//       res.json(mappedURLs);
+//     }
+//   });
+// })
 
 // TODO: programatically get all image urls from a specific gallery (using key value pairs)
 
@@ -121,6 +115,45 @@ app.get('/s3/galleries/images', (req, res, next) => {
 //     });
 // });
 
+app.get('/test', (req, res, next) => {
+  res.send('testing!');
+})
+
+app.use('/s3/images',
+
+  // multer parses the file named 'uri'.
+  // Without extra params the data is
+  // temporarely kept in memory
+  multipartMiddleware.single('uri'),
+
+  // another middleware, this time to
+  // transfer the received file to feathers
+  function(req,res,next){
+    req.feathers.file = req.file;
+    next();
+  },
+  blobService
+);
+
+// before-create Hook to get the file (if there is any)
+// and turn it into a datauri,
+// transparently getting feathers-blob
+// to work with multipart file uploads
+app.service('/s3/images').before({
+  create: [
+    function(hook) {
+    console.log('inside hook');
+      if (!hook.data.uri && hook.params.file){
+        const file = hook.params.file;
+        const uri = dauria.getBase64DataURI(file.buffer, file.mimetype);
+        hook.data = {uri: uri};
+      }
+      hook.params.s3 = { ACL: 'public-read' };
+      console.log(hook.data);
+      console.log(hook.params.file);
+    }
+  ]
+});
 
 
 // Configure a middleware for 404s and the error handler
