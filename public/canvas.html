@@ -142,15 +142,14 @@ Tool:
     data.append("uri", uri);
 
     var xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
+//    xhr.withCredentials = true;
 
     xhr.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {
         console.log(this.responseText);
       }
     });
-
-    xhr.open("POST", "https://tranquil-island-62126.herokuapp.com//s3/images/new");
+    xhr.open("POST", "https://tranquil-island-62126.herokuapp.com/s3/images/new");
     xhr.setRequestHeader("cache-control", "no-cache");
     xhr.send(data);
   }
