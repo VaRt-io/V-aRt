@@ -55,9 +55,8 @@ const AWS = require('aws-sdk');
 const BlobService = require('feathers-blob');
 const S3BlobStore = require('s3-blob-store');
 
-// Upload Service
-// app.use('/uploads', BlobService({Model: blobStorage}));
-
+// TODO: Add environmental variable support so amazon keys/secrets can be safe while file is still able to be shared
+// TODO: Move into the services directory
 // S3 Image Service
 const s3 = new AWS.S3({
   accessKeyId: 'AKIAI4NXXMVNEKPISIMQ',
@@ -72,34 +71,53 @@ const blobStore = S3BlobStore({
 const blobService = BlobService({
   Model: blobStore
 });
-// TODO: programatically upload blob and store galleryId & position as key-values pairs
-// /s3/galleries/images
-// app.put('/s3/galleries/:id', (req, res, next) => {
-//   const params = {Bucket: 'stanky-clams', Key: `${req.params.id}/aword`, ACL: 'public-read', Body: 'Hello World!'};
-//   s3.upload(params, function(err, data) {
-//     if (err)
-//       console.log(err);
-//     else
-//       console.log('Successfully uploaded data to ' + params.Bucket + '/' + params.Key);
-//     res.json(data);
-//   });
-// });
 
-// TODO: programatically get all image urls (currently this is get all objects)
+app.use('/s3/images/new',
+  // multer parses the file named 'uri'.
+  // Without extra params the data is
+  // temporarely kept in memory
+  multipartMiddleware.single('uri'),
+  // another middleware, this time to
+  // transfer the received file to feathers
+  function(req,res,next){
+    req.feathers.file = req.file;
+    next();
+  },
+  blobService
+);
 
-// app.get('/s3/galleries/images', (req, res, next) => {
-//   const params = {Bucket: 'stanky-clams'};
-//   s3.listObjects(params, (err, data) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log('got objects', data);
-//       console.log(data);
-//       const mappedURLs = data.Contents.map((object) => `https://s3.amazonaws.com/clam-images/${object.Key}`);
-//       res.json(mappedURLs);
-//     }
-//   });
-// })
+
+app.get('/s3/images', (req, res, next) => {
+  const params = {Bucket: 'stanky-clams'};
+  s3.listObjects(params, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      const mappedURLs = data.Contents.map((object) => `https://s3.amazonaws.com/clam-images/${object.Key}`);
+      res.json(mappedURLs);
+    }
+  });
+});
+
+// before-create Hook to get the file (if there is any)
+// and turn it into a datauri,
+// transparently getting feathers-blob
+// to work with multipart file uploads
+
+// TODO: Add galleryId & position as key-values pairs
+app.service('/s3/images/new').before({
+  create: [
+    function(hook) {
+      if (!hook.data.uri && hook.params.file){
+        const file = hook.params.file;
+        const uri = dauria.getBase64DataURI(file.buffer, file.mimetype);
+        hook.data = {uri: uri};
+      }
+      hook.params.s3 = { ACL: 'public-read' };
+      console.log(hook.data);
+    }
+  ]
+});
 
 // TODO: programatically get all image urls from a specific gallery (using key value pairs)
 
@@ -114,47 +132,6 @@ const blobService = BlobService({
 //       console.log(err);
 //     });
 // });
-
-app.get('/test', (req, res, next) => {
-  res.send('testing!');
-})
-
-app.use('/s3/images',
-
-  // multer parses the file named 'uri'.
-  // Without extra params the data is
-  // temporarely kept in memory
-  multipartMiddleware.single('uri'),
-
-  // another middleware, this time to
-  // transfer the received file to feathers
-  function(req,res,next){
-    req.feathers.file = req.file;
-    next();
-  },
-  blobService
-);
-
-// before-create Hook to get the file (if there is any)
-// and turn it into a datauri,
-// transparently getting feathers-blob
-// to work with multipart file uploads
-app.service('/s3/images').before({
-  create: [
-    function(hook) {
-    console.log('inside hook');
-      if (!hook.data.uri && hook.params.file){
-        const file = hook.params.file;
-        const uri = dauria.getBase64DataURI(file.buffer, file.mimetype);
-        hook.data = {uri: uri};
-      }
-      hook.params.s3 = { ACL: 'public-read' };
-      console.log(hook.data);
-      console.log(hook.params.file);
-    }
-  ]
-});
-
 
 // Configure a middleware for 404s and the error handler
 app.use(notFound());
