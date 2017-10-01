@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 module.exports = function () {
   const app = this;
-  const connectionString = app.get('postgres');
+  const connectionString = process.env.DATABASE_URL || app.get('postgres');
   const sequelize = new Sequelize(connectionString, {
     dialect: 'postgres',
     logging: false,
