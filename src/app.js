@@ -59,10 +59,8 @@ const S3BlobStore = require('s3-blob-store');
 // TODO: Move into the services directory
 // S3 Image Service
 const s3 = new AWS.S3({
-  // accessKeyId: 'AKIAI4NXXMVNEKPISIMQ',
   accessKeyId: process.env.S3_ID,
   secretAccessKey: process.env.S3_KEY
-  // secretAccessKey: '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'
 });
 
 const blobStore = S3BlobStore({
