@@ -152,6 +152,10 @@ Tool:
     xhr.open("POST", 'https://tranquil-island-62126.herokuapp.com/s3/images/new');
     xhr.setRequestHeader("cache-control", "no-cache");
     xhr.send(data);
+
+    setTimeout(() => {
+      window.location.href = 'https://tranquil-island-62126.herokuapp.com/vr.html';
+    }, 2000);
   }
 
 
