@@ -121,7 +121,7 @@ app.get('/s3/images', (req, res, next) => {
     .then((allObjectHeadPromises) => Promise.all(allObjectHeadPromises))
     .then((allObjectHeads) => allObjectHeads.filter((objectHead) => {
       if (req.query.hasOwnProperty('galleryid')) {
-        if (objectHead.Metadata.hasOwnProperty('galleryid')) {
+        if (objectHead.Metadata.hasOwnProperty('galleryid') && objectHead.Metadata.hasOwnProperty('position')) {
           return objectHead.Metadata.galleryid === req.query.galleryid;
         }
       } else {
@@ -132,7 +132,7 @@ app.get('/s3/images', (req, res, next) => {
       filteredObjects.forEach((filteredObject) => {
         objectKeys.forEach((objectKey) => {
           if (filteredObject.ETag === objectKey.ETag) {
-            resultantArr.push(`https://s3.amazonaws.com/stanky-clams/${objectKey.Key}`);
+            resultantArr.push({url:`https://s3.amazonaws.com/stanky-clams/${objectKey.Key}`, position: filteredObject.Metadata.position, galleryid: filteredObject.Metadata.galleryid});
           }
         });
       });
