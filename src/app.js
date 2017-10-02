@@ -4,6 +4,7 @@ const compress = require('compression');
 const cors = require('cors');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
+const promise = require('bluebird');
 
 const feathers = require('feathers');
 const configuration = require('feathers-configuration');
@@ -51,16 +52,18 @@ app.configure(authentication);
 // Set up our services (see `services/index.js`)
 app.configure(services);
 
+// const AWS = require('aws-sdk');
 const AWS = require('aws-sdk');
 const BlobService = require('feathers-blob');
 const S3BlobStore = require('s3-blob-store');
 
 // TODO: Move into the services directory
 // S3 Image Service
-const s3 = new AWS.S3({
+var s3 = promise.promisifyAll(new AWS.S3({
   accessKeyId: process.env.S3_ID,
   secretAccessKey: process.env.S3_KEY
-});
+}));
+// s3 =
 
 const blobStore = S3BlobStore({
   client: s3,
@@ -100,33 +103,55 @@ app.get('/s3/images', (req, res, next) => {
 
 
 app.get('/s3/images/test', (req, res, next) => {
-  console.log('req.query', req.query);
+  var galleryId;
+  var position;
+  if (req.query.hasOwnProperty('galleryId')) {
+    galleryId = req.query.galleryid;
+  }
   const params = {Bucket: 'stanky-clams'};
-  s3.listObjects(params, (err, data) => {
-    if (err) {
-      console.log(err);
-    } else {
-      const oneObject = data.Contents[0];
-      s3.headObject({Bucket: 'stanky-clams', Key: oneObject.Key}, (err, objectData) => {
-        res.json(objectData);
-      });
+  // const s3.listObjectsAsync = promise.promisify(s3.listObjects);
 
-      // const objectsMetaData = data.Contents.map((object) => {
-      //   const objectParams = {Bucket: 'stanky-clams', Key: object.Key}
-      //   return s3.headObject(objectParams, (err, objectData) => {
-      //     if (err) {
-      //       console.log(err);
-      //     } else {
-      //       return objectData.Metadata;
-      //     }
-      //   });
-      // });
-      // console.log(objectsMetaData);
-      // res.json(objectsMetaData);
-      // s3.headObject()
-      // res.json(data);
-    }
-  });
+  s3.listObjectsAsync(params)
+    .then((data) => data.Contents.map((object) => s3.headObjectAsync({Bucket: 'stanky-clams', Key: object.Key})))
+    .then((allObjectHeadPromises) => Promise.all(allObjectHeadPromises))
+    .then((allObjectHeads) => {
+      console.log('objectHeadsLengths', allObjectHeads.length);
+      res.json(allObjectHeads);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  // s3.listObjects(params, (err, data) => {
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //     // make a http request for the head of each object
+  //     // promise.all the requests
+  //     // filter the results by the gallery id
+  //     // map over each remaining object and construct the url
+  //     // res.json the arr of urls
+  //
+  //     // const oneObject = data.Contents[0];
+  //     // s3.headObject({Bucket: 'stanky-clams', Key: oneObject.Key}, (err, objectData) => {
+  //     //   res.json(objectData);
+  //     // });
+  //
+  //     // const objectsMetaData = data.Contents.map((object) => {
+  //     //   const objectParams = {Bucket: 'stanky-clams', Key: object.Key}
+  //     //   return s3.headObject(objectParams, (err, objectData) => {
+  //     //     if (err) {
+  //     //       console.log(err);
+  //     //     } else {
+  //     //       return objectData.Metadata;
+  //     //     }
+  //     //   });
+  //     // });
+  //     // console.log(objectsMetaData);
+  //     // res.json(objectsMetaData);
+  //     // s3.headObject()
+  //     // res.json(data);
+  //   }
+  // });
 });
 
 // before-create Hook to get the file (if there is any)
