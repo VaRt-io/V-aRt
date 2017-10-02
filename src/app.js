@@ -89,69 +89,56 @@ app.use('/s3/images/new',
 );
 
 
+// app.get('/s3/images', (req, res, next) => {
+//   const params = {Bucket: 'stanky-clams'};
+//   s3.listObjects(params, (err, data) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.json(data);
+//       const mappedURLs = data.Contents.map((object) => `https://s3.amazonaws.com/stanky-clams/${object.Key}`);
+//       // res.json(mappedURLs);
+//     }
+//   });
+// });
+
+
 app.get('/s3/images', (req, res, next) => {
   const params = {Bucket: 'stanky-clams'};
-  s3.listObjects(params, (err, data) => {
-    if (err) {
-      console.log(err);
-    } else {
-      const mappedURLs = data.Contents.map((object) => `https://s3.amazonaws.com/stanky-clams/${object.Key}`);
-      res.json(mappedURLs);
-    }
-  });
-});
 
-
-app.get('/s3/images/test', (req, res, next) => {
-  var galleryId;
-  var position;
-  if (req.query.hasOwnProperty('galleryId')) {
-    galleryId = req.query.galleryid;
-  }
-  const params = {Bucket: 'stanky-clams'};
-  // const s3.listObjectsAsync = promise.promisify(s3.listObjects);
+  var resultantArr = [];
+  var objectKeys = [];
+  // Fetch list of objects in bucket
+  // Make a http request for the head/metadata of each object
+  // Filter the objects for the galleryId specified in the query params
+  //
 
   s3.listObjectsAsync(params)
-    .then((data) => data.Contents.map((object) => s3.headObjectAsync({Bucket: 'stanky-clams', Key: object.Key})))
-    .then((allObjectHeadPromises) => Promise.all(allObjectHeadPromises))
-    .then((allObjectHeads) => {
-      console.log('objectHeadsLengths', allObjectHeads.length);
-      res.json(allObjectHeads);
+    .then((data) => {
+      objectKeys = data.Contents;
+      return data.Contents.map((object) => s3.headObjectAsync({Bucket: 'stanky-clams', Key: object.Key}));
     })
-    .catch((err) => {
-      console.log(err);
-    });
-  // s3.listObjects(params, (err, data) => {
-  //   if (err) {
-  //     console.log(err);
-  //   } else {
-  //     // make a http request for the head of each object
-  //     // promise.all the requests
-  //     // filter the results by the gallery id
-  //     // map over each remaining object and construct the url
-  //     // res.json the arr of urls
-  //
-  //     // const oneObject = data.Contents[0];
-  //     // s3.headObject({Bucket: 'stanky-clams', Key: oneObject.Key}, (err, objectData) => {
-  //     //   res.json(objectData);
-  //     // });
-  //
-  //     // const objectsMetaData = data.Contents.map((object) => {
-  //     //   const objectParams = {Bucket: 'stanky-clams', Key: object.Key}
-  //     //   return s3.headObject(objectParams, (err, objectData) => {
-  //     //     if (err) {
-  //     //       console.log(err);
-  //     //     } else {
-  //     //       return objectData.Metadata;
-  //     //     }
-  //     //   });
-  //     // });
-  //     // console.log(objectsMetaData);
-  //     // res.json(objectsMetaData);
-  //     // s3.headObject()
-  //     // res.json(data);
-  //   }
-  // });
+    .then((allObjectHeadPromises) => Promise.all(allObjectHeadPromises))
+    .then((allObjectHeads) => allObjectHeads.filter((objectHead) => {
+      if (req.query.hasOwnProperty('galleryid')) {
+        if (objectHead.Metadata.hasOwnProperty('galleryid')) {
+          return objectHead.Metadata.galleryid === req.query.galleryid;
+        }
+      } else {
+        return objectHead;
+      }
+    }))
+    .then((filteredObjects) => {
+      filteredObjects.forEach((filteredObject) => {
+        objectKeys.forEach((objectKey) => {
+          if (filteredObject.ETag === objectKey.ETag) {
+            resultantArr.push(`https://s3.amazonaws.com/stanky-clams/${objectKey.Key}`);
+          }
+        });
+      });
+      res.json(resultantArr);
+    })
+    .catch(console.error);
 });
 
 // before-create Hook to get the file (if there is any)
