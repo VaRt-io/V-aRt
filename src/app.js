@@ -108,10 +108,11 @@ app.get('/s3/images', (req, res, next) => {
 
   var resultantArr = [];
   var objectKeys = [];
+  // TODO: Write a better comment
   // Fetch list of objects in bucket
-  // Make a http request for the head/metadata of each object
-  // Filter the objects for the galleryId specified in the query params
-  //
+  // Make an http request for the head of each object
+  // If there is a galleryid query param, filter the head objects by the specified gallery id
+  // Else construct urls consisting of the galleryid and position
 
   s3.listObjectsAsync(params)
     .then((data) => {
@@ -119,26 +120,40 @@ app.get('/s3/images', (req, res, next) => {
       return data.Contents.map((object) => s3.headObjectAsync({Bucket: 'stanky-clams', Key: object.Key}));
     })
     .then((allObjectHeadPromises) => Promise.all(allObjectHeadPromises))
-    .then((allObjectHeads) => allObjectHeads.filter((objectHead) => {
+    .then((allObjectHeads) => {
       if (req.query.hasOwnProperty('galleryid')) {
-        if (objectHead.Metadata.hasOwnProperty('galleryid') && objectHead.Metadata.hasOwnProperty('position')) {
-          return objectHead.Metadata.galleryid === req.query.galleryid;
-        }
+        return allObjectHeads.filter((objectHead) => {
+          if (objectHead.Metadata.hasOwnProperty('galleryid') && objectHead.Metadata.hasOwnProperty('position')) {
+            return objectHead.Metadata.galleryid === req.query.galleryid;
+          }
+        });
       } else {
-        return objectHead;
+        allObjectHeads.forEach((headObject) => {
+          objectKeys.forEach((objectKey) => {
+            if (headObject.LastModified.toString() === objectKey.LastModified.toString()) {
+              resultantArr.push({url:`https://s3.amazonaws.com/stanky-clams/${objectKey.Key}`, position: headObject.Metadata.position, galleryid: headObject.Metadata.galleryid});
+            }
+          });
+        });
+        res.json(resultantArr);
       }
-    }))
+    })
     .then((filteredObjects) => {
       filteredObjects.forEach((filteredObject) => {
         objectKeys.forEach((objectKey) => {
-          if (filteredObject.ETag === objectKey.ETag) {
+          if (filteredObject.LastModified.toString() === objectKey.LastModified.toString()) {
             resultantArr.push({url:`https://s3.amazonaws.com/stanky-clams/${objectKey.Key}`, position: filteredObject.Metadata.position, galleryid: filteredObject.Metadata.galleryid});
           }
         });
       });
       res.json(resultantArr);
     })
-    .catch(console.error);
+    .catch((err) => {
+      if (err.message !== 'Cannot read property \'forEach\' of undefined') {
+        console.log(err);
+      }
+
+    });
 });
 
 // before-create Hook to get the file (if there is any)
@@ -147,6 +162,7 @@ app.get('/s3/images', (req, res, next) => {
 // to work with multipart file uploads
 
 // TODO: Add galleryId & position as key-values pairs
+// TODO:
 app.service('/s3/images/new').before({
   create: [
     function(hook) {
