@@ -4,6 +4,7 @@ const compress = require('compression');
 const cors = require('cors');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
+const promise = require('bluebird');
 
 const feathers = require('feathers');
 const configuration = require('feathers-configuration');
@@ -51,17 +52,18 @@ app.configure(authentication);
 // Set up our services (see `services/index.js`)
 app.configure(services);
 
+// const AWS = require('aws-sdk');
 const AWS = require('aws-sdk');
 const BlobService = require('feathers-blob');
 const S3BlobStore = require('s3-blob-store');
 
-// TODO: Add environmental variable support so amazon keys/secrets can be safe while file is still able to be shared
 // TODO: Move into the services directory
 // S3 Image Service
-const s3 = new AWS.S3({
+var s3 = promise.promisifyAll(new AWS.S3({
   accessKeyId: process.env.S3_ID,
   secretAccessKey: process.env.S3_KEY
-});
+}));
+// s3 =
 
 const blobStore = S3BlobStore({
   client: s3,
@@ -87,16 +89,71 @@ app.use('/s3/images/new',
 );
 
 
+// app.get('/s3/images', (req, res, next) => {
+//   const params = {Bucket: 'stanky-clams'};
+//   s3.listObjects(params, (err, data) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.json(data);
+//       const mappedURLs = data.Contents.map((object) => `https://s3.amazonaws.com/stanky-clams/${object.Key}`);
+//       // res.json(mappedURLs);
+//     }
+//   });
+// });
+
+
 app.get('/s3/images', (req, res, next) => {
   const params = {Bucket: 'stanky-clams'};
-  s3.listObjects(params, (err, data) => {
-    if (err) {
-      console.log(err);
-    } else {
-      const mappedURLs = data.Contents.map((object) => `https://s3.amazonaws.com/stanky-clams/${object.Key}`);
-      res.json(mappedURLs);
-    }
-  });
+
+  var resultantArr = [];
+  var objectKeys = [];
+  // TODO: Write a better comment
+  // Fetch list of objects in bucket
+  // Make an http request for the head of each object
+  // If there is a galleryid query param, filter the head objects by the specified gallery id
+  // Else construct urls consisting of the galleryid and position
+
+  s3.listObjectsAsync(params)
+    .then((data) => {
+      objectKeys = data.Contents;
+      return data.Contents.map((object) => s3.headObjectAsync({Bucket: 'stanky-clams', Key: object.Key}));
+    })
+    .then((allObjectHeadPromises) => Promise.all(allObjectHeadPromises))
+    .then((allObjectHeads) => {
+      if (req.query.hasOwnProperty('galleryid')) {
+        return allObjectHeads.filter((objectHead) => {
+          if (objectHead.Metadata.hasOwnProperty('galleryid') && objectHead.Metadata.hasOwnProperty('position')) {
+            return objectHead.Metadata.galleryid === req.query.galleryid;
+          }
+        });
+      } else {
+        allObjectHeads.forEach((headObject) => {
+          objectKeys.forEach((objectKey) => {
+            if (headObject.LastModified.toString() === objectKey.LastModified.toString()) {
+              resultantArr.push({url:`https://s3.amazonaws.com/stanky-clams/${objectKey.Key}`, position: headObject.Metadata.position, galleryid: headObject.Metadata.galleryid});
+            }
+          });
+        });
+        res.json(resultantArr);
+      }
+    })
+    .then((filteredObjects) => {
+      filteredObjects.forEach((filteredObject) => {
+        objectKeys.forEach((objectKey) => {
+          if (filteredObject.LastModified.toString() === objectKey.LastModified.toString()) {
+            resultantArr.push({url:`https://s3.amazonaws.com/stanky-clams/${objectKey.Key}`, position: filteredObject.Metadata.position, galleryid: filteredObject.Metadata.galleryid});
+          }
+        });
+      });
+      res.json(resultantArr);
+    })
+    .catch((err) => {
+      if (err.message !== 'Cannot read property \'forEach\' of undefined') {
+        console.log(err);
+      }
+
+    });
 });
 
 // before-create Hook to get the file (if there is any)
@@ -105,16 +162,26 @@ app.get('/s3/images', (req, res, next) => {
 // to work with multipart file uploads
 
 // TODO: Add galleryId & position as key-values pairs
+// TODO:
 app.service('/s3/images/new').before({
   create: [
     function(hook) {
-      console.log('hook data**', hook.data);
       if (!hook.data.uri && hook.params.file){
         const file = hook.params.file;
         const uri = dauria.getBase64DataURI(file.buffer, file.mimetype);
         hook.data = {uri: uri};
       }
-      hook.params.s3 = { ACL: 'public-read' };
+      hook.params.s3 = {
+        ACL: 'public-read',
+        Key: hook.data.name,
+        Metadata: {
+          'galleryid': hook.data.galleryId.toString(),
+          'position': hook.data.position.toString()
+        }
+      };
+      // hook.params.name = hook.data.name;
+      // hook.params.position = hook.data.position;
+      // hook.params.galleryId = hook.data.galleryId;
     }
   ]
 });
