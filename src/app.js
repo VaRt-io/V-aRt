@@ -55,7 +55,6 @@ const AWS = require('aws-sdk');
 const BlobService = require('feathers-blob');
 const S3BlobStore = require('s3-blob-store');
 
-// TODO: Add environmental variable support so amazon keys/secrets can be safe while file is still able to be shared
 // TODO: Move into the services directory
 // S3 Image Service
 const s3 = new AWS.S3({
@@ -99,6 +98,37 @@ app.get('/s3/images', (req, res, next) => {
   });
 });
 
+
+app.get('/s3/images/test', (req, res, next) => {
+  console.log('req.query', req.query);
+  const params = {Bucket: 'stanky-clams'};
+  s3.listObjects(params, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      const oneObject = data.Contents[0];
+      s3.headObject({Bucket: 'stanky-clams', Key: oneObject.Key}, (err, objectData) => {
+        res.json(objectData);
+      });
+
+      // const objectsMetaData = data.Contents.map((object) => {
+      //   const objectParams = {Bucket: 'stanky-clams', Key: object.Key}
+      //   return s3.headObject(objectParams, (err, objectData) => {
+      //     if (err) {
+      //       console.log(err);
+      //     } else {
+      //       return objectData.Metadata;
+      //     }
+      //   });
+      // });
+      // console.log(objectsMetaData);
+      // res.json(objectsMetaData);
+      // s3.headObject()
+      // res.json(data);
+    }
+  });
+});
+
 // before-create Hook to get the file (if there is any)
 // and turn it into a datauri,
 // transparently getting feathers-blob
@@ -108,13 +138,22 @@ app.get('/s3/images', (req, res, next) => {
 app.service('/s3/images/new').before({
   create: [
     function(hook) {
-      console.log('hook data**', hook.data);
       if (!hook.data.uri && hook.params.file){
         const file = hook.params.file;
         const uri = dauria.getBase64DataURI(file.buffer, file.mimetype);
         hook.data = {uri: uri};
       }
-      hook.params.s3 = { ACL: 'public-read' };
+      hook.params.s3 = {
+        ACL: 'public-read',
+        Key: hook.data.name,
+        Metadata: {
+          'galleryid': hook.data.galleryId.toString(),
+          'position': hook.data.position.toString()
+        }
+      };
+      // hook.params.name = hook.data.name;
+      // hook.params.position = hook.data.position;
+      // hook.params.galleryId = hook.data.galleryId;
     }
   ]
 });
