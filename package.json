@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.125.0",
+    "bluebird": "^3.5.0",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
     "cors": "^2.8.4",
