@@ -24,15 +24,6 @@ const blobService = BlobService({
   Model: blobStore
 });
 
-// const blobStore = S3BlobStore({
-//   client: s3,
-//   bucket: 'stanky-clams'
-// });
-//
-// const blobService = BlobService({
-//   Model: blobStore
-// });
-
 module.exports = function () {
   const app = this;
   // const paginate = app.get('paginate');
