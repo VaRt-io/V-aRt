@@ -37,6 +37,7 @@
     "aframe-react": "^4.3.0",
     "aws-sdk": "^2.125.0",
     "axios": "^0.16.2",
+    "bluebird": "^3.5.0",
     "body-parser": "^1.18.2",
     "bootstrap": "^3.3.7",
     "compression": "^1.7.1",
