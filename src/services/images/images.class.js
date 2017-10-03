@@ -1,7 +1,4 @@
 /* eslint-disable no-unused-vars */
-const test = require('./images.class');
-
-console.log('test require', test);
 
 const AWS = require('aws-sdk');
 const promise = require('bluebird');
@@ -51,6 +48,9 @@ class Service {
         }
       })
       .then((filteredObjects) => {
+        if(filteredObjects[0].position) {
+          return filteredObjects;
+        }
         filteredObjects.forEach((filteredObject) => {
           objectKeys.forEach((objectKey) => {
             if (filteredObject.LastModified.toString() === objectKey.LastModified.toString()) {
