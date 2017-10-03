@@ -1,50 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script   src="https://code.jquery.com/jquery-3.2.1.min.js"
-	 					integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-						crossorigin="anonymous"></script>
-	<link rel='stylesheet' type='text/css' href='/dist/drawingboard.css'></link>
+  <title>Hello, WebVR! - A-Frame</title>
+  <meta name="description" content="Hello, WebVR! - A-Frame">
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+<script defer src="/bundle.js"></script>
 </head>
-<body>
-<div id="drawingBoard"></div>
 
-<style>
-	#drawingBoard {
-		width: 800px;
-		height: 600px;
-	},
-	#name {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-	}
-</style>
-
-<script src='/dist/drawingboard.js'></script>
-
-<script>
-
-	var customBoard = new DrawingBoard.Board('drawingBoard', {
-	controls: [
-		'Color',
-		{ Size: { type: 'range' } },
-		{ DrawingMode: { filler: true } },
-		'Navigation',
-		'Upload'
-	],
-	size: 1,
-	webStorage: 'session',
-	enlargeYourContainer: true
-	});
-
-</script>
-<form >
-  <fieldset>
-    <legend>Illustration title:</legend>
-    <input id='title' type="text" name="title" value="">
-  </fieldset>
-</form>
+<body id="landingBackground">
+    <div id="mainView">
+    </div>
 </body>
 </html>
