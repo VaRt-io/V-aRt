@@ -39,6 +39,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
 // Host the public folder
 app.use('/', feathers.static(app.get('public')));
+app.get('/test/canvas', (req, res, next) => {
+  // console.log('galleryid is ', req.query.galleryid);
+  res.sendFile(path.join(__dirname, '..', 'public/index.html'))
+})
 
 // Set up Plugins and providers
 app.configure(hooks());
@@ -93,7 +97,6 @@ app.get('/s3/images', (req, res, next) => {
 
   var resultantArr = [];
   var objectKeys = [];
-  // TODO: Write a better comment
   // Fetch list of objects in bucket
   // Make an http request for the head of each object
   // If there is a galleryid query param
@@ -139,7 +142,6 @@ app.get('/s3/images', (req, res, next) => {
       if (err.message !== 'Cannot read property \'forEach\' of undefined') {
         console.log(err);
       }
-
     });
 });
 
