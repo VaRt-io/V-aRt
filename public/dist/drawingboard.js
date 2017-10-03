@@ -1419,6 +1419,7 @@ DrawingBoard.Control.Upload = DrawingBoard.Control.extend({
   name: 'upload',
 
   initialize: function() {
+    console.log(document.location);
     this.$el.append('<button class="drawing-board-control-download-button"></button>');
     this.$el.on('click', '.drawing-board-control-download-button', $.proxy(function(e) {
       // this.board.downloadImg();
