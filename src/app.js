@@ -63,7 +63,6 @@ var s3 = promise.promisifyAll(new AWS.S3({
   accessKeyId: process.env.S3_ID,
   secretAccessKey: process.env.S3_KEY
 }));
-// s3 =
 
 const blobStore = S3BlobStore({
   client: s3,
@@ -89,20 +88,6 @@ app.use('/s3/images/new',
 );
 
 
-// app.get('/s3/images', (req, res, next) => {
-//   const params = {Bucket: 'stanky-clams'};
-//   s3.listObjects(params, (err, data) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       res.json(data);
-//       const mappedURLs = data.Contents.map((object) => `https://s3.amazonaws.com/stanky-clams/${object.Key}`);
-//       // res.json(mappedURLs);
-//     }
-//   });
-// });
-
-
 app.get('/s3/images', (req, res, next) => {
   const params = {Bucket: 'stanky-clams'};
 
@@ -111,8 +96,10 @@ app.get('/s3/images', (req, res, next) => {
   // TODO: Write a better comment
   // Fetch list of objects in bucket
   // Make an http request for the head of each object
-  // If there is a galleryid query param, filter the head objects by the specified gallery id
-  // Else construct urls consisting of the galleryid and position
+  // If there is a galleryid query param
+    // filter the head objects by the specified gallery id
+    // Construct objects consisting of the galleryid, position, urls joining the listObjects with the ObjectHeads on the last modified value
+  // Else do the same as the if statement, but without filtering by the gallery id
 
   s3.listObjectsAsync(params)
     .then((data) => {
@@ -174,7 +161,7 @@ app.service('/s3/images/new').before({
       }
       console.log('does this run?', hook.data.test);
       const galleryid = hook.data.galleryid ? hook.data.galleryid.toString() : '0';
-      const position = hook.data.position ? hook.data.position.toString() : '0'
+      const position = hook.data.position ? hook.data.position.toString() : '0';
       hook.params.s3 = {
         ACL: 'public-read',
         Key: hook.data.name,
@@ -183,26 +170,9 @@ app.service('/s3/images/new').before({
           'position': position
         }
       };
-      // hook.params.name = hook.data.name;
-      // hook.params.position = hook.data.position;
-      // hook.params.galleryId = hook.data.galleryId;
     }
   ]
 });
-
-// TODO: programatically get all image urls from a specific gallery (using key value pairs)
-
-// TODO: programatically get a specific image url
-
-// app.get('/s3/images/:name', (req, res, next) => {
-//   blobService.get(req.params.name)
-//     .then(function (result) {
-//       console.log(result);
-//       res.json(result);
-//     }).catch(function(err) {
-//       console.log(err);
-//     });
-// });
 
 // Configure a middleware for 404s and the error handler
 app.use(notFound());
