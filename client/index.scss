@@ -22,10 +22,21 @@
 .navbar-inverse .navbar-nav>li>a {
     color: blue;
     font-family: 'Orbitron', sans-serif;
+    font-size: 18px
 }
 
 .navbar-inverse .navbar-brand {
     font-family: 'Orbitron', sans-serif;
     color: green;
     font-size: 30px;
+}
+
+a {
+    color: blue;
+}
+#allGalleryBox {
+    margin: 0px 0px 0px 40px
+}
+#allGalleryRender {
+    margin: 0px 0px 0px 40px
 }
