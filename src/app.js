@@ -32,6 +32,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
 // Host the public folder
+
+
+
 app.use('/', feathers.static(app.get('public')));
 
 // TODO: Write route to serve the canvas file
@@ -39,6 +42,9 @@ app.use('/', feathers.static(app.get('public')));
 //   // console.log('galleryid is ', req.query.galleryid);
 //   res.sendFile(path.join(__dirname, '..', 'public/index.html'))
 // })
+
+
+
 
 
 // Set up Plugins and providers
@@ -54,8 +60,7 @@ app.configure(authentication);
 app.configure(services);
 
 // Configure a middleware for 404s and the error handler
-app.use(notFound());
-app.use(handler());
+
 
 app.hooks(appHooks);
 
@@ -63,5 +68,7 @@ app.use('*', (req, res, next) =>
   res.sendFile(path.join(__dirname, '..', 'public/index.html'))
 );
 
+app.use(notFound());
+app.use(handler());
 
 module.exports = app;
