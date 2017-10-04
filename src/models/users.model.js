@@ -16,6 +16,7 @@ module.exports = function (app) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    // add user model revisions here
 
 
     googleId: { type: Sequelize.STRING },
