@@ -6,17 +6,17 @@ import {OurCarousel} from './index';
 export default class Main extends Component{
 
 
-  render(){
-    return (
-      <div>
-        <h3 style={{margin: '30px 0px 50px 30px'}}>
-           V-aRt is virtual art expeierence mergring the technology of virtual reality
-          <br />    with the talent of artists arcoss the world.
-          <br />Enjoy browsing our virtual galleries and museums.
-        </h3>
-        <OurCarousel />
-      </div>
-    );
-  }
+    render(){
+        return(
+          <div>
+           <h3 style={{margin:"30px 0px 0px 30px"}}>V-aRt is  a virtual art expeierence,</h3>
+           <h3 style={{margin:"0px 0px 0px 50px"}}>mergring the technology of virtual reality</h3>
+           <h3 style={{margin:"0px 0px 0px 70px"}}>with the talent of artists arcoss the Globe.</h3>
+           <h3 style={{margin:"0px 0px 50px 90px"}}>Enjoy browsing our virtual galleries and museums.</h3>
+         
+           <OurCarousel />
+           </div>
+        )
+    }
 }
 
