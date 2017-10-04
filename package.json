@@ -27,6 +27,7 @@
     "eslint": "eslint src/. client/. test/. --config .eslintrc.json",
     "eslint-backend": "eslint src/. test/. --config .eslintrc.json",
     "eslint-frontend": "eslint client/. --config .eslintrc.json",
+    "eslint-fix": "eslint --fix src/. client/. --config .eslintrc.json",
     "start": "node src/",
     "mocha": "mocha test/ --recursive",
     "start-dev": "npm run build-client-watch & npm start",
