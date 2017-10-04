@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink, Link} from 'react-router-dom';
 
 
-const div = <div />
+const div = <div />;
 
 export default class SingleGallery extends Component{
 
