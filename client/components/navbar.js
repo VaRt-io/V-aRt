@@ -11,15 +11,15 @@ export default class OurNavbar extends Component{
             <Navbar id="ourNavbar"inverse collapseOnSelect>
             <Navbar.Header>
               <Navbar.Brand>
-                <LinkContainer to='/'><a href="#">VaRt</a></LinkContainer>
+                <LinkContainer to='/'><a href="#">V-aRt</a></LinkContainer>
               </Navbar.Brand>
               <Navbar.Toggle />
             </Navbar.Header>
             <Navbar.Collapse>
               <Nav>
-                <LinkContainer to='/galleries'><NavItem eventKey={1} href="">Galleries</NavItem></LinkContainer>
-                <LinkContainer to='/artists'><NavItem eventKey={2} href="">Artists</NavItem></LinkContainer>
-                <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
+                <LinkContainer to='/galleries'><NavItem >Galleries</NavItem></LinkContainer>
+                <LinkContainer to='/artists'><NavItem >Artists</NavItem></LinkContainer>
+                <NavDropdown eventKey={3} title="SearchBar" id="basic-nav-dropdown">
                   <MenuItem eventKey={3.1}>Action</MenuItem>
                   <MenuItem eventKey={3.2}>Another action</MenuItem>
                   <MenuItem eventKey={3.3}>Something else here</MenuItem>
