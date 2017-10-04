@@ -8,8 +8,8 @@ import Main from './components/main';
 
 
 ReactDOM.render(
-        <Router>
-            <Main />
-        </Router>,
-    document.getElementById('mainView')
-)
+  <Router>
+    <Main />
+  </Router>,
+  document.getElementById('mainView')
+);
