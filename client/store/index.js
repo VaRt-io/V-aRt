@@ -8,7 +8,7 @@ import gallery from './gallery';
 import users from './users';
 
 const reducer = combineReducers({image, gallery, users});
-const middleware = composeWithDevTools(applyMiddleware(thunkMiddleware, createLogger({collapsed: true})))
+const middleware = composeWithDevTools(applyMiddleware(thunkMiddleware, createLogger({collapsed: true})));
 const store = createStore(reducer, middleware);
 
 export default store;
