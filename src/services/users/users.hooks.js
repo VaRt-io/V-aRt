@@ -15,14 +15,10 @@ module.exports = {
   before: {
     all: [],
     find: [
-      function(hook) {
-      const sequelize = hook.app.get('sequelizeClient');
-      console.log(sequelize);
-      const galleries = sequelize.models.galleries;
-      console.log(hook.params.sequelize);
-      hook.params.sequelize = {
-        include: [{all: true}]
-      }
+      function rawFalse(hook) {
+        if (!hook.params.sequelize) hook.params.sequelize = {};
+        Object.assign(hook.params.sequelize, { raw: false, include: [{all: true}] });
+        return hook;
       }
     ],
     // find: [ authenticate('jwt') ],
