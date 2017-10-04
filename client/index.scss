@@ -40,3 +40,16 @@ a {
 #allGalleryRender {
     margin: 0px 0px 0px 40px
 }
+
+#profileColumn {
+    overflow:hidden;
+    text-overflow: ellipsis;
+    margin: 0px 0px 0px 50px;
+}
+
+#profilePic {
+    width: 325px;
+    height: 450px;
+    
+}
+
