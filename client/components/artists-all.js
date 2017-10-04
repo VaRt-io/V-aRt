@@ -7,16 +7,11 @@ import store, {fetchUsers} from '../store';
 
 class AllArtists extends Component {
 
-  componentDidMount(){
-    console.log('artist comp MOUNTED');
-        console.log(fetchUsers)
-    const action = fetchUsers();
-    store.dispatch(action);
-  }
+
 
   render(){
     console.log('PROPPPPSSSS', this.props);
-    const artists = this.props.artistCollection;
+    const artists = this.props.artistsCollection;
     console.log('ARTistS', artists);
     return (
       <div id="allGalleryBox">
@@ -42,7 +37,7 @@ class AllArtists extends Component {
 
 const mapState = (state, ownProps) => {
   return {
-    artistCollection: state.users.artistCollection
+    artistsCollection: state.users.artistsCollection
   };
 };
 
