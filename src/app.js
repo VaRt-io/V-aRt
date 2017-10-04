@@ -34,7 +34,6 @@ app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
 // Host the public folder
 
 
-
 app.use('/', feathers.static(app.get('public')));
 
 // TODO: Write route to serve the canvas file
@@ -42,9 +41,6 @@ app.use('/', feathers.static(app.get('public')));
 //   // console.log('galleryid is ', req.query.galleryid);
 //   res.sendFile(path.join(__dirname, '..', 'public/index.html'))
 // })
-
-
-
 
 
 // Set up Plugins and providers
