@@ -40,10 +40,6 @@ app.use('/', feathers.static(app.get('public')));
 //   res.sendFile(path.join(__dirname, '..', 'public/index.html'))
 // })
 
-app.use('*', (req, res, next) =>
-  res.sendFile(path.join(__dirname, '..', 'public/index.html'))
-);
-
 
 // Set up Plugins and providers
 app.configure(hooks());
@@ -62,5 +58,10 @@ app.use(notFound());
 app.use(handler());
 
 app.hooks(appHooks);
+
+app.use('*', (req, res, next) =>
+  res.sendFile(path.join(__dirname, '..', 'public/index.html'))
+);
+
 
 module.exports = app;
