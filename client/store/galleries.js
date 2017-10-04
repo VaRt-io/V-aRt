@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 //INITIAL STATE
-export const initialState = {
+export const initialGalleryState = {
   galleryCollection: [],
   newGallery: {},
 };
@@ -40,9 +40,9 @@ export const removeGallery = gallery => {
 export const getGalleriesThunk = () => (dispatch) => {
   console.log('INSIDE GET GALLERIES THUNK');
   axios.get('/api/galleries')
-        .then(result => result.data)
-        .then(galleries => dispatch(getGalleries(galleries)))
-        .catch(console.error);
+    .then(result => result.data)
+    .then(galleries => dispatch(getGalleries(galleries)))
+    .catch(console.error);
 };
 
 // export function getGalleriesThunk(){
@@ -57,16 +57,16 @@ export const getGalleriesThunk = () => (dispatch) => {
 
 export const postGalleryThunk = gallery => dispatch => {
   axios.post('/api/galleries')
-        .then(result => result.data)
-        .then(gallery => dispatch(postGallery(gallery)))
-        .catch(console.error);
+    .then(result => result.data)
+    .then(gallery => dispatch(postGallery(gallery)))
+    .catch(console.error);
 };
 
 export const deleteGalleryThunk = gallery => dispatch => {
   axios.delete('/api/galleries', gallery)
-        .then(result => result.data)
-        .then(gallery => dispatch(removeGallery(gallery)))
-        .catch(console.error);
+    .then(result => result.data)
+    .then(gallery => dispatch(removeGallery(gallery)))
+    .catch(console.error);
 };
 
 
@@ -74,7 +74,7 @@ export const deleteGalleryThunk = gallery => dispatch => {
 // REDUCER
 //
 
-export default function reducer(state = initialState, action){
+export default function reducer(state = initialGalleryState, action){
   switch (action.type){
   case GET_GALLERIES:
     return Object.assign({}, state, {galleryCollection: action.galleries});

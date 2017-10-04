@@ -1,6 +1,14 @@
 import axios from 'axios';
 
 //
+//INITIAL STATE
+//
+
+export const initialUserState = {
+  artistCollection: []
+};
+
+//
 // ACTION TYPES
 //
 
@@ -35,50 +43,55 @@ const changeAdminStatus = user => {
 /**
  * THUNK CREATORS
  */
-export const fetchUsers = () => dispatch =>
+export const fetchUsers = () => dispatch => {
   axios.get('/api/users')
     .then(result => result.data)
     .then(users => {
       dispatch(getUsers(users));
     })
     .catch(console.error);
+};
 
-export const postUser = user => dispatch =>
+export const postUser = user => dispatch => {
   axios.post('/api/users', user)
     .then(result => result.data)
     .then(newUser => {
       dispatch(addUser(newUser));
     })
     .catch(console.error);
+};
 
-export const fetchUserGalleries = user => dispatch =>
+export const fetchUserGalleries = user => dispatch => {
   axios.get('/api/galleries')
     .then(result => result.data)
     .then(user => {
       dispatch(getUserGalleries(user));
     })
     .catch(console.error);
+};
 
-export const removeUser = user => dispatch =>
+export const removeUser = user => dispatch => {
   axios.delete(`/api/users/${user.id}`)
     .then(() => {
       dispatch(deleteUser(user));
     })
     .catch(console.error);
+};
 
-export const updateAdminStatus = user => dispatch =>
+export const updateAdminStatus = user => dispatch => {
   axios.put(`/api/users/${user.id}`, user)
     .then(() => {
       dispatch(changeAdminStatus(user));
     })
     .catch(console.error);
+};
 /**
  * REDUCER
  */
-export default function reducer (state = [], action) {
+export default function reducer (state = initialUserState, action) {
   switch (action.type) {
   case GET_USERS:
-    return action.users;
+    return Object.assign({}, state, {artistCollection: action.users});
   case ADD_USER:
     return [...state, action.user];
   case GET_USER_GALLERIES:

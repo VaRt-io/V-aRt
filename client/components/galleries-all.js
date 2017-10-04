@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, Link} from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import store from '../store';
 
@@ -17,11 +17,11 @@ class AllGalleries extends Component{
                 {
                     galleries && galleries.map(gallery => {
                       return (
-                            <div>
-                            <h3 key={gallery.id}>
+                        <div key={gallery.id}>
+                          <h3>
                             <Link to= {`/galleries/${gallery.id}`}>{gallery.name}</Link>
-                                </h3>
-                            </div>
+                          </h3>
+                        </div>
                       );
                     })
                 }
