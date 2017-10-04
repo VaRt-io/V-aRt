@@ -14,9 +14,16 @@ const restrict = [
 module.exports = {
   before: {
     all: [],
-    find: [],
+    find: [
+      function rawFalse(hook) {
+        if (!hook.params.sequelize) hook.params.sequelize = {};
+        Object.assign(hook.params.sequelize, { raw: false, include: [{all: true, nested: true}] });
+        return hook;
+      }
+    ],
     // find: [ authenticate('jwt') ],
-    get: [ ...restrict ],
+    // get: [ ...restrict ],
+    get: [],
     create: [ hashPassword() ],
     update: [ ...restrict, hashPassword() ],
     patch: [ ...restrict, hashPassword() ],

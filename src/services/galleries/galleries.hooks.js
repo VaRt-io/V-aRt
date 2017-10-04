@@ -3,7 +3,13 @@
 module.exports = {
   before: {
     all: [],
-    find: [],
+    find: [
+      function rawFalse(hook) {
+        if (!hook.params.sequelize) hook.params.sequelize = {};
+        Object.assign(hook.params.sequelize, { raw: false, include: ['paintings'] });
+        return hook;
+      }
+    ],
     get: [],
     create: [],
     update: [],
