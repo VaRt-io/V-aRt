@@ -14,9 +14,20 @@ const restrict = [
 module.exports = {
   before: {
     all: [],
-    find: [],
+    find: [
+      function(hook) {
+      const sequelize = hook.app.get('sequelizeClient');
+      console.log(sequelize);
+      const galleries = sequelize.models.galleries;
+      console.log(hook.params.sequelize);
+      hook.params.sequelize = {
+        include: [{all: true}]
+      }
+      }
+    ],
     // find: [ authenticate('jwt') ],
-    get: [ ...restrict ],
+    // get: [ ...restrict ],
+    get: [],
     create: [ hashPassword() ],
     update: [ ...restrict, hashPassword() ],
     patch: [ ...restrict, hashPassword() ],
