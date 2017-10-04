@@ -40,7 +40,7 @@ module.exports = function () {
     multipartMiddleware.single('uri'),
     // another middleware, this time to
     // transfer the received file to feathers
-    function(req,res,next){
+    function(req, res, next){
       req.feathers.file = req.file;
       next();
     },
@@ -61,8 +61,8 @@ module.exports = function () {
           ACL: 'public-read',
           Key: hook.data.name,
           Metadata: {
-            'galleryid': galleryid,
-            'position': position
+            galleryid: galleryid,
+            position: position
           }
         };
       }
