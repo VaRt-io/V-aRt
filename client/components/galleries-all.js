@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-=======
 import React, { Component } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import {connect} from 'react-redux';
->>>>>>> abb757a1f2617694ad3af6a0f055e018196719bf
 import store from '../store';
 
 class AllGalleries extends Component{
