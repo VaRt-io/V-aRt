@@ -6,19 +6,19 @@ import {LinkContainer} from 'react-router-bootstrap';
 
 export default class OurNavbar extends Component{
 
-    render(){
-        return(
+  render(){
+    return (
             <Navbar id="ourNavbar"inverse collapseOnSelect>
             <Navbar.Header>
               <Navbar.Brand>
-                <LinkContainer to='/'><a href="#">V-aRt</a></LinkContainer>
+                <LinkContainer to="/"><a href="#">V-aRt</a></LinkContainer>
               </Navbar.Brand>
               <Navbar.Toggle />
             </Navbar.Header>
             <Navbar.Collapse>
               <Nav>
-                <LinkContainer to='/galleries'><NavItem >Galleries</NavItem></LinkContainer>
-                <LinkContainer to='/artists'><NavItem >Artists</NavItem></LinkContainer>
+                <LinkContainer to="/galleries"><NavItem >Galleries</NavItem></LinkContainer>
+                <LinkContainer to="/artists"><NavItem >Artists</NavItem></LinkContainer>
                 <NavDropdown eventKey={3} title="SearchBar" id="basic-nav-dropdown">
                   <MenuItem eventKey={3.1}>Action</MenuItem>
                   <MenuItem eventKey={3.2}>Another action</MenuItem>
@@ -33,6 +33,6 @@ export default class OurNavbar extends Component{
               </Nav>
             </Navbar.Collapse>
           </Navbar>
-        )
-    }
+    );
+  }
 }
