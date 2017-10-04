@@ -5,15 +5,11 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const galleries = sequelizeClient.define('galleries', {
-    title: {
+  const paintings = sequelizeClient.define('paintings', {
+    url: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    thumbnailUrl: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
+    }
   }, {
     hooks: {
       beforeCount(options) {
@@ -22,13 +18,13 @@ module.exports = function (app) {
     }
   });
 
-  galleries.associate = function (models) { // eslint-disable-line no-unused-vars
-    const {users, paintings} = models;
-    galleries.belongsTo(users);
-    galleries.hasMany(paintings);
+  paintings.associate = function (models) { // eslint-disable-line no-unused-vars
     // Define associations here
+    const {users, galleries} = models;
+    paintings.belongsTo(galleries);
+    paintings.belongsTo(users);
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
   };
 
-  return galleries;
+  return paintings;
 };
