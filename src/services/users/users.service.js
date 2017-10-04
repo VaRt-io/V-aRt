@@ -21,6 +21,7 @@ module.exports = function () {
   // Get our initialized service so that we can register hooks and filters
   const service = app.service('api/users');
 
+  // hooks.before.find = [rawFalse];
   service.hooks(hooks);
 
   if (service.filter) {
