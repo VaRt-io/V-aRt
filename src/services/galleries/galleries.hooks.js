@@ -4,13 +4,11 @@ module.exports = {
   before: {
     all: [],
     find: [
-      function(hook) {
-        const sequelize = hook.app.get('sequelizeClient');
-        console.log(hook.params.sequelize);
-        hook.params.sequelize = {
-          include: [{all: true}]
-        }
-      }
+      // function rawFalse(hook) {
+      //   if (!hook.params.sequelize) hook.params.sequelize = {};
+      //   Object.assign(hook.params.sequelize, { raw: false, include: ['images'] });
+      //   return hook;
+      // }
     ],
     get: [],
     create: [],
