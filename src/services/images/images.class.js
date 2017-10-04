@@ -40,7 +40,7 @@ class Service {
           allObjectHeads.forEach((headObject) => {
             objectKeys.forEach((objectKey) => {
               if (headObject.LastModified.toString() === objectKey.LastModified.toString()) {
-                resultantArr.push({url:`https://s3.amazonaws.com/stanky-clams/${objectKey.Key}`, position: headObject.Metadata.position, galleryid: headObject.Metadata.galleryid});
+                resultantArr.push({url: `https://s3.amazonaws.com/stanky-clams/${objectKey.Key}`, position: headObject.Metadata.position, galleryid: headObject.Metadata.galleryid});
               }
             });
           });
@@ -48,13 +48,13 @@ class Service {
         }
       })
       .then((filteredObjects) => {
-        if(filteredObjects[0].position) {
+        if (filteredObjects[0].position) {
           return filteredObjects;
         }
         filteredObjects.forEach((filteredObject) => {
           objectKeys.forEach((objectKey) => {
             if (filteredObject.LastModified.toString() === objectKey.LastModified.toString()) {
-              resultantArr.push({url:`https://s3.amazonaws.com/stanky-clams/${objectKey.Key}`, position: filteredObject.Metadata.position, galleryid: filteredObject.Metadata.galleryid});
+              resultantArr.push({url: `https://s3.amazonaws.com/stanky-clams/${objectKey.Key}`, position: filteredObject.Metadata.position, galleryid: filteredObject.Metadata.galleryid});
             }
           });
         });
