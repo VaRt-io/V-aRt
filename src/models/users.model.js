@@ -16,10 +16,13 @@ module.exports = function (app) {
       type: DataTypes.STRING,
       allowNull: false
     },
-
-
+    profileImageUrl: {
+      type: DataTypes.STRING,
+    },
+    bio: {
+      type: DataTypes.STRING
+    },
     googleId: { type: Sequelize.STRING },
-
     facebookId: { type: Sequelize.STRING },
 
   }, {
