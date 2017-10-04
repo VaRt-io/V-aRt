@@ -33,29 +33,33 @@ const removeImage = image => {
 // THUNKS
 //
 
-export const getImagesThunk = () => dispatch =>
+export const getImagesThunk = () => dispatch => {
   axios.get('/s3/images')
     .then(result => result.data)
     .then(images => dispatch(getImages(images)))
     .catch(console.error);
+};
 
-export const postImageThunk = image => dispatch =>
+export const postImageThunk = image => dispatch => {
   axios.post('/s3/images')
     .then(result => result.data)
     .then(images => dispatch(postImage(image)))
     .catch(console.error);
+};
 
-export const editImageThunk = image => dispatch =>
+export const editImageThunk = image => dispatch => {
   axios.put('/s3/images')
     .then(result => result.data)
     .then(image => dispatch(editImage(image)))
     .catch(console.error);
+};
 
-export const deleteImageThunk = image => dispatch =>
+export const deleteImageThunk = image => dispatch => {
   axios.delete('/s3/images')
     .then(result => result.data)
     .then(image => dispatch(removeImage(image)))
     .catch(console.error);
+};
 
 //
 // REDUCER
