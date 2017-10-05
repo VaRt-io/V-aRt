@@ -18,7 +18,7 @@ class AllGalleries extends Component{
                       return (
                         <div key={gallery.id}>
                           <h3>
-                            <Link to= {`/galleries/${gallery.id}`}>{gallery.name}</Link>
+                            <Link to= {`/galleries/${gallery.id}`}>{gallery.title}</Link>
                           </h3>
                         </div>
                       );

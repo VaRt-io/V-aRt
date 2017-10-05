@@ -8,6 +8,7 @@ const GET_IMAGES_FROM_S3 = 'GET_IMAGES_FROM_S3';
 const POST_IMAGE_TO_S3 = 'POST_IMAGE_TO_S3';
 const UPDATE_IMAGE_ON_S3 = 'UPDATE_IMAGE_ON_S3';
 const DELETE_IMAGE_ON_S3 = 'DELETE_IMAGE_ON_S3';
+const GET_IMAGES_FROM_GALLERY = 'GET_IMAGES_FROM_GALLERY'
 
 //
 // ACTION CREATORS
@@ -16,6 +17,10 @@ const DELETE_IMAGE_ON_S3 = 'DELETE_IMAGE_ON_S3';
 const getImages = images => {
   return { type: GET_IMAGES_FROM_S3, images };
 };
+
+const getImagesFromGallery = galleryId => {
+    return { type: GET_IMAGES_FROM_GALLERY, galleryId}
+}
 
 const postImage = image => {
   return { type: POST_IMAGE_TO_S3, image };
@@ -33,49 +38,53 @@ const removeImage = image => {
 // THUNKS
 //
 
-export const getImagesThunk = () => dispatch => {
+export const getImagesThunk = () => dispatch =>
   axios.get('/s3/images')
     .then(result => result.data)
     .then(images => dispatch(getImages(images)))
     .catch(console.error);
-};
 
-export const postImageThunk = image => dispatch => {
+export const getImagesFromGalleryThunk = (galleryId) => dispatch =>
+    axios.get(`/api/paintings/?galleryId=${galleryId}`)
+        .then(result => result.data)
+        .then(images => dispatch(getImagesFromGallery(images)))
+        .catch(console.error);
+
+export const postImageThunk = image => dispatch =>
   axios.post('/s3/images')
     .then(result => result.data)
     .then(images => dispatch(postImage(image)))
     .catch(console.error);
-};
 
-export const editImageThunk = image => dispatch => {
+export const editImageThunk = image => dispatch =>
   axios.put('/s3/images')
     .then(result => result.data)
     .then(image => dispatch(editImage(image)))
     .catch(console.error);
-};
 
-export const deleteImageThunk = image => dispatch => {
+export const deleteImageThunk = image => dispatch =>
   axios.delete('/s3/images')
     .then(result => result.data)
     .then(image => dispatch(removeImage(image)))
     .catch(console.error);
-};
 
 //
 // REDUCER
 //
 
 export default function reducer(state = [], action){
-  switch (action.type){
-  case GET_IMAGES_FROM_S3:
-    return action.images;
-  case POST_IMAGE_TO_S3:
-    return [...state, action.image];
-  case UPDATE_IMAGE_ON_S3:
-    return state.map(image => (image.url === action.image.url ? action.image : image));
-  case DELETE_IMAGE_ON_S3:
-    return state.filter(image => image.url !== action.image.url);
-  default:
-    return state;
-  }
+    switch(action.type){
+        case GET_IMAGES_FROM_S3:
+            return action.images;
+        case GET_IMAGES_FROM_GALLERY:
+            return state.filter(image => image.galleryId === action.galleryId);
+        case POST_IMAGE_TO_S3:
+            return [...state, action.image];
+        case UPDATE_IMAGE_ON_S3:
+            return state.map(image => image.url === action.image.url ? action.image : image);
+        case DELETE_IMAGE_ON_S3:
+            return state.filter(image => image.url !== action.image.url);
+        default:
+          return state;
+    }
 }
