@@ -8,7 +8,6 @@ import store, {fetchUsers} from '../store';
 class AllArtists extends Component {
 
 
-
   render(){
     console.log('PROPPPPSSSS', this.props);
     const artists = this.props.artistsCollection;
