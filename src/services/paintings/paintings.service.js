@@ -16,10 +16,10 @@ module.exports = function () {
   };
 
   // Initialize our service with any options it requires
-  app.use('/paintings', createService(options));
+  app.use('/api/paintings', createService(options));
 
   // Get our initialized service so that we can register hooks and filters
-  const service = app.service('paintings');
+  const service = app.service('api/paintings');
 
   service.hooks(hooks);
 

@@ -10,9 +10,9 @@ export default class Main extends Component{
     console.log('MAIN COMPONENT MOUNTED');
         // console.log(getGalleriesThunk)
     const galleryAction = getGalleriesThunk();
-    const userAction= fetchUsers();     ///USERS = ARTISTS 
+    const userAction = fetchUsers();     ///USERS = ARTISTS 
     store.dispatch(galleryAction);
-    store.dispatch(userAction)
+    store.dispatch(userAction);
   }
 
   render(){
