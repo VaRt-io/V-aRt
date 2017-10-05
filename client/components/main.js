@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery, VR, VR2} from './index';
+import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery} from './index';
+import VRWrapper from "../containers/VRWrapper.js"
 
 import store, {getGalleriesThunk, fetchUsers} from '../store';
 
@@ -21,15 +22,11 @@ export default class Main extends Component{
             <OurNavbar />
             <Switch>
             <Route exact path="/" component={LandingPage} />
-            <Route exact path="/vr" component={VR} />
-            
+            <Route exact path="/vr/:galleryId" component={VRWrapper} />
             <Route exact path="/artists/:id" component={SingleArtist} />
             <Route exact path="/artists" component={AllArtists} />
             <Route exact path="/galleries" component={AllGalleries} />
             <Route exact path="/galleries/:id" component={SingleGallery} />
-            <Route exact path="/vr" component={VR} />
-            <Route exact path="/vr2" component={VR2} />
-
             </Switch>
         </div>
     );
