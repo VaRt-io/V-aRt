@@ -9,6 +9,7 @@ const S3BlobStore = require('s3-blob-store');
 const multer = require('multer');
 const multipartMiddleware = multer();
 const dauria = require('dauria');
+const axios = require('axios');
 
 var s3 = promise.promisifyAll(new AWS.S3({
   accessKeyId: process.env.S3_ID,
@@ -65,6 +66,35 @@ module.exports = function () {
             position: position
           }
         };
+      }
+    ]
+  });
+
+  // write an after hook that posts to the painting database
+  app.service('s3/images/new').after({
+    create: [
+      function postPainting(hook) {
+      console.log('after hook data', hook.data);
+
+      const {name, userId, galleryId, position} = hook.data;
+      const host = process.env.HOST || app.get('host');
+      const port = process.env.PORT || app.get('port');
+
+      const paintingEndpoint = `http://${host}:${port}/api/paintings`;
+
+        const options = {
+            userId: userId,
+            galleryId: galleryId,
+            position: position || 0,
+            url: `s3.amazonaws.com/stanky-clams/${name}`
+        };
+
+        // TODO: Add a promise-retry to this in case this does not work
+        axios.post(paintingEndpoint, options)
+          .then()
+          .catch((err) => {
+            console.log('fail painting post after s3 upload', err);
+          })
       }
     ]
   });
