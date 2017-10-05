@@ -3,7 +3,6 @@ import { NavLink, Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import store from '../store';
 
-
 class AllGalleries extends Component{
 
   render(){
