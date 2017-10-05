@@ -9,6 +9,18 @@ module.exports = function (app) {
     url: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    position: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 0
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'users',
+        key: 'id'
+      }
     }
   }, {
     hooks: {
