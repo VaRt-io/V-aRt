@@ -10,3 +10,4 @@ export { default as AllGalleries} from './galleries-all';
 export {default as SingleGallery} from './gallery-single';
 export {default as VR} from './VR';
 export {default as VR2} from './VR2';
+export {default as CanvasWrapper} from './CanvasWrapper';
