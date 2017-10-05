@@ -5,7 +5,7 @@ import axios from 'axios';
 //
 
 export const initialUserState = {
-  artistCollection: []
+  artistsCollection: []
 };
 
 //
@@ -91,7 +91,7 @@ export const updateAdminStatus = user => dispatch => {
 export default function reducer (state = initialUserState, action) {
   switch (action.type) {
   case GET_USERS:
-    return Object.assign({}, state, {artistCollection: action.users});
+    return Object.assign({}, state, {artistsCollection: action.users});
   case ADD_USER:
     return [...state, action.user];
   case GET_USER_GALLERIES:
