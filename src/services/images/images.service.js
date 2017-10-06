@@ -74,13 +74,15 @@ module.exports = function () {
   app.service('s3/images/new').after({
     create: [
       function postPainting(hook) {
-      console.log('after hook data', hook.data);
-
       const {name, userId, galleryId, position} = hook.data;
+      hook.result.name = name;
+      hook.result.userId = +userId;
+      hook.result.galleryId = +galleryId;
+      hook.result.position = position
       const host = process.env.HOST || app.get('host');
       const port = process.env.PORT || app.get('port');
 
-      const paintingEndpoint = `http://${host}:${port}/api/paintings`;
+      // const paintingEndpoint = `http://${host}:${port}/api/paintings`;
 
         const options = {
             userId: userId,
@@ -89,11 +91,13 @@ module.exports = function () {
             url: `s3.amazonaws.com/stanky-clams/${name}`
         };
 
-        // TODO: Add a promise-retry to this in case this does not work
-        axios.post(paintingEndpoint, options)
-          .then()
+        return hook.app.service('/api/paintings')
+          .create(options)
+          .then(result => {
+            console.log("Robot answer");
+          })
           .catch((err) => {
-            console.log('fail painting post after s3 upload', err);
+            console.log('failed paintings post')
           })
       }
     ]
