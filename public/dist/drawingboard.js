@@ -627,6 +627,14 @@ DrawingBoard.Board.prototype = {
     window.location.href = img;
   },
 
+  UrlName: function(name){
+    var newName = name;
+    while (newName.indexOf(' ') !== -1){
+      newName = newName.replace(' ', '_');
+    }
+    return newName;
+  },
+
   // ADDED UPLOAD FUNCTIONALITY
 
   // xhrUploadURI: function(uri, name){
@@ -1427,8 +1435,9 @@ DrawingBoard.Control.Upload = DrawingBoard.Control.extend({
     this.$el.on('click', '.drawing-board-control-download-button', $.proxy(function(e) {
       // this.board.downloadImg();
       var dataURL = this.board.getImg();
-      var name = document.getElementById('title').value;
+      var name = this.board.UrlName(document.getElementById('title').value);
       var galleryId = document.getElementById('galleryId').title;
+
       // console.log(this.board.getImg());
       // console.log(galleryId);
       this.board.fetchUploadURI(dataURL, name, galleryId);
