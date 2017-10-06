@@ -21,7 +21,6 @@ export const DELETE_GALLERY = 'DELETE_GALLERY';
 
 
 export const getGalleries = galleries => {
-  console.log('INSIDE GETGALLERIES ACITON CREATOR');
   return { type: GET_GALLERIES, galleries };
 };
 
@@ -38,27 +37,16 @@ export const removeGallery = gallery => {
 //
 
 export const getGalleriesThunk = () => (dispatch) => {
-  console.log('INSIDE GET GALLERIES THUNK');
   axios.get('/api/galleries')
     .then(result => result.data)
     .then(galleries => dispatch(getGalleries(galleries)))
     .catch(console.error);
 };
 
-// export function getGalleriesThunk(){
-//     console.log("INSIDE GET GALLERIES THUNK ")
-//     return function thunk(dispatch){
-//         axios.get('/api/galleries')
-//          .then(result => result.data)
-//         .then(galleries => dispatch(getGalleries(galleries)))
-//         .catch(console.error);
-//     }
-// }
-
 export const postGalleryThunk = gallery => dispatch => {
-  axios.post('/api/galleries')
+  axios.post('/api/galleries', gallery)
     .then(result => result.data)
-    .then(gallery => dispatch(postGallery(gallery)))
+    .then(newGallery => dispatch(postGallery(newGallery)))
     .catch(console.error);
 };
 

@@ -651,22 +651,24 @@ DrawingBoard.Board.prototype = {
   //   }, 2000);
   // },
 
-  fetchUploadURI: function(uri, name) {
+  fetchUploadURI: function(uri, name, galleryId) {
     var formData = new FormData();
     formData.append('uri', uri);
     formData.append('name', name);
+    formData.append('galleryid', galleryId);
     const request = new Request('https://tranquil-island-62126.herokuapp.com/s3/images/new', {
       method: 'POST',
       body: formData,
     });
+
     fetch(request)
       .then((resp) => resp.json())
       .then((data) => {
         console.log('success', data);
         // TODO: Render a success message
-        setTimeout(() => {
-          window.location.href = 'https://tranquil-island-62126.herokuapp.com/vr.html';
-        }, 1000);
+        // setTimeout(() => {
+        //   window.location.href = 'https://tranquil-island-62126.herokuapp.com/vr.html';
+        // }, 1000);
       })
       .catch((err) => {
       // TODO: Render an error message
@@ -674,14 +676,15 @@ DrawingBoard.Board.prototype = {
       });
   },
 
-  uploadImg: function() {
-    var img = this.getImg();
-    var name = document.getElementById('title');
-
-    // this.board.xhrUploadURI(img, name);
-    this.board.fetchUploadURI(img, name);
-    // window.location.href = img;
-  },
+  // uploadImg: function() {
+  //   var img = this.getImg();
+  //   var name = document.getElementById('title');
+  //   var id = document.getElementById('galleryId');
+  //
+  //   // this.board.xhrUploadURI(img, name);
+  //   this.board.fetchUploadURI(img, name, id);
+  //   // window.location.href = img;
+  // },
 
 
   /**
@@ -1425,9 +1428,10 @@ DrawingBoard.Control.Upload = DrawingBoard.Control.extend({
       // this.board.downloadImg();
       var dataURL = this.board.getImg();
       var name = document.getElementById('title').value;
+      var galleryId = document.getElementById('galleryId').title;
       // console.log(this.board.getImg());
-      // console.log(name);
-      this.board.fetchUploadURI(dataURL, name);
+      // console.log(galleryId);
+      this.board.fetchUploadURI(dataURL, name, galleryId);
       e.preventDefault();
     }, this));
   }
