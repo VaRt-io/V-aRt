@@ -2,6 +2,7 @@ const app = require('../../src/app');
 const expect = require('chai').expect;
 const request = require('supertest');
 const agent = request.agent(app);
+const paintings = app.service('api/paintings');
 // TODO: import the user, gallery, and painting model
 
 describe('s3/images service', () => {
@@ -64,7 +65,12 @@ describe('s3/images service', () => {
           expect(res.body.name).to.equal('testFile');
         })
       // TODO: Look for painting in the DB
-        // .expect(() => )
+        .expect(() => paintings.find())
+        .expect((foundPaintings) => {
+        console.log(foundPaintings.res);
+          const filteredPaintings = foundPaintings.filter((paintings) => paintings.url === `s3.amazonaws.com/stanky-clams/testFile`)
+          expect(filteredPaintings.length).to.equal(1);
+        })
     });
   })
 });
