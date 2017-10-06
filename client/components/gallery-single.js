@@ -16,7 +16,7 @@ class SingleGallery extends Component{
     return (
       <div>
         <h1>{currentGallery.name}</h1>
-        <Link to="/vr"><button className="btn btn-danger" style={{backgroundColor: 'red'}}>Enter VR</button></Link>
+        <Link to={`/vr/${currentGalleryId}`}><button className="btn btn-danger" style={{backgroundColor: 'red'}}>Enter VR</button></Link>
         <h3>map over images</h3>
         <Link to={`/canvas?galleryid=${currentGalleryId}`}><button className="btn btn-success">Create an Image</button></Link>
       </div>
