@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import VRWrapper from "../containers/VRWrapper.js"
 import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery, VR, VR2, CanvasWrapper, CreateGallery} from './index';
 
 import store, {getGalleriesThunk, fetchUsers} from '../store';
