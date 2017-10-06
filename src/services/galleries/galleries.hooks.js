@@ -6,12 +6,16 @@ module.exports = {
     find: [
       function rawFalse(hook) {
         if (!hook.params.sequelize) hook.params.sequelize = {};
-        Object.assign(hook.params.sequelize, { raw: false, include: ['paintings'] });
+        Object.assign(hook.params.sequelize, { raw: false, include: [{all: true}] });
         return hook;
       }
     ],
     get: [],
-    create: [],
+    create: [
+      function log(hook) {
+        console.log('before hook', hook.data);
+      }
+    ],
     update: [],
     patch: [],
     remove: []
@@ -21,7 +25,11 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [
+      function log(hook) {
+        console.log('after hook', hook.data);
+      }
+    ],
     update: [],
     patch: [],
     remove: []
