@@ -5,6 +5,8 @@ const cors = require('cors');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const feathers = require('feathers');
+const seeder = require('feathers-seeder');
+const seederConfig = require('./seeder-config');
 const configuration = require('feathers-configuration');
 const hooks = require('feathers-hooks');
 const rest = require('feathers-rest');
@@ -54,6 +56,7 @@ app.configure(middleware);
 app.configure(authentication);
 // Set up our services (see `services/index.js`)
 app.configure(services);
+app.configure(seeder(seederConfig));
 
 // Configure a middleware for 404s and the error handler
 
