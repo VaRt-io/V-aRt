@@ -94,7 +94,6 @@ module.exports = function () {
         return hook.app.service('/api/paintings')
           .create(options)
           .then(result => {
-            console.log("Robot answer");
           })
           .catch((err) => {
             console.log('failed paintings post')
