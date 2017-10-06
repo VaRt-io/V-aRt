@@ -71,7 +71,39 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [
+      // send a delete request to the s3 server for the image
+      function deleteObject(hook) {
+        const s3Params = {Bucket: hook.app.get('bucket'), Key: hook.params.query.name};
+        const paintingUrl = `s3.amazonaws.com/stanky-clams/${hook.params.query.name}`;
+        return s3.deleteObjectAsync(s3Params)
+        .then((response) => {
+          hook.result = {imageDeleted: true};
+          console.log('deleted object in s3', response);
+          return hook.app.service('api/paintings').find();
+        })
+          .then((foundPaintings) => {
+            const paintingToDelete = foundPaintings.filter((aPainting) => aPainting.url === paintingUrl)[0];
+            if(paintingToDelete) {
+              return hook.app.service('api/paintings').remove(paintingToDelete.id);
+            } else {
+              throw new Error('No painting to delete in db');
+            }
+          })
+          .then(() => {
+          console.log('painting deleted');
+            hook.result = {imageDeleted: true, paintingDeleted: true};
+          })
+        .catch((err) => {
+          if(err.message === 'No painting to delete in db') {
+            console.log('No painting to delete in db')
+          } else {
+            console.log(err);
+            hook.result = {imageDeleted: true, paintingDeleted: true};
+          }
+        })
+      }
+    ]
   },
 
   after: {
