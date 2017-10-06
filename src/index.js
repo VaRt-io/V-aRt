@@ -5,9 +5,9 @@ const port = process.env.PORT || app.get('port');
 // const server = app.listen(port);
 
 app.seed().then(() => {
-  const server = app.listen(app.get('port'));
+  const server = app.listen(port);
   server.on('listening', () =>
-  logger.info('Feathers application started on http://%s:%d', process.env.HOST || app.get('host'), port)
+  logger.info('Feathers application loaded on http://%s:%d', process.env.HOST || app.get('host'), port)
 );
   
   // ...
