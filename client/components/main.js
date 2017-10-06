@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-<<<<<<< HEAD
 import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery} from './index';
 import VRWrapper from "../containers/VRWrapper.js"
-=======
-import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery, VR, VR2, CanvasWrapper, CreateGallery} from './index';
->>>>>>> master
 
 import store, {getGalleriesThunk, fetchUsers, getImagesThunk} from '../store';
 
