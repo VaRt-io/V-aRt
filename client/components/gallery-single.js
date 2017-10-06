@@ -14,12 +14,12 @@ class SingleGallery extends Component{
 
     console.log('CURRENT GALLERY', currentGallery);
     return (
-            <div>
-            <h1>{currentGallery.title}</h1>
-                <Link to={`/vr/${currentGallery.id}`}><button className="btn btn-danger" style={{backgroundColor: 'red'}}>Enter VR</button></Link>
-                <h3>map over images</h3>
-                    <a href="https://tranquil-island-62126.herokuapp.com/canvas.html"><button className="btn btn-success">Create an Image</button></a>
-            </div>
+      <div>
+        <h1>{currentGallery.name}</h1>
+        <Link to="/vr"><button className="btn btn-danger" style={{backgroundColor: 'red'}}>Enter VR</button></Link>
+        <h3>map over images</h3>
+        <Link to={`/canvas?galleryid=${currentGalleryId}`}><button className="btn btn-success">Create an Image</button></Link>
+      </div>
     );
   }
 
