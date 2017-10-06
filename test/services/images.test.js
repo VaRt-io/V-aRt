@@ -25,19 +25,26 @@ describe('s3/images service', () => {
   // TODO: Write a after hook that cleans up s3 & database
 
   describe('POST s3/images/new - multipart file uploading service', () => {
+    var theCreatedUser;
+    var theCreatedGallery;
+
     beforeEach(() => {
-      // return users.create({
-      //   email: 'artist1@email.com',
-      //   password: 'password',
-      //   profileImageUrl: 'https://cdn-images-1.medium.com/max/1600/1*w7nRoB7E8bMPz_ly0oCNdQ.png',
-      //   bio: 'a short bio'
-      // }).then((createdUser) => {
-      //   return galleries.create({
-      //     title: 'test title',
-      //     thumbnailUrl: 'http://howtorecordpodcasts.com/wp-content/uploads/2012/10/YouTube-Background-Pop-4.jpg',
-      //     userId: createdUser.id
-      //   });
-      // })
+      return users.create({
+        email: 'artist1@email.com',
+        password: 'password',
+        profileImageUrl: 'https://cdn-images-1.medium.com/max/1600/1*w7nRoB7E8bMPz_ly0oCNdQ.png',
+        bio: 'a short bio'
+      }).then((createdUser) => {
+        theCreatedUser = createdUser;
+        return galleries.create({
+          title: 'test title',
+          thumbnailUrl: 'http://howtorecordpodcasts.com/wp-content/uploads/2012/10/YouTube-Background-Pop-4.jpg',
+          userId: theCreatedUser.id
+        });
+      }).then((createdGallery) => {
+        theCreatedGallery = createdGallery;
+        return theCreatedGallery;
+      })
     });
 
     afterEach(() => {
@@ -81,46 +88,46 @@ describe('s3/images service', () => {
         })
     });
 
-    it('sends the galleryId, userId, and name along with the file encoded as dataURI', () => {
-      return agent
-        .post(`/s3/images/new`)
-        .send({
-          uri: dataUri,
-          name: 'testFile',
-          userId: 1,
-          galleryId: 1
-        })
-        .expect('Content-Type', /json/)
-        .expect(201)
-        .expect((res) => {
-          expect(res.body.name).to.equal('testFile');
-          expect(res.body.userId).to.equal(1);
-          expect(res.body.galleryId).to.equal(1);
-        })
-    });
+    // it('sends the galleryId, userId, and name along with the file encoded as dataURI', () => {
+    //   return agent
+    //     .post(`/s3/images/new`)
+    //     .send({
+    //       uri: dataUri,
+    //       name: 'testFile',
+    //       userId: theCreatedUser.id,
+    //       galleryId: theCreatedGallery.id
+    //     })
+    //     .expect('Content-Type', /json/)
+    //     .expect(201)
+    //     .expect((res) => {
+    //       expect(res.body.name).to.equal('testFile');
+    //       expect(res.body.userId).to.equal(theCreatedUser.id);
+    //       expect(res.body.galleryId).to.equal(theCreatedGallery.id);
+    //     })
+    // });
 
-    it('saves the s3 hosted url along with any associated data of the uploaded file to the DB', () => {
-      return agent
-        .post('/s3/images/new')
-        .send({
-          uri: dataUri,
-          name: 'testFile',
-          userId: 1,
-          galleryId: 1
-        })
-        .expect('Content-Type', /json/)
-        .expect(201)
-        .expect((res) => {
-          expect(res.body.name).to.equal('testFile');
-        })
-        .expect(() => {
-        paintings
-          .find()
-          .then((foundPaintings) => {
-          const filteredPaintings = foundPaintings.filter((paintings) => paintings.url === `s3.amazonaws.com/stanky-clams/testFile`)
-          expect(filteredPaintings.length).to.equal(1);
-        });
-      })
-    });
+    // it('saves the s3 hosted url along with any associated data of the uploaded file to the DB', () => {
+    //   return agent
+    //     .post('/s3/images/new')
+    //     .send({
+    //       uri: dataUri,
+    //       name: 'testFile',
+    //       userId: 1,
+    //       galleryId: 1
+    //     })
+    //     .expect('Content-Type', /json/)
+    //     .expect(201)
+    //     .expect((res) => {
+    //       expect(res.body.name).to.equal('testFile');
+    //     })
+    //     .expect(() => {
+    //     paintings
+    //       .find()
+    //       .then((foundPaintings) => {
+    //       const filteredPaintings = foundPaintings.filter((paintings) => paintings.url === `s3.amazonaws.com/stanky-clams/testFile`)
+    //       expect(filteredPaintings.length).to.equal(1);
+    //     });
+    //   })
+    // });
   })
 });
