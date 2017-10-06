@@ -18,12 +18,25 @@ class AllArtists extends Component {
         <div id="allGalleryRender">
           {
             artists && artists.map(artist => {
+              // return (
+              //   <div key={artist.id}>
+              //     <h3 >
+              //       <Link to= {`/artists/${artist.id}`}>{artist.email}</Link>
+              //     </h3>
+              //   </div>
+              // );
               return (
-                <div key={artist.id}>
-                  <h3 >
-                    <Link to= {`/artists/${artist.id}`}>{artist.email}</Link>
-                  </h3>
-                </div>
+              <div className="renderedBox col-md-3" key={artist.id}>
+                <div className="innerRenderedBox">
+                  <img id="allGalleryThumb" src={artist.profileImageUrl} />
+                  <div style={{marginTop: '15px'}}>
+                    <Link id="allGalleriesText" to= {`/artists/${artist.id}`}>{artist.name}</Link>
+                    
+                  </div>
+
+              </div>
+              
+            </div>
               );
             })
           }
