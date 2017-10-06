@@ -16,9 +16,9 @@ class SingleArtist extends Component{
     return (
       <div>
         <div id="profileColumn" className="col-md-3">
-          <h1>Artist's Name</h1>
-          <img id="profilePic" src={'https://baterbys.com/wp-content/uploads/2014/06/salvador-dali2.jpg'} />
-          <h4>artist.name's bio</h4>
+          <h1>{currentArtist.name}</h1>
+          <img id="profilePic" src={currentArtist.profileImageUrl} />
+          <h4 style={{color: "blue"}}>{currentArtist.bio}</h4>
           <p />
           <p>{currentArtist.email}</p>
 
