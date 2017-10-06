@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const request = require('supertest');
 const agent = request.agent(app);
 const paintings = app.service('api/paintings');
-// TODO: import the user, gallery, and painting model
+// TODO: import the user, gallery, and painting service
 
 describe('s3/images service', () => {
   it('registered the service', () => {
@@ -12,6 +12,8 @@ describe('s3/images service', () => {
   });
 
   // TODO: Write a before hook that seeds db with a user and gallery
+  // TODO: Writer a delete image service hook
+  // TODO: Write a after hook that cleans up s3 & database
 
   describe('POST s3/images/new - multipart file uploading service', () => {
     // afterEach(() => {
@@ -64,13 +66,14 @@ describe('s3/images service', () => {
         .expect((res) => {
           expect(res.body.name).to.equal('testFile');
         })
-      // TODO: Look for painting in the DB
-        .expect(() => paintings.find())
-        .expect((foundPaintings) => {
-        console.log(foundPaintings.res);
+        .expect(() => {
+        paintings
+          .find()
+          .then((foundPaintings) => {
           const filteredPaintings = foundPaintings.filter((paintings) => paintings.url === `s3.amazonaws.com/stanky-clams/testFile`)
           expect(filteredPaintings.length).to.equal(1);
-        })
+        });
+      })
     });
   })
 });
