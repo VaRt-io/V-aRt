@@ -5,8 +5,7 @@ export default class CanvasWrapper extends Component {
   constructor(props){
     super(props);
     this.state = {
-      name: '',
-      galleryId: ''
+      name: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
