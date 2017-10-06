@@ -5,7 +5,8 @@ export default class CanvasWrapper extends Component {
   constructor(props){
     super(props);
     this.state = {
-      name: ''
+      name: '',
+      galleryId: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -40,16 +41,26 @@ export default class CanvasWrapper extends Component {
       height: '600px',
     };
 
-    console.log('them props', this.props);
+    function getMatchObj(match) {
+      let current = match.slice(1).split('=');
+      return { [current[0]]: current[1] };
+    }
+
+    var idObject = getMatchObj(this.props.location.search.toString());
+
+    var galId = idObject['galleryid'];
 
     const handleChange = this.handleChange;
 
     return (
       <div>
         <div id='drawingBoard' style={boardStyle}></div>
+
+        <div id='galleryId' title={galId}></div>
+
         <form>
           <input
-            id='title'
+            id="title"
             type="text"
             name="name"
             value= {this.state.name}
