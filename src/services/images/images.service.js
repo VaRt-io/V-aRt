@@ -9,21 +9,6 @@ const S3BlobStore = require('s3-blob-store');
 const multer = require('multer');
 const multipartMiddleware = multer();
 const dauria = require('dauria');
-const axios = require('axios');
-
-var s3 = promise.promisifyAll(new AWS.S3({
-  accessKeyId: process.env.S3_ID,
-  secretAccessKey: process.env.S3_KEY
-}));
-
-const blobStore = S3BlobStore({
-  client: s3,
-  bucket: 'stanky-clams'
-});
-
-const blobService = BlobService({
-  Model: blobStore
-});
 
 module.exports = function () {
   const app = this;
@@ -33,6 +18,21 @@ module.exports = function () {
     name: 'images',
     // paginate
   };
+
+  const s3 = promise.promisifyAll(new AWS.S3({
+    accessKeyId: process.env.S3_ID,
+    secretAccessKey: process.env.S3_KEY
+  }));
+
+  const blobStore = S3BlobStore({
+    client: s3,
+    bucket: app.get('bucket')
+  });
+
+  const blobService = BlobService({
+    Model: blobStore
+  });
+
 
   app.use('s3/images/new',
     // multer parses the file named 'uri'.
@@ -88,7 +88,7 @@ module.exports = function () {
             userId: userId,
             galleryId: galleryId,
             position: position || 0,
-            url: `s3.amazonaws.com/stanky-clams/${name}`
+            url: `s3.amazonaws.com/${app.get('bucket')}/${name}`
         };
 
         return hook.app.service('/api/paintings')
@@ -96,7 +96,11 @@ module.exports = function () {
           .then(result => {
           })
           .catch((err) => {
-            console.log('failed paintings post')
+          if(process.env.NODE_ENV === 'test') {
+            throw new Error('failed paintings post');
+          } else {
+            console.log('failed paintings post');
+          }
           })
       }
     ]

@@ -1,19 +1,20 @@
 /* eslint-disable no-unused-vars */
-
+const app = require('../../index');
 const AWS = require('aws-sdk');
 const promise = require('bluebird');
-var s3 = promise.promisifyAll(new AWS.S3({
+const s3 = promise.promisifyAll(new AWS.S3({
   accessKeyId: process.env.S3_ID,
   secretAccessKey: process.env.S3_KEY
 }));
-
+console.log(app);
 class Service {
   constructor (options) {
     this.options = options || {};
   }
 
   find (params) {
-    const s3Params = {Bucket: 'stanky-clams'};
+    // console.log(this.options, params);
+    const s3Params = {Bucket: app.get('bucket')};
     var resultantArr = [];
     var objectKeys = [];
     // Fetch list of objects in bucket
@@ -26,7 +27,7 @@ class Service {
     return s3.listObjectsAsync(s3Params)
       .then((data) => {
         objectKeys = data.Contents;
-        return data.Contents.map((object) => s3.headObjectAsync({Bucket: 'stanky-clams', Key: object.Key}));
+        return data.Contents.map((object) => s3.headObjectAsync({Bucket: app.get('bucket'), Key: object.Key}));
       })
       .then((allObjectHeadPromises) => Promise.all(allObjectHeadPromises))
       .then((allObjectHeads) => {
@@ -40,7 +41,7 @@ class Service {
           allObjectHeads.forEach((headObject) => {
             objectKeys.forEach((objectKey) => {
               if (headObject.LastModified.toString() === objectKey.LastModified.toString()) {
-                resultantArr.push({url: `https://s3.amazonaws.com/stanky-clams/${objectKey.Key}`, position: headObject.Metadata.position, galleryid: headObject.Metadata.galleryid});
+                resultantArr.push({url: `https://s3.amazonaws.com/${app.get('bucket')}/${objectKey.Key}`, position: headObject.Metadata.position, galleryid: headObject.Metadata.galleryid});
               }
             });
           });
@@ -54,7 +55,7 @@ class Service {
         filteredObjects.forEach((filteredObject) => {
           objectKeys.forEach((objectKey) => {
             if (filteredObject.LastModified.toString() === objectKey.LastModified.toString()) {
-              resultantArr.push({url: `https://s3.amazonaws.com/stanky-clams/${objectKey.Key}`, position: filteredObject.Metadata.position, galleryid: filteredObject.Metadata.galleryid});
+              resultantArr.push({url: `https://s3.amazonaws.com/${app.get('bucket')}/${objectKey.Key}`, position: filteredObject.Metadata.position, galleryid: filteredObject.Metadata.galleryid});
             }
           });
         });
