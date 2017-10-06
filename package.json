@@ -29,7 +29,7 @@
     "eslint-frontend": "eslint client/. --config .eslintrc.json",
     "eslint-fix": "eslint --fix src/. client/. --config .eslintrc.json",
     "start": "node src/",
-    "mocha": "mocha test/ --recursive --timeout 8000",
+    "mocha": "NODE_ENV=test mocha test/ --recursive --timeout 8000",
     "start-dev": "npm run build-client-watch & npm start",
     "start-server": "NODE_ENV='development' nodemon server -e html,js,scss --ignore public",
     "build-client": "webpack"
