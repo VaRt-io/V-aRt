@@ -1,43 +1,33 @@
 import 'aframe';
 import 'aframe-particle-system-component';
+import 'aframe-physics-system'
 import {Entity, Scene} from 'aframe-react';
 import React,{Component} from 'react';
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import ReactDOM from 'react-dom';
-import {getImagesFromGalleryThunk} from '../store'
+import store from '../store'
 // import AllImages from '../VRComponents/AllImages.js'
 
-export class FrameVR extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            images: [],
-            models: [],
-            galleries: []
-        }
-    }
+export function FrameVR (props){
 
-    componentDidMount(){
-    }
-
-    render(){
         // var assetPath = "../public/models"
         // console.log(assetPath + "obj/Old_picture_frame.obj")
-        console.log(this.state)
-        let currGalleryId = this.props.match.params.galleryId
-        var gallery = this.state.galleries.find(gallery => {return id === currGalleryId})
-        var images = this.state.images.filter(image => {return galleryId === currGalleryId})
-        var positions = ["0 3 0", "3 0 0", "0 -3 0", "-3 0 0"]
-        var rotations = []
+        console.log(props)
+        let currGalleryId = props.match.params.galleryId
+        console.log(currGalleryId)
+        var gallery = props.galleries.find(gallery => {return +gallery.id === +currGalleryId})
+        var images = gallery.paintings
+        console.log(images)
+        var positions = ["-1.50 2.0 -9.65", "3.454 2.00 -9.65", "5.000 2.00 -6.20" , "5.000 2.00 -2.00", "2.50 2.0 2.10", "-1.50 2.0 2.10", "-4.00 2.0 -1.50", "-4.00 2.0 -7.00"]
+        var rotations = ["0 0 0", "0 0 0", "0 -90 0", "0 -90 0", "0 180 0", "0 180 0", "0 90 0", "0 90 0"]
             return(
-            <Scene>
+            <Scene physics="friction: 0.1; restitution: 0.5">
                 <a-assets>
                     <a-asset-item id="frame-obj" src="/models/Frame/Old_picture_frame.obj"></a-asset-item>
                     <a-asset-item id="frame-mtl" src="/models/Frame/Old_picture_frame.mtl"></a-asset-item>
 
                     {/* {models && models.map(model => {
-                        return(
+                        return(wa
                             <div>
                                 <a-asset-item id={model.name + "-obj"} src={model.objPath}></a-asset-item>
                                 <a-asset-item id={model.name + "-mtl"} src={model.mtlPath}></a-asset-item>
@@ -47,21 +37,23 @@ export class FrameVR extends Component{
                     
                 )} */}
                 </a-assets>
-                <a-plane color="#CCC" height="20" width="20" position="-9.31 7.831 0.169" rotation="0 90 0"></a-plane>
-                <a-plane color="#CCC" height="20" width="20" position="0.573 7.741 -9.667" rotation="0 0 0"></a-plane>
-                <a-plane color="#CCC" height="20" width="20" position="10 8.266 0.114" rotation="0 -90 0"></a-plane>
-                <a-plane color="#CCC" height="20" width="20" position="6.19 7.792 10.13" rotation="0 180 0"></a-plane>
+
+                <a-plane static-body color="#FF0000" height="20" width="20" position="-4.17 7.831 -1.71" rotation="0 90 0"></a-plane>
+                <a-plane static-body color="#FF0000" height="20" width="20" position="0.573 7.741 -9.667" rotation="0 0 0"></a-plane>
+                <a-plane static-body color="#FF0000" height="20" width="20" position="5.157 8.266 0.114" rotation="0 -90 0"></a-plane>
+                <a-plane static-body color="#FF0000" height="20" width="20" position="4.729 8.618 2.151" rotation="0 180 0"></a-plane>
                 <a-plane color="#CCC" height="20" width="20" position="-2.89 0.047 -4.31" rotation="-90 0 0"></a-plane>
-                <a-plane color="#CCC" height="20" width="20" position="6.19 7.792 10.13" rotation="90 0 0"></a-plane>
+                <a-plane color="#CCC" height="20" width="20" position="5.680 7.015 0.019" rotation="90 0 0"></a-plane>
                 {/* {models && models.map(model =>{
                     return(
                         <a-entity obj-model={`obj:#${model.name}-obj; mtl:#${model.name}-mtl`} position={model.position} scale="0.55 0.55 0.55"></a-entity>
                     )
                 })} */}
 
-                { images && images.map(image => {
+                { images && images.map((image, index) => {
+
                     return(
-                    <a-entity obj-model="obj:#frame-obj; mtl:#frame-mtl" position={positions[image.position]} scale="0.55 0.55 0.55">
+                    <a-entity key={index} obj-model="obj:#frame-obj" material= "color:blue" position={positions[index]} rotation={rotations[index]} scale="2.5 2.5 1">
                         <a-image src={image.url} position="0 .4 0" scale="1 .7 1"></a-image>
                     </a-entity>
                 )})
@@ -69,16 +61,13 @@ export class FrameVR extends Component{
             </Scene>
        );
        
-   }
-
 }
 
-const mapDispatchToProps = dispatch => ({postNewCampus: (newCampus) => dispatch(postNewCampus(newCampus))})
-const mapPropsToState = function(state){
+
+const mapState = function(state){
  return{
    galleries: state.galleries.galleryCollection,
-   images: state.images
  }
 };
 
-export default connect(mapPropsToState, mapDispatchToProps)(FrameVR);
+export default connect(mapState)(FrameVR);

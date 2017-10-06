@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery} from './index';
 import VRWrapper from "../containers/VRWrapper.js"
 
-import store, {getGalleriesThunk, fetchUsers} from '../store';
+import store, {getGalleriesThunk, fetchUsers, getImagesThunk} from '../store';
 
 export default class Main extends Component{
 
@@ -12,6 +12,8 @@ export default class Main extends Component{
         // console.log(getGalleriesThunk)
     const galleryAction = getGalleriesThunk();
     const userAction = fetchUsers();     ///USERS = ARTISTS 
+    const imageAction = getImagesThunk();
+    store.dispatch(imageAction);
     store.dispatch(galleryAction);
     store.dispatch(userAction);
   }
