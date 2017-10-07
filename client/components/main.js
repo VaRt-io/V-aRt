@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery, VR, VR2, CanvasWrapper, CreateGallery, SinglePainting} from './index';
+import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery, VR, VR2, CanvasWrapper, CreateGallery, SinglePainting, Signup} from './index';
 import AframeVR from '../containers/wrapper';
 
 import store, {getGalleriesThunk, fetchUsers, getPaintingsThunk} from '../store';
@@ -35,6 +35,8 @@ export default class Main extends Component{
           <Route exact path="/vr2" component={VR2} />
           <Route exact path="/canvas" component={CanvasWrapper} />
           <Route exact path="/paintings/:id" component={SinglePainting} />
+
+          <Route exact path="/signup" component={Signup} />
 
         </Switch>
       </div>
