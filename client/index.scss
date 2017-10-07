@@ -14,11 +14,13 @@
     float: none;
 
 }
-
+//carousel 
 .carImg{
     text-align: center;
     margin: auto;
 }
+
+//NAVBAR
 .navbar-inverse .navbar-nav>li>a {
     color: blue;
     font-family: 'Orbitron', sans-serif;
@@ -31,27 +33,18 @@
     font-size: 30px;
 }
 
+//LINKS
 a {
     color: blue;
 }
+// ALL GALLERIES & ALL ARTISTS 
 #allGalleryBox {
     margin: 0px 0px 0px 40px
 }
 #allGalleryRender {
     margin: 0px 0px 0px 40px
 }
-
-#profileColumn {
-    overflow:hidden;
-    text-overflow: ellipsis;
-    margin: 0px 0px 0px 50px;
-}
-
-#profilePic {
-    width: 325px;
-    height: 450px;
-    
-}
+ 
  .renderedBox{
     // background-color: black;
     margin: 10px 0px 20px 10px;
@@ -66,10 +59,10 @@ a {
         
     }
     #allGalleryThumb {
-    width:  65px;
-    height: 65px;
+    width:  75px;
+    height: 75px;
     float: left;   
-    margin: 20px 20px 20px 20px;
+    margin: 10px 20px 10px 10px;
     }
     
     #byline{
@@ -81,5 +74,95 @@ a {
         margin: 20px 0px 0px 0px
     }
  }
+
+// SINGLE USER PAGE 
+
+#singleArtistContainer{
+    display: flex;
+    flex-direction: column
+}
+#profileColumn {
+    display: flex;
+    flex-direction: column;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    margin: 0px 0px 0px 50px;
+
+    #profilePic {
+        width: 300px;
+        height: 400px;
+        
+    }
+}
+
+.galleriesAndPaintings{
+    display: flex;
+    flex-direction: column;
+}
+
+.singleUserGalleries {
+   
+
+    .galleriesRow{
+        display: flex;
+        display: row
+    }
+}
+.singleUserPaintings{
+   
+
+    .paintingsRow{
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+.innerGalleryBox{
+    display: flex;
+    flex-direction: column;
+}
+.singleUserGalleryThumb{
+    width: 100px;
+    height:100px;
+    margin: 0px 10px 0px 10px;
+}
+.singleUserGalleryLink{
+    text-align: center;
+}
+
+//SINGLE GALLERY VIEW 
+.page-header{
+    margin-top: 0px;
+}
+#enterVRButton .btn {
+    height: 60px;
+    width: 150px
+}
+.singleGalleryContainer{
+    display: flex;
+    flex-direction: column;
+    
+}
+.userImagesInGalleryRow{
+    display: flex;
+    flex-direction: row;
+}
+.paintingsBox{
+    display: flex;
+    flex-direction: column;
+}
+
+//GalleryCreate
+
+.formBox{
+    background-color: #222;
+    border: green 5px solid;
+    width:50%;
+    text-align: center;
+    margin-top: 50px;
+    margin: auto;
+    padding: 25px 10px 10px 10px;
+    border-radius: 20px
+}
 
 
