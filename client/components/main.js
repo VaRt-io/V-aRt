@@ -5,7 +5,8 @@ import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleG
 =======
 >>>>>>> 8443e2fa3b78d5d5d06583c3b23e0f4b37f0bdbb
 
-import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery, VR, VR2, CanvasWrapper, CreateGallery, SinglePainting} from './index';
+import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery, VR, VR2, CanvasWrapper, GalleryCreate, SinglePainting, GalleryEdit, Signup} from './index';
+
 import AframeVR from '../containers/wrapper';
 
 import store, {getGalleriesThunk, fetchUsers, getPaintingsThunk} from '../store';
@@ -34,11 +35,14 @@ export default class Main extends Component{
           <Route exact path="/artists" component={AllArtists} />
           <Route exact path="/galleries" component={AllGalleries} />
           <Route exact path="/galleries/:id" component={SingleGallery} />
-          <Route exact path="/createGallery" component={CreateGallery} />
+          <Route exact path="/gallery-create" component={GalleryCreate} />
+          <Route exact path="/gallery-edit" component={GalleryEdit} />
           <Route exact path="/vr" component={VR} />
           <Route exact path="/vr2" component={VR2} />
           <Route exact path="/canvas" component={CanvasWrapper} />
           <Route exact path="/paintings/:id" component={SinglePainting} />
+
+          <Route exact path="/signup" component={Signup} />
 
         </Switch>
       </div>
