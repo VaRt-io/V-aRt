@@ -18,7 +18,7 @@ class SinglePainting extends Component{
       return name;
     }
 
-    var artName = getPaintingName(currentPainting['url'] + '');
+    var artName = getPaintingName(currentPainting.url + '');
 
     return (
       <div>

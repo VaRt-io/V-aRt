@@ -96,7 +96,7 @@ module.exports = function () {
         hook.data.name = name;
         hook.data.userId = +userId;
         hook.data.galleryId = +galleryId;
-        hook.data.position = position
+        hook.data.position = position;
       }
     ]
   });

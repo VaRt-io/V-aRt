@@ -9,7 +9,7 @@ class AllGalleries extends Component{
     console.log('PROPPPPSSSS', this.props);
     const galleries = this.props.galleryCollection;
     const artistName = galleries.user;
-    console.log("HELLLLOOOO")
+    console.log('HELLLLOOOO');
     console.log('GALLERies', galleries);
     console.log('ArTIstNaMe', artistName);
 

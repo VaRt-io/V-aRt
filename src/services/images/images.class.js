@@ -5,7 +5,7 @@ class Service {
   }
 
   find (params) {
-    return Promise.resolve([])
+    return Promise.resolve([]);
   }
 
   get (id, params) {

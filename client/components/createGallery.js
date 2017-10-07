@@ -35,14 +35,14 @@ class CreateGallery extends Component{
         <form onSubmit={this.props.handleSubmit}>
           <div>
             <label>Add a Gallery: </label>
-            <br></br>
+            <br />
             <input
               type="text"
               name="title"
               value= {this.state.title}
               placeholder="Enter new gallery name"
               onChange={handleChange} />
-            <br></br>
+            <br />
             <input
               type="text"
               name="thumbnailUrl"
@@ -50,7 +50,7 @@ class CreateGallery extends Component{
               placeholder="Enter gallery thumbnail"
               onChange={handleChange} />
           </div>
-          <br></br>
+          <br />
           <div>
             <button type="submit" className="button" >Submit</button>
           </div>
