@@ -46,6 +46,7 @@ describe('s3/images service', () => {
     beforeEach(() => {
       return users.create({
         email: 'artist1@email.com',
+        name: 'test user',
         password: 'password',
         profileImageUrl: 'https://cdn-images-1.medium.com/max/1600/1*w7nRoB7E8bMPz_ly0oCNdQ.png',
         bio: 'a short bio'
@@ -90,6 +91,7 @@ describe('s3/images service', () => {
         .post(`/s3/images/new`)
         .send({
           uri: dataUri,
+          name: 'testFile'
         })
         .expect('Content-Type', /json/)
         .expect(201)
