@@ -11,11 +11,7 @@ module.exports = {
       }
     ],
     get: [],
-    create: [
-      function log(hook) {
-        console.log('before hook', hook.data);
-      }
-    ],
+    create: [],
     update: [],
     patch: [],
     remove: []
@@ -25,11 +21,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [
-      function log(hook) {
-        console.log('after hook', hook.data);
-      }
-    ],
+    create: [],
     update: [],
     patch: [],
     remove: []
