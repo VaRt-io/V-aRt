@@ -12,7 +12,7 @@ module.exports = function (app) {
     },
     thumbnailUrl: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
   }, {
     hooks: {
