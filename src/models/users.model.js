@@ -21,6 +21,7 @@ module.exports = function (app) {
     },
     profileImageUrl: {
       type: DataTypes.STRING,
+      defaultValue: 'https://uploads5.wikiart.org/images/salvador-dali.jpg!Portrait.jpg'
     },
     bio: {
       type: DataTypes.TEXT
