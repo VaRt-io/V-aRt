@@ -8,7 +8,8 @@ module.exports = function (app) {
   const paintings = sequelizeClient.define('paintings', {
     url: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     position: {
       type: DataTypes.STRING,
