@@ -1,14 +1,24 @@
 const AWS = require('aws-sdk');
 const promise = require('bluebird');
+const { authenticate } = require('feathers-authentication').hooks;
 const s3 = promise.promisifyAll(new AWS.S3({
   accessKeyId: process.env.S3_ID,
   secretAccessKey: process.env.S3_KEY
 }));
 
+const restrict = [
+  authenticate('jwt'),
+  // restrictToOwner({
+  //   idField: 'id',
+  //   ownerField: 'id'
+  // })
+];
+
 module.exports = {
   before: {
     all: [],
     find: [
+      authenticate('jwt'),
       function getS3Images(hook) {
         const s3Params = {Bucket: hook.app.get('bucket')};
         var resultantArr = [];
