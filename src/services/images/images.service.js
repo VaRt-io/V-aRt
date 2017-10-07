@@ -77,21 +77,21 @@ module.exports = function () {
           position: position || 0,
           url: `s3.amazonaws.com/${app.get('bucket')}/${name}`
         };
-        return hook.app.service('/api/paintings')
-          .create(options)
-          .then(result => {
-            // hook.result.paintingSaved = true;
-            hook.data.paintingSaved = true;
-          })
-          .catch((err) => {
-            if(process.env.NODE_ENV === 'test') {
-              throw new Error('failed paintings post');
-            } else {
-              // hook.result.paintingSaved = false;
-              hook.data.paintingSaved = false;
-              console.log('failed paintings post');
-            }
-          });
+        // return hook.app.service('/api/paintings')
+        //   .create(options)
+        //   .then(result => {
+        //     // hook.result.paintingSaved = true;
+        //     hook.data.paintingSaved = true;
+        //   })
+        //   .catch((err) => {
+        //     if(process.env.NODE_ENV === 'test') {
+        //       throw new Error('failed paintings post');
+        //     } else {
+        //       // hook.result.paintingSaved = false;
+        //       hook.data.paintingSaved = false;
+        //       console.log('failed paintings post');
+        //     }
+        //   });
 
         hook.data.name = name;
         hook.data.userId = +userId;
