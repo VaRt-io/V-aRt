@@ -43,7 +43,7 @@ module.exports = {
               });
               // return resultantArr;
               hook.result = resultantArr;
-              throw new Error('No query params')
+              throw new Error('No query params');
             }
           })
           .then((filteredObjects) => {
@@ -84,7 +84,7 @@ module.exports = {
         })
           .then((foundPaintings) => {
             const paintingToDelete = foundPaintings.filter((aPainting) => aPainting.url === paintingUrl)[0];
-            if(paintingToDelete) {
+            if (paintingToDelete) {
               return hook.app.service('api/paintings').remove(paintingToDelete.id);
             } else {
               throw new Error('No painting to delete in db');
@@ -95,13 +95,13 @@ module.exports = {
             hook.result = {imageDeleted: true, paintingDeleted: true};
           })
         .catch((err) => {
-          if(err.message === 'No painting to delete in db') {
-            console.log('No painting to delete in db')
+          if (err.message === 'No painting to delete in db') {
+            console.log('No painting to delete in db');
           } else {
             console.log(err);
             hook.result = {imageDeleted: true, paintingDeleted: true};
           }
-        })
+        });
       }
     ]
   },

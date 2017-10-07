@@ -47,15 +47,15 @@ export default class CanvasWrapper extends Component {
 
     var idObject = getMatchObj(this.props.location.search.toString());
 
-    var galId = idObject['galleryid'];
+    var galId = idObject.galleryid;
 
     const handleChange = this.handleChange;
 
     return (
       <div>
-        <div id='drawingBoard' style={boardStyle}></div>
+        <div id="drawingBoard" style={boardStyle} />
 
-        <div id='galleryId' title={galId}></div>
+        <div id="galleryId" title={galId} />
 
         <form>
           <input
