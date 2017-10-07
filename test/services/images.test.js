@@ -24,9 +24,10 @@ describe('s3/images service', () => {
         }
       });
 
-      return paintingsModel.truncate({cascade: true})
-        .then(() => galleriesModel.truncate({cascade: true}))
-        .then(() => usersModel.truncate({cascade: true}))
+      // return paintingsModel.truncate({cascade: true})
+      //   .then(() => galleriesModel.truncate({cascade: true}))
+      //   .then(() => usersModel.truncate({cascade: true}))
+    return db.sync();
   });
 
   it('registered the service', () => {
