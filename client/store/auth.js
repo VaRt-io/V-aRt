@@ -29,8 +29,8 @@ const authFail = () => {
   return {type: AUTH_FAIL };
 };
 
-const deauthenticateUser = user => {
-  return {type: DEAUTHENTICATE_USER, user};
+const deauthenticateUser = () => {
+  return {type: DEAUTHENTICATE_USER};
 };
 
 const setCurrentUser = user => {
@@ -62,30 +62,24 @@ const setCurrentUser = user => {
    axios.post('/api/authentiction', user)
      .then(result => result.data)
      .then(payload => {
-       console.log(user)
        localStorage.setItem('jwt', payload.accessToken);
        localStorage.setItem('email', user.email);
        return dispatch(authSuccess());
      })
-     .then((test) => {
-       axios.get(`/api/users?email=${user.email}`)
-     })
-     .then(userArray => {
-       console.log('user array', userArray);
-       console.log('the user', userArray[0]);
-       dispatch(setCurrentUser(userArray[0]))
-     })
-     .catch(console.error);
+     .then(() => axios.get(`/api/users?email=${user.email}`))
+     .then((res) => res.data)
+     .then(userArray => dispatch(setCurrentUser(userArray[0])))
+     .catch((err) => dispatch(authFail()));
  };
 
- export const deauthUser = user => dispatch => {
-   axios.post('/api/authentiction', user)
-     .then(result => result.data)
-     .then(newUser => {
-       dispatch(addUser(newUser));
-     })
-     .catch(console.error);
- };
+ // export const deauthUser = user => dispatch => {
+ //   axios.post('/api/authentiction', user)
+ //     .then(result => result.data)
+ //     .then(newUser => {
+ //       dispatch(de(newUser));
+ //     })
+ //     .catch(console.error);
+ // };
 
  /**
   * REDUCER
@@ -100,7 +94,7 @@ const setCurrentUser = user => {
    case DEAUTHENTICATE_USER:
      return initialAuthState;
    case SET_CURRENT_USER:
-     return Object.assign({}, state, {user: action.user});
+     return Object.assign({}, state, action.user);
    default:
      return state;
    }
