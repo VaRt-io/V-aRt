@@ -48,6 +48,8 @@ module.exports = function () {
     blobService
   );
 
+  // what am i trying to do?
+
   app.service('s3/images/new').before({
     create: [
       function(hook) {
@@ -56,16 +58,45 @@ module.exports = function () {
           const uri = dauria.getBase64DataURI(file.buffer, file.mimetype);
           hook.data = {uri: uri};
         }
-        const galleryid = hook.data.galleryid ? hook.data.galleryid.toString() : '0';
+        const galleryId = hook.data.galleryid ? hook.data.galleryid.toString() : '0';
         const position = hook.data.position ? hook.data.position.toString() : '0';
+        const {name, userId} = hook.data;
+
         hook.params.s3 = {
           ACL: 'public-read',
           Key: hook.data.name,
           Metadata: {
-            galleryid: galleryid,
+            galleryid: galleryId,
             position: position
           }
         };
+
+        const options = {
+          userId: userId,
+          galleryId: galleryId,
+          position: position || 0,
+          url: `s3.amazonaws.com/${app.get('bucket')}/${name}`
+        };
+        return hook.app.service('/api/paintings')
+          .create(options)
+          .then(result => {
+            // hook.result.paintingSaved = true;
+            hook.data.paintingSaved = true;
+          })
+          .catch((err) => {
+            if(process.env.NODE_ENV === 'test') {
+              throw new Error('failed paintings post');
+            } else {
+              // hook.result.paintingSaved = false;
+              hook.data.paintingSaved = false;
+              console.log('failed paintings post');
+            }
+          });
+
+        hook.data.name = name;
+        hook.data.userId = +userId;
+        hook.data.galleryId = +galleryId;
+        hook.data.position = position
       }
     ]
   });
@@ -73,35 +104,12 @@ module.exports = function () {
   // write an after hook that posts to the painting database
   app.service('s3/images/new').after({
     create: [
-      function postPainting(hook) {
-      const {name, userId, galleryId, position} = hook.data;
-      hook.result.name = name;
-      hook.result.userId = +userId;
-      hook.result.galleryId = +galleryId;
-      hook.result.position = position
-      const host = process.env.HOST || app.get('host');
-      const port = process.env.PORT || app.get('port');
-
-      // const paintingEndpoint = `http://${host}:${port}/api/paintings`;
-
-        const options = {
-            userId: userId,
-            galleryId: galleryId,
-            position: position || 0,
-            url: `s3.amazonaws.com/${app.get('bucket')}/${name}`
-        };
-
-        return hook.app.service('/api/paintings')
-          .create(options)
-          .then(result => {
-          })
-          .catch((err) => {
-          if(process.env.NODE_ENV === 'test') {
-            throw new Error('failed paintings post');
-          } else {
-            console.log('failed paintings post');
-          }
-          })
+      function attachHookDataToResults(hook) {
+        hook.result.name = hook.data.name;
+        hook.result.userId = +hook.data.userId;
+        hook.result.galleryId = +hook.data.galleryId;
+        hook.result.position = hook.data.position;
+        hook.result.paintingSaved = hook.data.paintingSaved;
       }
     ]
   });
