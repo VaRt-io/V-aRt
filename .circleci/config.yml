@@ -6,6 +6,10 @@ version: 2
 jobs:
   build:
     working_directory: ~/repo
+version: 2
+jobs:
+  build:
+    working_directory: ~/capstone_backend
     docker:
       - image: circleci/node:7.10
         environment:
