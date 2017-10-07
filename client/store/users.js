@@ -44,6 +44,7 @@ const changeAdminStatus = user => {
  * THUNK CREATORS
  */
 export const fetchUsers = () => dispatch => {
+  console.log('in thunkz')
   axios.get('/api/users')
     .then(result => result.data)
     .then(users => {

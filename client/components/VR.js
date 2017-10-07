@@ -7,9 +7,7 @@ import ReactDOM from 'react-dom';
 export default class VR extends Component{
 
   render(){
-    // return(
-    //     <div>Welcome to VR</div>
-    // )
+    console.log('VR PROPS', this.props);
     return (
       <Scene>
         <Entity geometry={{primitive: 'box'}} material={{color: 'red'}} position={{x: 0, y: 0, z: -5}} />
