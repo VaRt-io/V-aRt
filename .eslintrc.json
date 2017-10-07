@@ -1,7 +1,7 @@
 {
   "extends": "fullstack",
   "rules": {
-    "indent": [ 2, 2 ],
+    "indent": [ 0, 0 ],
     "quotes": [ 2, "single" ],
     "linebreak-style": [ 2, "unix" ],
     "semi": [ 2, "always" ],
@@ -14,6 +14,7 @@
     "comma-dangle": [ 0 ],
     "no-unused-expressions" : [ 0 ], // until fixed https://github.com/babel/babel-eslint/issues/158
     "block-scoped-var": [ 0 ], // until fixed https://github.com/eslint/eslint/issues/2253
-    "react/prop-types": [ 0 ]
+    "react/prop-types": [ 0 ],
+    "react/prefer-stateless-function": [ 0 ]
   }
 }

@@ -37,6 +37,7 @@
   "dependencies": {
     "aframe": "^0.7.0",
     "aframe-particle-system-component": "^1.0.10",
+    "aframe-physics-system": "^2.0.0",
     "aframe-react": "^4.3.0",
     "aws-sdk": "^2.125.0",
     "axios": "^0.16.2",
@@ -59,6 +60,7 @@
     "feathers-hooks": "^2.1.0",
     "feathers-hooks-common": "^3.7.3",
     "feathers-rest": "^1.8.0",
+    "feathers-seeder": "^1.0.10",
     "feathers-sequelize": "^2.3.1",
     "feathers-socketio": "^2.0.0",
     "fs-blob-store": "^5.2.1",
