@@ -49,7 +49,7 @@ export const postGalleryThunk = (gallery, history) => dispatch => {
     .then(result => result.data)
     .then(newGallery => {
       dispatch(postGallery(newGallery));
-      history.push('/gallery-edit');
+      history.push(`/gallery-edit/${newGallery.id}`);
     })
     .catch(console.error);
 };
