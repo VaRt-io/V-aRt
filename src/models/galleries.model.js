@@ -12,7 +12,8 @@ module.exports = function (app) {
     },
     thumbnailUrl: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/The_Scream.jpg/220px-The_Scream.jpg'
     },
   }, {
     hooks: {
