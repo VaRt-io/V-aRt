@@ -21,7 +21,7 @@ class SingleArtist extends Component{
           <h2>{currentArtist.name}</h2>
           <img id="profilePic" src={currentArtist.profileImageUrl} />
           <h4>Biography</h4>
-          <h5 style={{color: "blue"}}>{currentArtist.bio}</h5>
+          <h5 style={{color: 'blue'}}>{currentArtist.bio}</h5>
           <p />
           <p>{currentArtist.email}</p>
         </div>
@@ -32,10 +32,10 @@ class SingleArtist extends Component{
             <h3>Galleries</h3>
             <div className="galleriesRow">
             {
-              galleries && galleries.map(gallery=>{
-                return(
+              galleries && galleries.map(gallery => {
+                return (
                   <div className="innerGalleryBox" key={gallery.id}>
-                  <img className="singleUserGalleryThumb" src={gallery.thumbnailUrl}/>
+                  <img className="singleUserGalleryThumb" src={gallery.thumbnailUrl} />
                   <Link className="singleUserGalleryLink" to={`/galleries/${gallery.id}`}>{gallery.title}</Link>
                   </div>
                 );
@@ -49,12 +49,12 @@ class SingleArtist extends Component{
           <h3>Paintings</h3>
             <div className="paintingsRow">
             {
-              galleries && galleries.map(gallery=>{
-                return gallery.paintings.map(painting=>{
+              galleries && galleries.map(gallery => {
+                return gallery.paintings.map(painting => {
                   console.log(painting.url);
                   return (
                     <div className="innerGalleryBox" key={painting.id}>
-                    <img className="singleUserGalleryThumb" src={painting.url}/>
+                    <img className="singleUserGalleryThumb" src={painting.url} />
                     <Link to="#">Painting Name</Link>
                     </div>
                   );
