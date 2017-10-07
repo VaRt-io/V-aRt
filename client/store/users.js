@@ -16,11 +16,11 @@ const GET_USERS = 'GET_USERS';
 const ADD_USER = 'ADD_USER';
 const GET_USER_GALLERIES = 'GET_USER_GALLERIES';
 const DELETE_USER = 'DELETE_USER';
-const CHANGE_ADMIN_STATUS = 'CHANGE_ADMIN_STATUS';
 
 /**
  * ACTION CREATORS
  */
+
 const getUsers = users => {
   return { type: GET_USERS, users };
 };
@@ -37,14 +37,10 @@ const deleteUser = user => {
   return { type: DELETE_USER, user };
 };
 
-const changeAdminStatus = user => {
-  return { type: CHANGE_ADMIN_STATUS, user };
-};
 /**
  * THUNK CREATORS
  */
 export const fetchUsers = () => dispatch => {
-  console.log('in thunkz')
   axios.get('/api/users')
     .then(result => result.data)
     .then(users => {
@@ -79,13 +75,6 @@ export const removeUser = user => dispatch => {
     .catch(console.error);
 };
 
-export const updateAdminStatus = user => dispatch => {
-  axios.put(`/api/users/${user.id}`, user)
-    .then(() => {
-      dispatch(changeAdminStatus(user));
-    })
-    .catch(console.error);
-};
 /**
  * REDUCER
  */
@@ -99,8 +88,6 @@ export default function reducer (state = initialUserState, action) {
     return state.filter(galleries => galleries.userId === action.user.id);
   case DELETE_USER:
     return state.filter(user => user.id !== action.user.id);
-  case CHANGE_ADMIN_STATUS:
-    return state.map(user => (user.id === action.user.id ? action.user : user));
   default:
     return state;
   }
