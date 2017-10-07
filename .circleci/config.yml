@@ -49,3 +49,4 @@ jobs:
           prefix: coverage
       - store_test_results:
           path: ./coverage/clover.xml
+      - run: yarn run mocha
