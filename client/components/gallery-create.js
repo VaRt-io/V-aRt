@@ -79,7 +79,7 @@ const mapDispatch = (dispatch, ownProps) => {
     handleSubmit(event){
       event.preventDefault();
       const title = event.target.title.value;
-      const thumbnailUrl = null
+      const thumbnailUrl = null;
       const history = ownProps.history;
       
       dispatch(postGalleryThunk( { title }, history ));

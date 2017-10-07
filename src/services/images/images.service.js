@@ -58,7 +58,7 @@ module.exports = function () {
           const uri = dauria.getBase64DataURI(file.buffer, file.mimetype);
           hook.data = {uri: uri};
         }
-        const galleryId = hook.data.galleryid ? hook.data.galleryid.toString() : '0';
+        const galleryId = hook.data.galleryId ? hook.data.galleryId.toString() : '0';
         const position = hook.data.position ? hook.data.position.toString() : '0';
         const {name, userId} = hook.data;
 
@@ -72,31 +72,33 @@ module.exports = function () {
         };
 
         const options = {
-          userId: userId,
-          galleryId: galleryId,
-          position: position || 0,
+          userId: +userId,
+          galleryId: +hook.data.galleryId,
+          position: +position || 0,
           url: `s3.amazonaws.com/${app.get('bucket')}/${name}`
         };
-        // return hook.app.service('/api/paintings')
-        //   .create(options)
-        //   .then(result => {
-        //     // hook.result.paintingSaved = true;
-        //     hook.data.paintingSaved = true;
-        //   })
-        //   .catch((err) => {
-        //     if(process.env.NODE_ENV === 'test') {
-        //       throw new Error('failed paintings post');
-        //     } else {
-        //       // hook.result.paintingSaved = false;
-        //       hook.data.paintingSaved = false;
-        //       console.log('failed paintings post');
-        //     }
-        //   });
-
-        hook.data.name = name;
+         hook.data.name = name;
         hook.data.userId = +userId;
         hook.data.galleryId = +galleryId;
-        hook.data.position = position
+        hook.data.position = +position;
+
+        return hook.app.service('/api/paintings')
+          .create(options)
+          .then(result => {
+            // hook.result.paintingSaved = true;
+            hook.data.paintingSaved = true;
+          })
+          .catch((err) => {
+            if(process.env.NODE_ENV === 'test') {
+              throw new Error('failed paintings post');
+            } else {
+              // hook.result.paintingSaved = false;
+              hook.data.paintingSaved = false;
+              console.log('failed paintings post');
+            }
+          });
+
+       
       }
     ]
   });
