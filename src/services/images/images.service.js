@@ -60,7 +60,8 @@ module.exports = function () {
         }
         const galleryId = hook.data.galleryId ? hook.data.galleryId.toString() : '0';
         const position = hook.data.position ? hook.data.position.toString() : '0';
-        const {name, userId} = hook.data;
+        const userId = hook.data.userId ? hook.data.userId.toString() : '0';
+        const name = hook.data.name;
 
         hook.params.s3 = {
           ACL: 'public-read',
@@ -70,10 +71,10 @@ module.exports = function () {
             position: position
           }
         };
-
         const options = {
+          name,
           userId: +userId,
-          galleryId: +hook.data.galleryId,
+          galleryId: +galleryId,
           position: +position || 0,
           url: `s3.amazonaws.com/${app.get('bucket')}/${name}`
         };
@@ -115,7 +116,6 @@ module.exports = function () {
       }
     ]
   });
-
   // Initialize our service with any options it requires
   app.use('/s3/images', createService(options));
 
