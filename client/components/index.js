@@ -12,3 +12,4 @@ export {default as CreateGallery} from './createGallery';
 export {default as VR} from './VR';
 export {default as VR2} from './VR2';
 export {default as CanvasWrapper} from './CanvasWrapper';
+export {default as VRWrapper} from './VRWrapper'
