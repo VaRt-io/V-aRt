@@ -663,8 +663,8 @@ DrawingBoard.Board.prototype = {
     var formData = new FormData();
     formData.append('uri', uri);
     formData.append('name', name);
-    formData.append('galleryid', galleryId);
-    const request = new Request('https://tranquil-island-62126.herokuapp.com/s3/images/new', {
+    formData.append('galleryId', galleryId);
+    const request = new Request('http://localhost:3030/s3/images/new', {
       method: 'POST',
       body: formData,
     });
