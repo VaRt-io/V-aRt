@@ -34,8 +34,7 @@ class OurNavbar extends Component{
               </Nav>
               <Nav pullRight>
                 {currentUser.isLoggedIn ? <NavItem onClick={() => this.props.history.push(`/artists/${currentUser.id}`)}>Dashboard </NavItem> : <NavItem onClick={() => this.props.history.push('/signup')}>Sign Up</NavItem>}
-                {currentUser.isLoggedIn ? <NavItem onClick={() => this.props.signUserOut(this.props.history)} eventKey={1} >Sign Out </NavItem> : <NavItem eventKey={1} onClick={() => {this.props.history.push('/signin')} }>Sign In</NavItem> }              
-              </Nav>
+                {currentUser.isLoggedIn ? <NavItem onClick={() => this.props.signUserOut(this.props.history)} eventKey={1} >Sign Out </NavItem> : <NavItem eventKey={1} onClick={() => {this.props.history.push('/signin')} }>Sign In</NavItem> }              </Nav>
             </Navbar.Collapse>
           </Navbar>
     );
