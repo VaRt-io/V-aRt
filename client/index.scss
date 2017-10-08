@@ -14,7 +14,7 @@
     float: none;
 
 }
-//carousel 
+//carousel
 .carImg{
     text-align: center;
     margin: auto;
@@ -37,14 +37,14 @@
 a {
     color: blue;
 }
-// ALL GALLERIES & ALL ARTISTS 
+// ALL GALLERIES & ALL ARTISTS
 #allGalleryBox {
     margin: 0px 0px 0px 40px
 }
 #allGalleryRender {
     margin: 0px 0px 0px 40px
 }
- 
+
  .renderedBox{
     // background-color: black;
     margin: 10px 0px 20px 10px;
@@ -56,15 +56,15 @@ a {
     .innerRenderedBox{
         display: flex;
         flex-direction: row;
-        
+
     }
     #allGalleryThumb {
     width:  75px;
     height: 75px;
-    float: left;   
+    float: left;
     margin: 10px 20px 10px 10px;
     }
-    
+
     #byline{
         align-self: flex-end;
         text-align: left;
@@ -75,7 +75,7 @@ a {
     }
  }
 
-// SINGLE USER PAGE 
+// SINGLE USER PAGE
 
 #singleArtistContainer{
     display: flex;
@@ -91,7 +91,7 @@ a {
     #profilePic {
         width: 300px;
         height: 400px;
-        
+
     }
 }
 
@@ -101,7 +101,7 @@ a {
 }
 
 .singleUserGalleries {
-   
+
 
     .galleriesRow{
         display: flex;
@@ -109,7 +109,7 @@ a {
     }
 }
 .singleUserPaintings{
-   
+
 
     .paintingsRow{
         display: flex;
@@ -130,7 +130,7 @@ a {
     text-align: center;
 }
 
-//SINGLE GALLERY VIEW 
+//SINGLE GALLERY VIEW
 .page-header{
     margin-top: 0px;
 }
@@ -141,7 +141,7 @@ a {
 .singleGalleryContainer{
     display: flex;
     flex-direction: column;
-    
+
 }
 .userImagesInGalleryRow{
     display: flex;
@@ -183,4 +183,16 @@ a {
 }
 .addAPaintingTextDiv {
     margin: 0px 20px 0px 20px
+}
+//Signup & Signin
+
+.formBoxLogin{
+    background-color: #222;
+    border: green 5px solid;
+    width:50%;
+    text-align: center;
+    margin-top: 50px;
+    margin: auto;
+    padding: 15px 10px 0px 15px;
+    border-radius: 20px
 }
