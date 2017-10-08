@@ -24,7 +24,7 @@ class Signin extends Component {
 
   render(){
     const handleChange = this.handleChange;
-    console.log('inside signin page', this.props)
+
     return (
         <Form horizontal className="formBoxLogin" onSubmit={(event) => this.props.handleSubmit(event, this.props.history)}>
 
@@ -79,7 +79,8 @@ const mapDispatchToProps = (dispatch) => {
 
       dispatch(attemptAuth( {
         email,
-        password
+        password,
+        strategy: 'local'
       }, history ));
     }
   };
