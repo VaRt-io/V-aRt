@@ -165,4 +165,22 @@ a {
     border-radius: 20px
 }
 
-
+//Gallery Edit
+.innerGalleryCover{
+    display: flex;
+    flex-direction: row;
+    h3{
+        margin: 0px 20px 0px 20px
+    }
+}
+.editGalleryContainer{
+    display: flex;
+    flex-direction: row;
+}
+.addAPaintingDiv {
+    display: flex;
+    flex-direction: row;
+}
+.addAPaintingTextDiv {
+    margin: 0px 20px 0px 20px
+}
