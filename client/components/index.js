@@ -16,3 +16,4 @@ export {default as CanvasWrapper} from './CanvasWrapper';
 export {default as SinglePainting} from './singlePainting';
 export {default as Signup} from './signup';
 export {default as Signin} from './signin';
+export {default as ArtistDashboard} from './artist-dashboard';

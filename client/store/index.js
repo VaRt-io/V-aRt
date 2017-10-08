@@ -7,9 +7,9 @@ import image from './image';
 import galleries from './galleries';
 import users from './users';
 import paintings from './paintings';
-import auth from './auth';
+import currentUser from './currentUser';
 
-const reducer = combineReducers({image, galleries, users, paintings, auth});
+const reducer = combineReducers({image, galleries, users, paintings, currentUser});
 const middleware = composeWithDevTools(applyMiddleware(thunkMiddleware, createLogger({collapsed: true})));
 const store = createStore(reducer, middleware);
 
@@ -18,4 +18,4 @@ export * from './image';
 export * from './galleries';
 export * from './users';
 export * from './paintings';
-export * from './auth';
+export * from './currentUser';
