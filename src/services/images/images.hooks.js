@@ -89,7 +89,6 @@ module.exports = {
         return s3.deleteObjectAsync(s3Params)
         .then((response) => {
           hook.result = {imageDeleted: true};
-          console.log('deleted object in s3', response);
           return hook.app.service('api/paintings').find();
         })
           .then((foundPaintings) => {
@@ -101,12 +100,10 @@ module.exports = {
             }
           })
           .then(() => {
-          console.log('painting deleted');
             hook.result = {imageDeleted: true, paintingDeleted: true};
           })
         .catch((err) => {
           if(err.message === 'No painting to delete in db') {
-            console.log('No painting to delete in db')
           } else {
             console.log(err);
             hook.result = {imageDeleted: true, paintingDeleted: true};

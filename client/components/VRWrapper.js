@@ -8,13 +8,15 @@ import {Link} from 'react-router-dom';
 import store from '../store';
 // import AllImages from '../VRComponents/AllImages.js'
 
+const defaultGallery = {id:99, paintings: [{url: "https://blogs.ancestry.com/ancestry/files/2014/09/Brickwall.jpg"}]}
+
 export function AframeVR (props){
             // var assetPath = "../public/models"
         // console.log(assetPath + "obj/Old_picture_frame.obj")
-        console.log(props)
+        console.log("AR PROPS",props)
         let currGalleryId = props.match.params.galleryId;
         console.log(currGalleryId);
-        var gallery = props.galleries.find(gallery => {return +gallery.id === +currGalleryId;});
+        var gallery = props.galleries.find(gallery => {return +gallery.id === +currGalleryId;}) || defaultGallery;
         var images = gallery.paintings;
         console.log(images)
         var positions = ['-1.50 2.0 -9.65', '3.454 2.00 -9.65', '5.000 2.00 -6.20' , '5.000 2.00 -2.00', '2.50 2.0 2.10', '-1.50 2.0 2.10', '-4.00 2.0 -1.50', '-4.00 2.0 -7.00']
@@ -37,10 +39,10 @@ export function AframeVR (props){
                 )} */}
                 </a-assets>
 
-                <a-plane height="20" width="20" src="textures/Brick_wall.jpg" position="-4.17 7.831 -1.71" rotation="0 90 0"></a-plane>
-                <a-plane height="20" width="20" src="textures/Brick_wall.jpg" position="0.573 7.741 -9.667" rotation="0 0 0"></a-plane>
-                <a-plane height="20" width="20" src="textures/Brick_wall.jpg" position="5.157 8.266 0.114" rotation="0 -90 0"></a-plane>
-                <a-plane height="20" width="20" src="textures/Brick_wall.jpg" position="4.729 8.618 2.151" rotation="0 180 0"></a-plane>
+                <a-plane height="20" width="20" src="https://blogs.ancestry.com/ancestry/files/2014/09/Brickwall.jpg" position="-4.17 7.831 -1.71" rotation="0 90 0"></a-plane>
+                <a-plane height="20" width="20" src="https://blogs.ancestry.com/ancestry/files/2014/09/Brickwall.jpg" position="0.573 7.741 -9.667" rotation="0 0 0"></a-plane>
+                <a-plane height="20" width="20" src="https://blogs.ancestry.com/ancestry/files/2014/09/Brickwall.jpg" position="5.157 8.266 0.114" rotation="0 -90 0"></a-plane>
+                <a-plane height="20" width="20" src="https://blogs.ancestry.com/ancestry/files/2014/09/Brickwall.jpg" position="4.729 8.618 2.151" rotation="0 180 0"></a-plane>
                 <a-plane color="#CCC" height="20" width="20" position="-2.89 0.047 -4.31" rotation="-90 0 0"></a-plane>
                 <a-plane color="#CCC" height="20" width="20" position="5.680 7.015 0.019" rotation="90 0 0"></a-plane>
                 {/* {models && models.map(model =>{
@@ -63,10 +65,10 @@ export function AframeVR (props){
 }
 
 
-const mapState = function(state){
+const mapState = function(state, ownProps){
     return {
         galleries: state.galleries.galleryCollection,
-    }
+    };
 };
 
 export default connect(mapState)(AframeVR);
