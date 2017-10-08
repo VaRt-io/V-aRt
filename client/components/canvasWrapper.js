@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import jwt_decode from 'jwt-decode';
 
 export default class CanvasWrapper extends Component {
 
@@ -49,12 +50,22 @@ export default class CanvasWrapper extends Component {
     var idObject = getMatchObj(this.props.location.search.toString());
 
     var galId = idObject['galleryid'];
+    var userId;
+
+    // Try to get userId from jwt (if it exists), else route user to signin page
+    try {
+      userId = jwt_decode(localStorage.getItem('jwt')).userId;
+    } catch (err) {
+      console.log(this.props, 'route user to signin page now');
+      this.props.history.push('/signin');
+    }
 
     const handleChange = this.handleChange;
 
     return (
       <div>
         <div id='galleryId' title={galId}></div>
+        <div id='userId' title={userId}></div>
 
         <div id='name-form-wrapper'>
           <form>
