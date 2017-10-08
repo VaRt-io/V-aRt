@@ -21,6 +21,14 @@ class SingleArtist extends Component{
       <div className="singleArtistContainer">
         <div id="profileColumn" className="col-md-4">
           <h2>{currentArtist.name}</h2>
+          {
+            currentUser.isLoggedIn && 
+            ( <div>
+              <Button>Edit Profile</Button>          
+            </div>
+            )
+          }
+
           <img id="profilePic" src={currentArtist.profileImageUrl} />
           <h4>Biography</h4>
           <h5 style={{color: "blue"}}>{currentArtist.bio}</h5>
