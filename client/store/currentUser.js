@@ -1,4 +1,5 @@
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 
 //
 //INITIAL STATE
@@ -44,14 +45,19 @@ const setCurrentUser = user => {
 
  export const checkIfLoggedIn = () => dispatch => {
    const jwtOptions = {
-    	strategy: "jwt",
+    	strategy: 'jwt',
       accessToken: localStorage.getItem('jwt')
-    };
-   const userEmail = localStorage.getItem('email');
-   axios.post('/authentication', jwtOptions)
+    };    
+  let decodedJwt;
+  try {
+    decodedJwt = jwt_decode(jwtOptions.accessToken);    
+  } catch (e) {
+    decodedJwt = null;
+  }
+  axios.post('/authentication', jwtOptions)
      .then(result => result.data)
      .then((response) => dispatch(authSuccess()))
-     .then(() => axios.get(`/api/users?email=${userEmail}`))
+     .then(() => axios.get(`/api/users?id=${decodedJwt.userId}`))
      .then((res) => res.data)
      .then(userArray => {
        dispatch(setCurrentUser(userArray[0]));
@@ -64,12 +70,13 @@ const setCurrentUser = user => {
  export const attemptAuth = (user, history) => dispatch => {
    axios.post('/authentication', user)
      .then(result => result.data)
-     .then(payload => {
-       localStorage.setItem('jwt', payload.accessToken);
-       localStorage.setItem('email', user.email);
-       return dispatch(authSuccess());
+     .then(response => {
+       const jwt = response.accessToken;
+       localStorage.setItem('jwt', jwt);
+       dispatch(authSuccess());
+       return jwt_decode(jwt);
      })
-     .then(() => axios.get(`/api/users?email=${user.email}`))
+     .then((jwt) => axios.get(`/api/users?id=${jwt.userId}`))
      .then((res) => res.data)
      .then(userArray => {
        dispatch(setCurrentUser(userArray[0]));
