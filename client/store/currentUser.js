@@ -48,14 +48,9 @@ const setCurrentUser = user => {
       accessToken: localStorage.getItem('jwt')
     };
    const userEmail = localStorage.getItem('email');
-   console.log('inside checkloginthunk', jwtOptions.accessToken, userEmail);
-
    axios.post('/authentication', jwtOptions)
      .then(result => result.data)
-     .then((response) => {
-        console.log('response?', response);
-        dispatch(authSuccess());
-      })
+     .then((response) => dispatch(authSuccess()))
      .then(() => axios.get(`/api/users?email=${userEmail}`))
      .then((res) => res.data)
      .then(userArray => {
