@@ -1,8 +1,9 @@
-DrawingBoard.Board.prototype.fetchUploadURI =  function(uri, name, galleryId) {
+DrawingBoard.Board.prototype.fetchUploadURI =  function(uri, name, galleryId, userId) {
     var formData = new FormData();
     formData.append('uri', uri);
     formData.append('name', name);
     formData.append('galleryId', galleryId);
+    formData.append('userId', userId);
     const request = new Request('http://localhost:3030/s3/images/new', {
       method: 'POST',
       body: formData,
@@ -12,10 +13,10 @@ DrawingBoard.Board.prototype.fetchUploadURI =  function(uri, name, galleryId) {
       .then((resp) => resp.json())
       .then((data) => {
         console.log('log from canvas response', data);
-        // TODO: Render a success message
-        // setTimeout(() => {
-        //   window.location.href = 'https://tranquil-island-62126.herokuapp.com/vr.html';
-        // }, 1000);
+        // TODO: Route to galleries page
+        setTimeout(() => {
+          window.location.href = `/gallery-edit/${galleryId}`;
+        }, 500);
       })
       .catch((err) => {
       // TODO: Render an error message
@@ -34,11 +35,18 @@ DrawingBoard.Control.Upload = DrawingBoard.Control.extend({
           // this.board.downloadImg();
           var dataURL = this.board.getImg();
           var name = this.board.UrlName(document.getElementById('title').value);
+
+          if (!name || name.length < 1) {
+              window.alert('You must name your masterpiece!');
+              return;
+          }
+
           var galleryId = document.getElementById('galleryId').title;
+          var userId = document.getElementById('userId').title;
     
           // console.log(this.board.getImg());
           // console.log(galleryId);
-          this.board.fetchUploadURI(dataURL, name, galleryId);
+          this.board.fetchUploadURI(dataURL, name, galleryId, +userId);
           e.preventDefault();
         }, this));
       }
