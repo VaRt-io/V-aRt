@@ -91,7 +91,7 @@ a {
     #profilePic {
         width: 300px;
         height: 400px;
-
+        margin-top: 10px;
     }
 }
 
@@ -124,14 +124,19 @@ a {
 .singleUserGalleryThumb{
     width: 100px;
     height:100px;
-    margin: 0px 10px 0px 10px;
+    margin: 5px 10px 10px 10px;
 }
 .singleUserGalleryLink{
     text-align: center;
 }
 
 //SINGLE GALLERY VIEW
-.page-header{
+.edit-gallery-btn {
+    width: 65%;
+    margin: 0 auto;
+}
+
+.page-header {
     margin-top: 0px;
 }
 #enterVRButton .btn {
@@ -177,3 +182,5 @@ a {
     padding: 15px 10px 0px 15px;
     border-radius: 20px
 }
+
+
