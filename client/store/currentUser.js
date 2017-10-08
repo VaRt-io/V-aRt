@@ -73,7 +73,7 @@ const setCurrentUser = user => {
      .then((res) => res.data)
      .then(userArray => {
        dispatch(setCurrentUser(userArray[0]));
-       history.push('/dashboard')
+       history.push(`/artists/${userArray[0].id}`);
      })
      .catch((err) => dispatch(authFail()));
  };
