@@ -23,7 +23,7 @@ export default class ourCarousel extends Component{
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="carImg" width={500} height={500} alt="900x500" src="https://www.bloomberg.com/features/2017-art-auction-estimates-quiz/img/art-quiz-bloomberg-question-02.jpg" />
+            <img className="carImg" width={500} height={500} alt="900x500" src="https://slack-imgs.com/?c=1&url=http%3A%2F%2Fthepaintshop.biz%2Fimg%2Fcanvas8708.png" />
             <Carousel.Caption>
               <h3>Third slide label</h3>
               <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
