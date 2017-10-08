@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import store from '../store';
+import {Button} from 'react-bootstrap';
 
 class SingleArtist extends Component{
 
@@ -27,7 +28,9 @@ class SingleArtist extends Component{
         </div>
 
         <div className="galleriesAndPaintings">
-
+        <div>
+          <Button type="submit">Create New Gallery</Button>        
+        </div>
           <div className= "singleUserGalleries">
             <h3>Galleries</h3>
             <div className="galleriesRow">
@@ -56,6 +59,9 @@ class SingleArtist extends Component{
                     <div className="innerGalleryBox" key={painting.id}>
                     <img className="singleUserGalleryThumb" src={painting.url}/>
                     <Link to="#">Painting Name</Link>
+                    <Button>
+                      Sign In
+                    </Button>
                     </div>
                   );
                 });
