@@ -76,7 +76,7 @@ module.exports = function () {
           userId: +userId,
           galleryId: +galleryId,
           position: +position || 0,
-          url: `s3.amazonaws.com/${app.get('bucket')}/${name}`
+          url: `http://s3.amazonaws.com/${app.get('bucket')}/${name}`
         };
          hook.data.name = name;
         hook.data.userId = +userId;
