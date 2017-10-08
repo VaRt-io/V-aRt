@@ -14,6 +14,7 @@ class SingleArtist extends Component{
     const currentArtist = artists.length && artists.filter(artist => +artist.id === +currentArtistId)[0];
     const galleries = currentArtist.galleries;
     const paintings = currentArtist.galleries;
+    const currentUser = this.props.currentUser;
     // console.log('current Artist', currentArtist);
     // console.log("GaLlERiEs", galleries);
     return (
@@ -34,7 +35,9 @@ class SingleArtist extends Component{
         TODO: Conditionally render button to link to create new allery page
         */
         }
-          <Button className="new-gallery-right" type="submit">New Gallery</Button>        
+        {
+          currentUser.isLoggedIn && <Link className="btn btn-default" to="/gallery-create">New Gallery</Link> 
+        }
         </div>
           <div className= "singleUserGalleries">
             <h3>Galleries</h3>
@@ -43,12 +46,13 @@ class SingleArtist extends Component{
               galleries && galleries.map(gallery=>{
                 return(
                   <div className="innerGalleryBox" key={gallery.id}>
+                  <Link className="singleUserGalleryLink" to={`/galleries/${gallery.id}`}>{gallery.title}</Link>                  
                   <img className="singleUserGalleryThumb" src={gallery.thumbnailUrl}/>
-                  <Link className="singleUserGalleryLink" to={`/galleries/${gallery.id}`}>{gallery.title}</Link>
                   {
                     /*
                     TODO: Conditionally render button to link to edit gallery page
                     */
+                    currentUser.isLoggedIn && <Link className="btn btn-warning edit-gallery-btn" to='/gallery-edit'>Edit</Link>
                   }
                   </div>
                 );
@@ -67,11 +71,8 @@ class SingleArtist extends Component{
                   console.log(painting.url);
                   return (
                     <div className="innerGalleryBox" key={painting.id}>
-                    <img className="singleUserGalleryThumb" src={painting.url}/>
-                    <Link to="#">Painting Name</Link>
-                    <Button>
-                      Sign In
-                    </Button>
+                      <img className="singleUserGalleryThumb" src={painting.url}/>
+                      <Link to="#">Painting Name</Link>
                     </div>
                   );
                 });
@@ -91,7 +92,8 @@ class SingleArtist extends Component{
 
 const mapState = (state, ownProps) => {
   return {
-    artistsCollection: state.users.artistsCollection
+    artistsCollection: state.users.artistsCollection,
+    currentUser: state.currentUser
   };
 };
 
