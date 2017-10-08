@@ -30,7 +30,8 @@ export default class CanvasWrapper extends Component {
       ],
       size: 1,
       webStorage: 'session',
-      enlargeYourContainer: true
+      enlargeYourContainer: true,
+      droppable: true
     });
   }
 
