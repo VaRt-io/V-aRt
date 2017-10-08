@@ -29,7 +29,12 @@ class SingleArtist extends Component{
 
         <div className="galleriesAndPaintings">
         <div>
-          <Button type="submit">Create New Gallery</Button>        
+        {
+          /*
+        TODO: Conditionally render button to link to create new allery page
+        */
+        }
+          <Button className="new-gallery-right" type="submit">New Gallery</Button>        
         </div>
           <div className= "singleUserGalleries">
             <h3>Galleries</h3>
@@ -40,6 +45,11 @@ class SingleArtist extends Component{
                   <div className="innerGalleryBox" key={gallery.id}>
                   <img className="singleUserGalleryThumb" src={gallery.thumbnailUrl}/>
                   <Link className="singleUserGalleryLink" to={`/galleries/${gallery.id}`}>{gallery.title}</Link>
+                  {
+                    /*
+                    TODO: Conditionally render button to link to edit gallery page
+                    */
+                  }
                   </div>
                 );
               })
