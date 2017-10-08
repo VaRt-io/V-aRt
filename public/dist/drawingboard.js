@@ -636,65 +636,6 @@ DrawingBoard.Board.prototype = {
   },
 
   // ADDED UPLOAD FUNCTIONALITY
-
-  // xhrUploadURI: function(uri, name){
-  //   var data = new FormData();
-  //   data.append('name', name);
-  //   data.append('uri', uri);
-  //
-  //   var xhr = new XMLHttpRequest();
-  //   //    xhr.withCredentials = true;
-  //
-  //   xhr.addEventListener('readystatechange', function () {
-  //     if (this.readyState === 4) {
-  //       console.log(this.responseText);
-  //     }
-  //   });
-  //   xhr.open('POST', 'https://tranquil-island-62126.herokuapp.com/s3/images/new');
-  //   xhr.setRequestHeader('cache-control', 'no-cache');
-  //   xhr.send(data);
-  //
-  //   setTimeout(() => {
-  //     window.location.href = 'https://tranquil-island-62126.herokuapp.com/vr.html';
-  //   }, 2000);
-  // },
-
-  fetchUploadURI: function(uri, name, galleryId) {
-    var formData = new FormData();
-    formData.append('uri', uri);
-    formData.append('name', name);
-    formData.append('galleryId', galleryId);
-    const request = new Request('http://localhost:3030/s3/images/new', {
-      method: 'POST',
-      body: formData,
-    });
-
-    fetch(request)
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log('success', data);
-        // TODO: Render a success message
-        // setTimeout(() => {
-        //   window.location.href = 'https://tranquil-island-62126.herokuapp.com/vr.html';
-        // }, 1000);
-      })
-      .catch((err) => {
-      // TODO: Render an error message
-        console.log('error', err);
-      });
-  },
-
-  // uploadImg: function() {
-  //   var img = this.getImg();
-  //   var name = document.getElementById('title');
-  //   var id = document.getElementById('galleryId');
-  //
-  //   // this.board.xhrUploadURI(img, name);
-  //   this.board.fetchUploadURI(img, name, id);
-  //   // window.location.href = img;
-  // },
-
-
   /**
 	 * WebStorage handling : save and restore to local or session storage
 	 */
@@ -1425,24 +1366,4 @@ DrawingBoard.Control.Size = DrawingBoard.Control.extend({
     return !!available;
   }
 });
-DrawingBoard.Control.Upload = DrawingBoard.Control.extend({
 
-  name: 'upload',
-
-  initialize: function() {
-    console.log(document.location);
-    this.$el.append('<button class="drawing-board-control-download-button"></button>');
-    this.$el.on('click', '.drawing-board-control-download-button', $.proxy(function(e) {
-      // this.board.downloadImg();
-      var dataURL = this.board.getImg();
-      var name = this.board.UrlName(document.getElementById('title').value);
-      var galleryId = document.getElementById('galleryId').title;
-
-      // console.log(this.board.getImg());
-      // console.log(galleryId);
-      this.board.fetchUploadURI(dataURL, name, galleryId);
-      e.preventDefault();
-    }, this));
-  }
-
-});
