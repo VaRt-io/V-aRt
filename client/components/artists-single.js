@@ -22,10 +22,10 @@ class SingleArtist extends Component{
         <div id="profileColumn" className="col-md-4">
           <h2>{currentArtist.name}</h2>
           {
-            currentUser.isLoggedIn && 
+            currentUser.isLoggedIn &&
             ( <div>
               {/*TODO: Use a modal to edit user bio? */}
-              <Button>Edit Profile</Button>          
+              <Button>Edit Profile</Button>
             </div>
             )
           }
@@ -40,12 +40,7 @@ class SingleArtist extends Component{
         <div className="galleriesAndPaintings">
         <div>
         {
-          /*
-        TODO: Conditionally render button to link to create new allery page
-        */
-        }
-        {
-          currentUser.isLoggedIn && <Link className="btn btn-default" to="/gallery-create">New Gallery</Link> 
+          currentUser.isLoggedIn && <Link className="btn btn-default" to="/gallery-create">New Gallery</Link>
         }
         </div>
           <div className= "singleUserGalleries">
@@ -55,19 +50,16 @@ class SingleArtist extends Component{
               galleries && galleries.map(gallery=>{
                 return(
                   <div className="innerGalleryBox" key={gallery.id}>
-                  <Link className="singleUserGalleryLink" to={`/galleries/${gallery.id}`}>{gallery.title}</Link>                  
+                  <Link className="singleUserGalleryLink" to={`/galleries/${gallery.id}`}>{gallery.title}</Link>
                   <img className="singleUserGalleryThumb" src={gallery.thumbnailUrl}/>
                   {
-                    /*
-                    TODO: Conditionally render button to link to edit gallery page
-                    */
-                    currentUser.isLoggedIn && <Link className="btn btn-warning edit-gallery-btn" to='/gallery-edit'>Edit</Link>
+                    currentUser.isLoggedIn && <Link className="btn btn-warning edit-gallery-btn" to={`/gallery-edit/${gallery.id}`}>Edit</Link>
                   }
                   </div>
                 );
               })
             }
-          
+
             </div>
           </div>
 
@@ -87,7 +79,7 @@ class SingleArtist extends Component{
                 });
               })
             }
-            
+
             </div>
           </div>
         </div>
