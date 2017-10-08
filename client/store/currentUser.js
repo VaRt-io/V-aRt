@@ -29,7 +29,7 @@ const authFail = () => {
   return {type: AUTH_FAIL };
 };
 
-const deauthenticateUser = () => {
+export const deAuthenticateUser = () => {
   return {type: DEAUTHENTICATE_USER};
 };
 
@@ -58,7 +58,7 @@ const setCurrentUser = user => {
    })
  }
 
- export const attemptAuth = user => dispatch => {
+ export const attemptAuth = (user, history) => dispatch => {
    axios.post('/api/authentiction', user)
      .then(result => result.data)
      .then(payload => {
@@ -68,7 +68,10 @@ const setCurrentUser = user => {
      })
      .then(() => axios.get(`/api/users?email=${user.email}`))
      .then((res) => res.data)
-     .then(userArray => dispatch(setCurrentUser(userArray[0])))
+     .then(userArray => {
+       dispatch(setCurrentUser(userArray[0]));
+       history.push('/dashboard')
+     })
      .catch((err) => dispatch(authFail()));
  };
 
