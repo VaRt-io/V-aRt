@@ -1,14 +1,24 @@
 const AWS = require('aws-sdk');
 const promise = require('bluebird');
+const { authenticate } = require('feathers-authentication').hooks;
 const s3 = promise.promisifyAll(new AWS.S3({
   accessKeyId: process.env.S3_ID,
   secretAccessKey: process.env.S3_KEY
 }));
 
+const restrict = [
+  authenticate('jwt'),
+  // restrictToOwner({
+  //   idField: 'id',
+  //   ownerField: 'id'
+  // })
+];
+
 module.exports = {
   before: {
     all: [],
     find: [
+      authenticate('jwt'),
       function getS3Images(hook) {
         const s3Params = {Bucket: hook.app.get('bucket')};
         var resultantArr = [];
@@ -79,7 +89,6 @@ module.exports = {
         return s3.deleteObjectAsync(s3Params)
         .then((response) => {
           hook.result = {imageDeleted: true};
-          console.log('deleted object in s3', response);
           return hook.app.service('api/paintings').find();
         })
           .then((foundPaintings) => {
@@ -91,12 +100,10 @@ module.exports = {
             }
           })
           .then(() => {
-          console.log('painting deleted');
             hook.result = {imageDeleted: true, paintingDeleted: true};
           })
         .catch((err) => {
           if(err.message === 'No painting to delete in db') {
-            console.log('No painting to delete in db')
           } else {
             console.log(err);
             hook.result = {imageDeleted: true, paintingDeleted: true};

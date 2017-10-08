@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery, VR, VR2, CanvasWrapper, GalleryCreate, SinglePainting, GalleryEdit, Signup, VRWrapper} from './index';
+import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery, VR, VR2, CanvasWrapper, GalleryCreate, SinglePainting, GalleryEdit, Signup, Signin, ArtistDashboard, VRWrapper} from './index';
+
 
 import AframeVR from '../containers/wrapper';
 
-import store, {getGalleriesThunk, fetchUsers, getPaintingsThunk} from '../store';
+import store, {getGalleriesThunk, fetchUsers, getPaintingsThunk, checkIfLoggedIn} from '../store';
 
 export default class Main extends Component{
 
@@ -15,9 +16,11 @@ export default class Main extends Component{
     const galleryAction = getGalleriesThunk();
     const userAction = fetchUsers();     ///USERS = ARTISTS
     const paintingsAction = getPaintingsThunk();
+    const checkIfLoggedInThunk = checkIfLoggedIn();
     store.dispatch(galleryAction);
     store.dispatch(userAction);
     store.dispatch(paintingsAction);
+    store.dispatch(checkIfLoggedInThunk);
   }
 
   render(){
@@ -37,9 +40,9 @@ export default class Main extends Component{
           <Route exact path="/vr2" component={VR2} />
           <Route exact path="/canvas" component={CanvasWrapper} />
           <Route exact path="/paintings/:id" component={SinglePainting} />
-
+          <Route exact path="/dashboard" component={ArtistDashboard} />
           <Route exact path="/signup" component={Signup} />
-
+          <Route exact path="/signin" component={Signin} />
         </Switch>
       </div>
     );
