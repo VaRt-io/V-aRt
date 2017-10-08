@@ -47,11 +47,11 @@ const setCurrentUser = user => {
     	strategy: "jwt",
       accessToken: localStorage.get('jwt')
     };
+   const userEmail = localStorage.get('email');
+
    axios.post('/post/authentication', jwtOptions)
-   .then((response) => {
-     dispatch(authSuccess());
-   })
-   .then(() => axios.get(`/api/users?email=${localStorage.get('email')}`))
+   .then((response) => dispatch(authSuccess()))
+   .then(() => axios.get(`/api/users?email=${userEmail}`))
    .then(userArray => dispatch(setCurrentUser(userArray[0])))
    .catch((err) => {
      console.log('not logged in currently');
