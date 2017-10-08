@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {postUser} from '../store';
+import {attemptAuth} from '../store';
 import {FormGroup, FormControl, ControlLabel, Form, Col, Button} from 'react-bootstrap';
 
-class Signup extends Component {
+class Signin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
       email: '',
       password: ''
     };
@@ -28,21 +27,6 @@ class Signup extends Component {
 
       return (
         <Form horizontal className="formBoxLogin" onSubmit={this.props.handleSubmit}>
-
-        <FormGroup controlId="formHorizontalName">
-          <Col componentClass={ControlLabel} sm={3}>
-            Name
-          </Col>
-          <Col sm={9}>
-            <FormControl
-              type="name"
-              name="name"
-              value={this.state.name}
-              placeholder="Name"
-              onChange={handleChange}
-              style={{backgroundColor: 'grey', color: 'lightgreen'}} />
-          </Col>
-        </FormGroup>
 
         <FormGroup controlId="formHorizontalEmail">
           <Col componentClass={ControlLabel} sm={3}>
@@ -77,7 +61,7 @@ class Signup extends Component {
         <FormGroup>
           <Col smOffset={2} sm={9}>
             <Button type="submit">
-              Sign Up
+              Sign In
             </Button>
           </Col>
         </FormGroup>
@@ -90,12 +74,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleSubmit(event){
       event.preventDefault();
-      const name = event.target.name.value;
       const email = event.target.email.value;
       const password = event.target.password.value;
 
-      dispatch(postUser( {
-        name,
+      dispatch(attemptAuth( {
         email,
         password
       } ));
@@ -103,4 +85,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Signup);
+export default connect(null, mapDispatchToProps)(Signin);
