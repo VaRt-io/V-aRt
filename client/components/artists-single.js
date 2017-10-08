@@ -24,6 +24,7 @@ class SingleArtist extends Component{
           {
             currentUser.isLoggedIn && 
             ( <div>
+              {/*TODO: Use a modal to edit user bio? */}
               <Button>Edit Profile</Button>          
             </div>
             )
