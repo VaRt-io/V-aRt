@@ -24,9 +24,9 @@ class Signin extends Component {
 
   render(){
     const handleChange = this.handleChange;
-
-      return (
-        <Form horizontal className="formBoxLogin" onSubmit={this.props.handleSubmit}>
+    console.log('inside signin page', this.props)
+    return (
+        <Form horizontal className="formBoxLogin" onSubmit={(event) => this.props.handleSubmit(event, this.props.history)}>
 
         <FormGroup controlId="formHorizontalEmail">
           <Col componentClass={ControlLabel} sm={3}>
@@ -72,7 +72,7 @@ class Signin extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleSubmit(event){
+    handleSubmit(event, history){
       event.preventDefault();
       const email = event.target.email.value;
       const password = event.target.password.value;
@@ -80,7 +80,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(attemptAuth( {
         email,
         password
-      } ));
+      }, history ));
     }
   };
 };
