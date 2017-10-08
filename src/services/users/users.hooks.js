@@ -16,7 +16,6 @@ module.exports = {
     all: [],
     find: [
       function rawFalse(hook) {
-      console.log(hook.params);
         if (!hook.params.sequelize) hook.params.sequelize = {};
         Object.assign(hook.params.sequelize, { raw: false, include: [{all: true, nested: true}] });
         return hook;
