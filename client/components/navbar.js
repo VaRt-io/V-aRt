@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
 import {LinkContainer} from 'react-router-bootstrap';
+import {deAuthenticateUser} from '../store';
 
 
 class OurNavbar extends Component{
@@ -12,7 +12,6 @@ class OurNavbar extends Component{
   }
 
   render(){
-    console.log('props here', this.props);
     return (
             <Navbar id="ourNavbar"inverse collapseOnSelect>
             <Navbar.Header>
@@ -34,7 +33,7 @@ class OurNavbar extends Component{
                 </NavDropdown>
               </Nav>
               <Nav pullRight>
-{this.props.currentUser.isLoggedIn ? <NavItem href="#" eventKey={1} >Sign Out </NavItem> : <NavItem eventKey={1} href="/signin">Sign In</NavItem> }
+{this.props.currentUser.isLoggedIn ? <NavItem onClick={() => this.props.signUserOut(this.props.history)} eventKey={1} >Sign Out </NavItem> : <NavItem eventKey={1} onClick={() => {this.props.history.push('/signin')} }>Sign In</NavItem> }
               </Nav>
             </Navbar.Collapse>
           </Navbar>
@@ -44,5 +43,14 @@ class OurNavbar extends Component{
 
 const mapStateToProps = ({currentUser}) => ({currentUser});
 
-export default withRouter(connect(mapStateToProps)(OurNavbar));
+const mapDispatchToProps = (dispatch) => {
+return {
+  signUserOut: (history) => {
+    dispatch(deAuthenticateUser())
+    history.push('/');
+    }
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OurNavbar));
 
