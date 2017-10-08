@@ -11,6 +11,7 @@ class SingleArtist extends Component{
     const currentArtistId = this.props.match.params.id;
     // console.log(currentArtistId);
     const artists = this.props.artistsCollection;
+    console.log("ArTists", artists)
     const currentArtist = artists.length && artists.filter(artist => +artist.id === +currentArtistId)[0];
     const galleries = currentArtist.galleries;
     const paintings = currentArtist.galleries;
