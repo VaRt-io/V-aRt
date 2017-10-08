@@ -6,6 +6,12 @@ const DataTypes = Sequelize.DataTypes;
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
   const paintings = sequelizeClient.define('paintings', {
+    
+    name:{
+      type: DataTypes.STRING,
+      allowNull: true,
+      unique:true,      ////WE HAVE TO COME BACK TO THIS AND ADD SOME KIN OF UNIQUE IDENTIFIER TO STRINGS
+    },
     url: {
       type: DataTypes.STRING,
       allowNull: false,

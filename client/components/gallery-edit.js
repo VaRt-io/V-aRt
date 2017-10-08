@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { NavLink, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import store from '../store';
-import{PageHeader, Button} from 'react-bootstrap';
+import{Button} from 'react-bootstrap';
+import {DisplayPaintings, OurPageHeader} from './index';
 
 
 class GalleryEdit extends Component{
@@ -20,34 +21,72 @@ class GalleryEdit extends Component{
         }
         console.log('CURRENT GALLERY', currentGallery);
         console.log('ArtistId', artistId);
+        console.log("Display Paintings", DisplayPaintings);
         return (
+           
+        <div className="editGalleryContainter">
+            <OurPageHeader artistName={artistName} artistId={artistId} 
+                        currentGallery={currentGallery}/>
+          
+            <div className="galleryCover">
+                <h3>Select a Picture for your Gallery Cover</h3>
+                <div className="innerGalleryCover">
+                <div>
+                    <img src={currentGallery.thumbnailUrl} />
+                    </div>
+                <div>
+                    <h3>Choose From Gallery</h3>
+                    <select>
+                    
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                </select>
+                </div>
+
+            <div><h3>Or</h3></div>
+
             <div>
-            <PageHeader>{currentGallery.title}
-            <small style={{color:'blue'}}> By: 
-            <Link to={`/artists/${artistId}`}>{`${artistName}`}</Link>
-            </small>
-          </PageHeader>
-          <h3>Select a Picture for your Gallery Cover</h3>
+            <h3>Upload A Cover</h3>
+                <form action="">
+                    <label>
+                        Picture:
+                        <input type="file" name="pic" accept="image/*" />
+                    </label>
+                </form>
+            </div>
+          </div>
+        </div>
 
           <h3>Add a painting</h3>
-          <Link to={`/canvas?galleryid=${currentGalleryId}`}><Button type="submit" 
-                    className="btn btn-success" 
-                    style={{color:'#222'}} >Canvas
-            </Button></Link>
-            <h3>My Paintings</h3>
-            {
-                currentGallery && currentGallery.paintings.map(painting=>{
-                    return(
-                      <div className="paintingsBox" key={painting.id}>
-                      <img className="singleUserGalleryThumb" src={painting.url}/>
-                      <Link to="#">Painting Name</Link>
-                      </div>
-                    );
-                  })
-            }
+          <hr style={{color: 'white'}}/>
+          <div className="addAPaintingDiv">
+            
+                <div className="addAPaintingTextDiv">
+                <h3>Draw From Canvas</h3>
+                    <Link to={`/canvas?galleryid=${currentGalleryId}`}><Button type="submit" 
+                                className="btn btn-success" 
+                                style={{color:'#222'}} >Canvas
+                        </Button></Link>
+                </div>
+                <div className="addAPaintingTextDiv">
+                <h3>Or Uplaod A Picture</h3>
+                    <form action="">
+                        <label>
+                        Picture:
+                        <input type="file" name="pic" accept="image/*" />
+                        </label>
+                    </form>
+                </div>
 
+                <div></div>
+                </div>
 
-            </div>
+                <h3>My Paintings</h3>
+                <DisplayPaintings currentGallery={currentGallery} />
+        </div>//this closes the first div
+           
         );
     
     }

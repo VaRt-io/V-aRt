@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { NavLink, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import store from '../store';
-import {Jumbotron, PageHeader} from 'react-bootstrap';
+import {Jumbotron} from 'react-bootstrap';
+import {OurPageHeader, DisplayPaintings, OurJumbotron } from './index';
+
 
 class SingleGallery extends Component{
 
@@ -21,45 +23,20 @@ class SingleGallery extends Component{
     }
     console.log('CURRENT GALLERY', currentGallery);
     console.log('ArtistId', artistId);
+    console.log(OurJumbotron)
     return (
       <div className="singleGalleryContainer">
-        <PageHeader>{currentGallery.title}
-          <small style={{color:'blue'}}> By: 
-          <Link to={`/artists/${artistId}`}>{`${artistName}`}</Link>
-          </small>
-        </PageHeader>
-
+        <OurPageHeader artistName={artistName} artistId={artistId} 
+        currentGallery={currentGallery}/>
       
         <div id="enterVRButton" style={{textAlign: 'center', marginTop:'10px', marginBottom:'50px'}}>
           <Link to={{pathname: `/galleries/${currentGalleryId}/vr/nightscene`}} ><button className="btn btn-danger" style={{backgroundColor: 'red', fontSize:'20px'}}>Enter VR</button></Link>
         </div>
         
-        <Jumbotron id="jumbo"  style={{backgroundImage: `url(${currentGallery.thumbnailUrl})`,
-                          width: '75%',
-                          height: '400px',
-                          textAlign: 'center',
-                          margin: 'auto',
-                          backgroundPosition: 'center center',
-                          color: 'white',
-                          fontSize: '30px',
-                          marginTop: '0px'}}>
-        
-        {currentGallery.title}</Jumbotron>
-       
+        <OurJumbotron currentGallery={currentGallery} />
       
         <h3>user images in this gallery</h3>
-        <div className="userImagesInGalleryRow">
-        {
-          currentGallery && currentGallery.paintings.map(painting=>{
-            return(
-              <div className="paintingsBox" key={painting.id}>
-              <img className="singleUserGalleryThumb" src={painting.url}/>
-              <Link to="#">Painting Name</Link>
-              </div>
-            );
-          })
-        }
-        </div>
+        <DisplayPaintings currentGallery={currentGallery} />   
         <Link to={`/canvas?galleryid=${currentGalleryId}`}><button className="btn btn-success">Create an Image</button></Link>
       </div>
     );
