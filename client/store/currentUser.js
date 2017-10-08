@@ -42,24 +42,32 @@ const setCurrentUser = user => {
  * THUNK CREATORS
  */
 
- export const checkIfLoggedIn = user => dispatch => {
+ export const checkIfLoggedIn = () => dispatch => {
    const jwtOptions = {
     	strategy: "jwt",
-      accessToken: localStorage.get('jwt')
+      accessToken: localStorage.getItem('jwt')
     };
-   const userEmail = localStorage.get('email');
+   const userEmail = localStorage.getItem('email');
+   console.log('inside checkloginthunk', jwtOptions.accessToken, userEmail);
 
-   axios.post('/post/authentication', jwtOptions)
-   .then((response) => dispatch(authSuccess()))
-   .then(() => axios.get(`/api/users?email=${userEmail}`))
-   .then(userArray => dispatch(setCurrentUser(userArray[0])))
-   .catch((err) => {
+   axios.post('/authentication', jwtOptions)
+     .then(result => result.data)
+     .then((response) => {
+        console.log('response?', response);
+        dispatch(authSuccess());
+      })
+     .then(() => axios.get(`/api/users?email=${userEmail}`))
+     .then((res) => res.data)
+     .then(userArray => {
+       dispatch(setCurrentUser(userArray[0]));
+     })
+     .catch((err) => {
      console.log('not logged in currently');
-   })
- }
+   });
+ };
 
  export const attemptAuth = (user, history) => dispatch => {
-   axios.post('/api/authentiction', user)
+   axios.post('/authentication', user)
      .then(result => result.data)
      .then(payload => {
        localStorage.setItem('jwt', payload.accessToken);
