@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {postUser} from '../store';
+import {FormGroup, FormControl, ControlLabel, Form, Col, Button} from 'react-bootstrap';
 
 class Signup extends Component {
   constructor(props) {
@@ -25,45 +26,62 @@ class Signup extends Component {
   render(){
     const handleChange = this.handleChange;
 
-    return (
-      <div>
-        <div className="temp">
-        <div>
-            <div className="header">
-              <a href="#" className="active" id="login-box-link">SignUp</a>
-            </div>
-            <form className="email-login" onSubmit={this.props.handleSubmit}>
-              <div>
-                <input
-                  type="name"
-                  name="name"
-                  value={this.state.name}
-                  placeholder="Name"
-                  onChange={handleChange} />
-              </div>
-              <div className="email-input">
-                <input
-                  type="email"
-                  name="email"
-                  value={this.state.email}
-                  placeholder="Email"
-                  onChange={handleChange} />
-              </div>
-              <div>
-                <input
-                  type="password"
-                  name="password"
-                  value={this.state.password}
-                  placeholder="Password"
-                  onChange={handleChange} />
-              </div>
-              <div>
-                <button>Sign Up</button>
-              </div>
-            </form>
-        </div>
-        </div>
-      </div>
+      return (
+        <Form horizontal className="formBoxLogin" onSubmit={this.props.handleSubmit}>
+
+        <FormGroup controlId="formHorizontalName">
+          <Col componentClass={ControlLabel} sm={3}>
+            Name
+          </Col>
+          <Col sm={9}>
+            <FormControl
+              type="name"
+              name="name"
+              value={this.state.name}
+              placeholder="Name"
+              onChange={handleChange}
+              style={{backgroundColor: 'grey', color: 'lightgreen'}} />
+          </Col>
+        </FormGroup>
+
+        <FormGroup controlId="formHorizontalEmail">
+          <Col componentClass={ControlLabel} sm={3}>
+            Email
+          </Col>
+          <Col sm={9}>
+            <FormControl
+              type="email"
+              name="email"
+              value={this.state.email}
+              placeholder="Email"
+              onChange={handleChange}
+              style={{backgroundColor: 'grey', color: 'lightgreen'}} />
+          </Col>
+        </FormGroup>
+
+        <FormGroup controlId="formHorizontalPassword">
+          <Col componentClass={ControlLabel} sm={3}>
+            Password
+          </Col>
+          <Col sm={9}>
+            <FormControl
+              type="password"
+              name="password"
+              value={this.state.password}
+              placeholder="Password"
+              onChange={handleChange}
+              style={{backgroundColor: 'grey', color: 'lightgreen'}} />
+          </Col>
+        </FormGroup>
+
+        <FormGroup>
+          <Col smOffset={2} sm={9}>
+            <Button type="submit">
+              Sign Up
+            </Button>
+          </Col>
+        </FormGroup>
+      </Form>
     );
   }
 }
