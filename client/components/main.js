@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery, VR, VR2, CanvasWrapper, GalleryCreate, SinglePainting, GalleryEdit, Signup, Signin, ArtistDashboard, VRWrapper} from './index';
 
 
-import AframeVR from '../containers/wrapper';
+// import AframeVR from '../containers/wrapper';
 
 import store, {getGalleriesThunk, fetchUsers, getPaintingsThunk, checkIfLoggedIn} from '../store';
 
