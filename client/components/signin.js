@@ -24,51 +24,60 @@ class Signin extends Component {
 
   render(){
     const handleChange = this.handleChange;
+    const currentUser = this.props.currentUser;
 
-    return (
+    if (currentUser.id) {
+      return (
+        <div onClick={this.props.history.push('/dashboard')}></div>
+      );
+    } else {
+      return (
         <Form horizontal className="formBoxLogin" onSubmit={(event) => this.props.handleSubmit(event, this.props.history)}>
 
-        <FormGroup controlId="formHorizontalEmail">
-          <Col componentClass={ControlLabel} sm={3}>
-            Email
-          </Col>
-          <Col sm={9}>
-            <FormControl
-              type="email"
-              name="email"
-              value={this.state.email}
-              placeholder="Email"
-              onChange={handleChange}
-              style={{backgroundColor: 'grey', color: 'lightgreen'}} />
-          </Col>
-        </FormGroup>
+    <FormGroup controlId="formHorizontalEmail">
+        <Col componentClass={ControlLabel} sm={3}>
+        Email
+        </Col>
+        <Col sm={9}>
+        <FormControl
+      type="email"
+      name="email"
+      value={this.state.email}
+      placeholder="Email"
+      onChange={handleChange}
+      style={{backgroundColor: 'grey', color: 'lightgreen'}} />
+      </Col>
+      </FormGroup>
 
-        <FormGroup controlId="formHorizontalPassword">
-          <Col componentClass={ControlLabel} sm={3}>
-            Password
-          </Col>
-          <Col sm={9}>
-            <FormControl
-              type="password"
-              name="password"
-              value={this.state.password}
-              placeholder="Password"
-              onChange={handleChange}
-              style={{backgroundColor: 'grey', color: 'lightgreen'}} />
-          </Col>
-        </FormGroup>
+      <FormGroup controlId="formHorizontalPassword">
+        <Col componentClass={ControlLabel} sm={3}>
+        Password
+        </Col>
+        <Col sm={9}>
+        <FormControl
+      type="password"
+      name="password"
+      value={this.state.password}
+      placeholder="Password"
+      onChange={handleChange}
+      style={{backgroundColor: 'grey', color: 'lightgreen'}} />
+      </Col>
+      </FormGroup>
 
-        <FormGroup>
-          <Col smOffset={2} sm={9}>
-            <Button type="submit">
-              Sign In
-            </Button>
-          </Col>
-        </FormGroup>
+      <FormGroup>
+      <Col smOffset={2} sm={9}>
+        <Button type="submit">
+        Sign In
+      </Button>
+      </Col>
+      </FormGroup>
       </Form>
     );
+    }
   }
 }
+
+const mapStateToProps = ({currentUser}) => ({currentUser});
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -86,4 +95,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Signin);
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);
