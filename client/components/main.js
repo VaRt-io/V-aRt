@@ -29,15 +29,16 @@ export default class Main extends Component{
         <OurNavbar />
         <Switch>
           <Route exact path="/" component={LandingPage} />
-          <Route exact path="/vr/:galleryId" component={VRWrapper} />
           <Route exact path="/artists/:id" component={SingleArtist} />
           <Route exact path="/artists" component={AllArtists} />
           <Route exact path="/galleries" component={AllGalleries} />
           <Route exact path="/galleries/:id" component={SingleGallery} />
+          <Route exact path="/galleries/:id/vr/nightscene" component={VRNightScene} />
           <Route exact path="/gallery-create" component={GalleryCreate} />
-          <Route exact path="/gallery-edit" component={GalleryEdit} />
-          <Route exact path="/vr" component={VR} />
-          <Route exact path="/vr2" component={VR2} />
+          <Route exact path="/gallery-edit/:id" component={GalleryEdit} />
+          <Route exact path="/vr/cube" component={VRCube} />
+          <Route exact path="/vr/nightscene" component={VRNightScene} />
+          <Route exact path="/vr/:galleryId" component={VRWrapper} />
           <Route exact path="/canvas" component={CanvasWrapper} />
           <Route exact path="/paintings/:id" component={SinglePainting} />
           <Route exact path="/dashboard" component={ArtistDashboard} />
