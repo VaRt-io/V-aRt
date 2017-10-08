@@ -35,9 +35,11 @@ class SingleGallery extends Component{
         
         <OurJumbotron currentGallery={currentGallery} />
       
-        <h3>user images in this gallery</h3>
+        <h3>My Paintings</h3>
         <DisplayPaintings currentGallery={currentGallery} />   
-        <Link to={`/canvas?galleryid=${currentGalleryId}`}><button className="btn btn-success">Create an Image</button></Link>
+        <div className="single-gallery-create-painting-wrapper">
+          <Link to={`/canvas?galleryid=${currentGalleryId}`} className="btn btn-success">Create New Painting</Link>
+        </div>
       </div>
     );
   }
