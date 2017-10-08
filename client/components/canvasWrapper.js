@@ -54,19 +54,22 @@ export default class CanvasWrapper extends Component {
 
     return (
       <div>
-        <div id='drawingBoard' style={boardStyle}></div>
-
         <div id='galleryId' title={galId}></div>
 
-        <form>
-          <input
-            id="title"
-            type="text"
-            name="name"
-            value= {this.state.name}
-            placeholder="Enter title"
-            onChange={handleChange} />
-        </form>
+        <div id='name-form-wrapper'>
+          <form>
+            <input
+              id="title"
+              type="text"
+              name="name"
+              value= {this.state.name}
+              placeholder="Enter title"
+              onChange={handleChange} />
+          </form>
+        </div>
+
+        <div id='drawingBoard' style={boardStyle}></div>
+        
       </div>
     );
   }
