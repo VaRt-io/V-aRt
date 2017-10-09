@@ -27,7 +27,7 @@ class Signup extends Component {
     const handleChange = this.handleChange;
 
       return (
-        <Form horizontal className="formBoxLogin" onSubmit={this.props.handleSubmit}>
+        <Form horizontal className="formBoxLogin" onSubmit={(e) => this.props.handleSubmit(e, this.props.history)}>
 
         <FormGroup controlId="formHorizontalName">
           <Col componentClass={ControlLabel} sm={3}>
@@ -88,7 +88,7 @@ class Signup extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleSubmit(event){
+    handleSubmit(event, history){
       event.preventDefault();
 
       const user = {
