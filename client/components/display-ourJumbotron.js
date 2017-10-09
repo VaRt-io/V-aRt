@@ -16,8 +16,7 @@ export default function OurJumbotron (props){
         color: 'white',
         fontSize: '30px',
         marginTop: '0px'}}>
-
-{currentGallery.title}</Jumbotron>
+        </Jumbotron>
        
         );
 
