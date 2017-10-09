@@ -4,28 +4,62 @@ import {connect} from 'react-redux';
 import store from '../store';
 import {Button} from 'react-bootstrap';
 
-class SingleArtist extends Component{
+class SingleArtist extends Component {
 
-  render(){
-    // console.log('SINGL Artist PROPS', this.props);
+  constructor(props) {
+    super(props);
+
     const currentArtistId = this.props.match.params.id;
-    // console.log(currentArtistId);
     const artists = this.props.artistsCollection;
     const currentArtist = artists.length && artists.filter(artist => +artist.id === +currentArtistId)[0];
-    const galleries = currentArtist.galleries;
-    const paintings = currentArtist.galleries;
+
+    const {name, profileImageUrl, bio, email, galleries} = currentArtist;
+
+    this.state = {
+      name,
+      profileImageUrl,
+      bio,
+      email,
+      galleries,
+    }; 
+
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.artistsCollection.length !== this.props.artistsCollection.length) {
+      const currentArtistId = nextProps.match.params.id;
+      const artists = nextProps.artistsCollection;
+      const currentArtist = artists.length && artists.filter(artist => +artist.id === +currentArtistId)[0];
+      const galleries = currentArtist.galleries;
+
+      const {name, profileImageUrl, bio, email} = currentArtist;
+
+      this.setState({
+        name,
+        profileImageUrl,
+        bio,
+        email,
+        galleries
+      });
+
+    } 
+ 
+  }
+
+  render(){
+
+    const currentArtist = this.state;
     const currentUser = this.props.currentUser;
-    // console.log('current Artist', currentArtist);
-    // console.log("GaLlERiEs", galleries);
+   
     return (
       <div className="singleArtistContainer">
         <div id="profileColumn" className="col-md-4">
           <h2>{currentArtist.name}</h2>
           {
-            currentUser.isLoggedIn && 
+            currentUser.isLoggedIn &&
             ( <div>
               {/*TODO: Use a modal to edit user bio? */}
-              <Button>Edit Profile</Button>          
+              <Button>Edit Profile</Button>
             </div>
             )
           }
@@ -40,34 +74,26 @@ class SingleArtist extends Component{
         <div className="galleriesAndPaintings">
         <div>
         {
-          /*
-        TODO: Conditionally render button to link to create new allery page
-        */
-        }
-        {
-          currentUser.isLoggedIn && <Link className="btn btn-default" to="/gallery-create">New Gallery</Link> 
+          currentUser.isLoggedIn && <Link className="btn btn-default" to="/gallery-create">New Gallery</Link>
         }
         </div>
           <div className= "singleUserGalleries">
             <h3>Galleries</h3>
             <div className="galleriesRow">
             {
-              galleries && galleries.map(gallery=>{
-                return(
+              currentArtist.galleries && currentArtist.galleries.map(gallery=>{
+                return (
                   <div className="innerGalleryBox" key={gallery.id}>
-                  <Link className="singleUserGalleryLink" to={`/galleries/${gallery.id}`}>{gallery.title}</Link>                  
-                  <img className="singleUserGalleryThumb" src={gallery.thumbnailUrl}/>
+                  <Link className="singleUserGalleryLink" to={`/galleries/${gallery.id}`}>{gallery.title}</Link>
+                  <img className="singleUserGalleryThumb" src={gallery.thumbnailUrl} />
                   {
-                    /*
-                    TODO: Conditionally render button to link to edit gallery page
-                    */
-                    currentUser.isLoggedIn && <Link className="btn btn-warning edit-gallery-btn" to='/gallery-edit'>Edit</Link>
+                    currentUser.isLoggedIn && <Link className="btn btn-warning edit-gallery-btn" to={`/gallery-edit/${gallery.id}`}>Edit</Link>
                   }
                   </div>
                 );
               })
             }
-          
+
             </div>
           </div>
 
@@ -75,19 +101,18 @@ class SingleArtist extends Component{
           <h3>Paintings</h3>
             <div className="paintingsRow">
             {
-              galleries && galleries.map(gallery=>{
-                return gallery.paintings.map(painting=>{
+              currentArtist.galleries && currentArtist.galleries.map(gallery =>{
+                return gallery.paintings.map(painting =>{
                   console.log(painting.url);
                   return (
                     <div className="innerGalleryBox" key={painting.id}>
-                      <img className="singleUserGalleryThumb" src={painting.url}/>
-                      <Link to="#">Painting Name</Link>
+                      <img className="singleUserGalleryThumb" src={painting.url} />
+                      <Link to={`/paintings/${painting.id}`} className="singleUserPaintingName">{painting.name}</Link>
                     </div>
                   );
                 });
               })
             }
-            
             </div>
           </div>
         </div>
