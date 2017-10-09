@@ -6,12 +6,12 @@ import store from '../store';
 class AllGalleries extends Component{
  
   render(){
-    console.log('PROPPPPSSSS', this.props);
+    // console.log('PROPPPPSSSS', this.props);
     const galleries = this.props.galleryCollection;
     const artistName = galleries.user;
-    console.log("HELLLLOOOO")
-    console.log('GALLERies', galleries);
-    console.log('ArTIstNaMe', artistName);
+    // console.log("HELLLLOOOO")
+    // console.log('GALLERies', galleries);
+    // console.log('ArTIstNaMe', artistName);
 
   
     return (
@@ -20,7 +20,7 @@ class AllGalleries extends Component{
         <div id="allGalleryRender">
           {
             galleries && galleries.map(gallery => {
-              console.log(gallery);
+              // console.log(gallery);
               return (
                 <div className="renderedBox col-md-3" key={gallery.id}>
                   <div className="innerRenderedBox">
