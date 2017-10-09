@@ -21,7 +21,7 @@ class SinglePainting extends Component{
     var artName = getPaintingName(currentPainting['url'] + '');
 
     return (
-      <div>
+      <div className='carImg'>
         <h1>{artName}</h1>
         <img src={currentPainting.url} />
       </div>
