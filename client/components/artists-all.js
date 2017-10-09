@@ -9,9 +9,9 @@ class AllArtists extends Component {
 
 
   render(){
-    console.log('PROPPPPSSSS', this.props);
+    // console.log('PROPPPPSSSS', this.props);
     const artists = this.props.artistsCollection;
-    console.log('ARTistS', artists);
+    // console.log('ARTistS', artists);
     return (
       <div id="allGalleryBox">
       <h1>allArtists </h1>
