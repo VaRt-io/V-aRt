@@ -38,7 +38,7 @@ export const removeGallery = gallery => {
 //
 
 export const getGalleriesThunk = () => (dispatch) => {
-  axios.get('/api/galleries')
+  return axios.get('/api/galleries')
     .then(result => result.data)
     .then(galleries => dispatch(getGalleries(galleries)))
     .catch(console.error);
@@ -46,11 +46,18 @@ export const getGalleriesThunk = () => (dispatch) => {
 
 export const postGalleryThunk = (gallery, history) => dispatch => {
   console.log(history);
+  var createdGallery;
   axios.post('/api/galleries', gallery)
     .then(result => result.data)
     .then(newGallery => {
-      dispatch(postGallery(newGallery));
-      history.push(`/gallery-edit/${newGallery.id}`);
+      createdGallery = newGallery;
+      console.log('newggallery', newGallery);      
+      return dispatch(getGalleriesThunk());
+    })
+    .then((thunk)=> {
+      history.push(`/gallery-edit/${createdGallery.id}`);
+      // setTimeout(()=>{
+      // }, 1500);
     })
     .catch(console.error);
 };

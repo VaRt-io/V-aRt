@@ -35,6 +35,7 @@ class CreateGallery extends Component{
 
 
   render(){
+    const userId = this.props.currentUser.id;
     const currentGalleryId = this.props.match.params.id;
 
     const handleChange = this.handleChange;
@@ -45,7 +46,7 @@ class CreateGallery extends Component{
 
     return (
     
-      <Form horizontal className=" formBox" onSubmit={this.props.handleSubmit}>
+      <Form horizontal className=" formBox" onSubmit={(e) => this.props.handleSubmit(e, userId)}>
       <FormGroup controlId="formHorizontalTitle">
         <Col componentClass={ControlLabel} sm={2}>
           Gallery Name
@@ -76,15 +77,16 @@ class CreateGallery extends Component{
 
 const mapDispatch = (dispatch, ownProps) => {
   return {
-    handleSubmit(event){
+    handleSubmit(event, userId){
       event.preventDefault();
       const title = event.target.title.value;
       const thumbnailUrl = null;
       const history = ownProps.history;
-      
-      dispatch(postGalleryThunk( { title }, history ));
+      dispatch(postGalleryThunk( { title, userId }, history ));
     }
   };
 };
 
-export default connect(null, mapDispatch)(CreateGallery);
+const mapState = ({currentUser}) => ({currentUser});
+
+export default connect(mapState, mapDispatch)(CreateGallery);
