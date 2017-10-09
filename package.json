@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "aframe": "^0.7.0",
+    "aframe-href-component": "^0.5.1",
     "aframe-particle-system-component": "^1.0.10",
     "aframe-physics-system": "^2.0.0",
     "aframe-react": "^4.3.0",
