@@ -2,10 +2,11 @@ import axios from 'axios';
 
 
 //INITIAL STATE
+
 export const initialGalleryState = {
-  galleryCollection: [],
-  newGallery: {},
+  galleryCollection: []
 };
+
 //
 // ACTION TYPES
 //
@@ -54,10 +55,19 @@ export const postGalleryThunk = (gallery, history) => dispatch => {
     .catch(console.error);
 };
 
+export const updateGalleryThunk = (gallery) => dispatch => {
+  axios.put(`/api/galleries/${gallery.id}`, gallery)
+    .then(result => result.data)
+    .then(newGallery => {
+      dispatch(getGalleriesThunk());
+    })
+    .catch(console.error);
+};
+
 export const deleteGalleryThunk = gallery => dispatch => {
   axios.delete('/api/galleries', gallery)
     .then(result => result.data)
-    .then(gallery => dispatch(removeGallery(gallery)))
+    .then(deletedGallery => dispatch(removeGallery(deletedGallery)))
     .catch(console.error);
 };
 
@@ -71,9 +81,13 @@ export default function reducer(state = initialGalleryState, action){
   case GET_GALLERIES:
     return Object.assign({}, state, {galleryCollection: action.galleries});
   case POST_GALLERY:
-    return [...state, action.gallery];
+    return Object.assign({}, state, {galleryCollection: [...state.galleryCollection, action.gallery]});
   case DELETE_GALLERY:
-    return state.filter(gallery => gallery.id !== action.gallery.id);
+    return Object.assign({}, state,
+      {galleryCollection: state.galleryCollection.filter(
+        gallery => gallery.id !== action.gallery.id)
+      }
+    );
   default:
     return state;
   }
