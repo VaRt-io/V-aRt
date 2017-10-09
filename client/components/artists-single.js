@@ -4,16 +4,70 @@ import {connect} from 'react-redux';
 import store from '../store';
 import {Button} from 'react-bootstrap';
 
-class SingleArtist extends Component{
+class SingleArtist extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      profileImageUrl: '',
+      bio: '',
+      email: '',
+      galleries: []
+    }; 
+  }
+
+  
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.artistsCollection.length !== this.props.artistsCollection.length) {
+
+      const currentArtistId = nextProps.match.params.id;
+      const artists = nextProps.artistsCollection;
+      const currentArtist = artists.length && artists.filter(artist => +artist.id === +currentArtistId)[0];
+      console.log('after filtering for curr artist', currentArtist);
+      const galleries = currentArtist.galleries;
+      console.log('current artist galleries', galleries);
+      // this.paintings = currentArtist.galleries;
+
+      const {name, profileImageUrl, bio, email} = currentArtist;
+
+      this.setState({
+        name,
+        profileImageUrl,
+        bio,
+        email,
+        galleries
+      });
+
+    } 
+    // else {
+    //   const currentArtistId = this.props.match.params.id;
+    //   const artists = this.props.artistsCollection;
+    //   const currentArtist = artists.length && artists.filter(artist => +artist.id === +currentArtistId)[0];
+    //   console.log('after filtering for curr artist', currentArtist);
+    //   const galleries = currentArtist.galleries;
+    //   // this.paintings = currentArtist.galleries;
+
+    //   const currentUser = this.props.currentUser;
+    //   const {name, profileImageUrl, bio, email} = currentUser;
+
+    //   this.setState({
+    //     name,
+    //     profileImageUrl,
+    //     bio,
+    //     email,
+    //     galleries
+    //   });
+    // }
+ 
+  }
 
   render(){
-    const currentArtistId = this.props.match.params.id;
-
-    const artists = this.props.artistsCollection;
-    const currentArtist = artists.length && artists.filter(artist => +artist.id === +currentArtistId)[0];
-    const galleries = currentArtist.galleries;
-    const paintings = currentArtist.galleries;
     const currentUser = this.props.currentUser;
+    const currentArtist = this.state;
+    console.log('currentUser', currentUser);
+    console.log('currentArtist state', currentArtist);
    
     return (
       <div className="singleArtistContainer">
@@ -45,7 +99,7 @@ class SingleArtist extends Component{
             <h3>Galleries</h3>
             <div className="galleriesRow">
             {
-              galleries && galleries.map(gallery=>{
+              currentArtist.galleries && currentArtist.galleries.map(gallery=>{
                 return(
                   <div className="innerGalleryBox" key={gallery.id}>
                   <Link className="singleUserGalleryLink" to={`/galleries/${gallery.id}`}>{gallery.title}</Link>
@@ -65,7 +119,7 @@ class SingleArtist extends Component{
           <h3>Paintings</h3>
             <div className="paintingsRow">
             {
-              galleries && galleries.map(gallery=>{
+              this.galleries && this.galleries.map(gallery=>{
                 return gallery.paintings.map(painting=>{
                   console.log(painting.url);
                   return (
