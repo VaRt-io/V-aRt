@@ -11,10 +11,16 @@ class GalleryEdit extends Component{
 
     constructor(props){
         super(props);
+
+        const currentGalleryId = this.props.match.params.id;
+        const galleries = this.props.galleryCollection;
+        const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === +currentGalleryId)[0];
+        const {title, environment, thumbnailUrl} = currentGallery;
+
         this.state = {
-            title: '',
-            environment: '',
-            thumbnailUrl: '',
+            title,
+            environment,
+            thumbnailUrl,
 
         };
         this.handleChange = this.handleChange.bind(this);
