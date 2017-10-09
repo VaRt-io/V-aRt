@@ -129,6 +129,9 @@ a {
 .singleUserGalleryLink{
     text-align: center;
 }
+.singleUserPaintingName {
+    margin: 0 auto;
+}
 
 //SINGLE GALLERY VIEW
 .edit-gallery-btn {
@@ -152,9 +155,15 @@ a {
     display: flex;
     flex-direction: row;
 }
-.paintingsBox{
+.paintingsBox {
     display: flex;
     flex-direction: column;
+}
+.single-gallery-image-link {
+    margin: 0 auto;
+}
+.single-gallery-create-painting-wrapper {
+    margin: 0 auto 3em auto;
 }
 
 //GalleryCreate
@@ -201,5 +210,14 @@ a {
     padding: 15px 10px 0px 15px;
     border-radius: 20px
 }
+
+// canvas
+
+#name-form-wrapper {
+    display: inline;
+    margin: 10em;
+}
+
+
 
 
