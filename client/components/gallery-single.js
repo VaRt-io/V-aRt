@@ -8,10 +8,26 @@ import {OurPageHeader, DisplayPaintings, OurJumbotron } from './index';
 
 class SingleGallery extends Component{
 
+  checkIfOwnGallery() {
+      // get array of all artist's own galleries by filtering galleries by ones that have his user id
+      // check if currentGalleryId is within that array of filtered gallaries
+    
+    const currentUserId = this.props.currentUser.isLoggedIn && this.props.currentUser.id;
+    const currentGalleryId = +this.props.match.params.id;
+
+    const ownGalleries = this.props.galleryCollection
+                          .filter((gallery) => currentUserId === gallery.userId)
+                          .map((filteredGalleries) => filteredGalleries.id);
+
+    if (ownGalleries.includes(currentGalleryId)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render(){
-    console.log('SINGL GALLERY PROPS', this.props);
     const currentGalleryId = this.props.match.params.id;
-    console.log(currentGalleryId);
     const galleries = this.props.galleryCollection;
     const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === +currentGalleryId)[0];
     const bgImage = currentGallery.thumbnailUrl;
@@ -21,9 +37,6 @@ class SingleGallery extends Component{
       artistName =currentGallery.user.name;
       artistId= currentGallery.user.id;
     }
-    console.log('CURRENT GALLERY', currentGallery);
-    console.log('ArtistId', artistId);
-    console.log(OurJumbotron)
     return (
       <div className="singleGalleryContainer">
         <OurPageHeader artistName={artistName} artistId={artistId} 
@@ -38,7 +51,12 @@ class SingleGallery extends Component{
         <h3>My Paintings</h3>
         <DisplayPaintings currentGallery={currentGallery} />   
         <div className="single-gallery-create-painting-wrapper">
-          <Link to={`/canvas?galleryid=${currentGalleryId}`} className="btn btn-success">Create New Painting</Link>
+        {
+          // Render if gallery belongs to user
+          this.checkIfOwnGallery() && (
+            <Link to={`/canvas?galleryid=${currentGalleryId}`} className="btn btn-success">Create New Painting</Link>
+          )
+        }
         </div>
       </div>
     );
@@ -49,6 +67,7 @@ class SingleGallery extends Component{
 const mapState = (state, ownProps) => {
   return {
     galleryCollection: state.galleries.galleryCollection,
+    currentUser: state.currentUser
   };
 };
 
