@@ -23,11 +23,7 @@ export function AframeVR (props){
             return xyz.join(' ');
         });
             return(
-<<<<<<< HEAD
-            <a-scene physics-world="gravity: 0 -9.8 0">
-=======
             <a-scene physics-world="gravity: 0 0 0">
->>>>>>> master
                 <a-assets>
                     <a-asset-item id="frame-obj" src="/models/Frame/Old_picture_frame.obj"></a-asset-item>
                     <a-asset-item id="frame-mtl" src="/models/Frame/Old_picture_frame.mtl"></a-asset-item>
