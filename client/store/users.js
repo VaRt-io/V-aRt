@@ -53,15 +53,14 @@ export const fetchUsers = () => dispatch => {
 export const postUser = (user, history) => dispatch => {
   axios.post('/api/users', user)
     .then(result => result.data)
-    .then(newUser => {
-      return dispatch(fetchUsers());
-    })
-    .then(() => {
+    .then((newUser) => newUser)
+    .then((passedUser) => {
+      dispatch(fetchUsers());
       const userLogin = {
-        email: user.email,
-        password: user.password
+        email: passedUser.email,
+        password: user.password,
+        strategy: 'local'
       };
-      console.log('userLogin(**', userLogin);
       return dispatch(attemptAuth(userLogin, history));
     })
     .catch(console.error);
