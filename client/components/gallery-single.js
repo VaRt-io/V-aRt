@@ -19,14 +19,9 @@ class SingleGallery extends Component{
                           .filter((gallery) => currentUserId === gallery.userId)
                           .map((filteredGalleries) => filteredGalleries.id);
 
-    console.log('own galleries', ownGalleries);
-    console.log('currentGalleryid', currentGalleryId);
-
     if (ownGalleries.includes(currentGalleryId)) {
-      console.log('own gallery');
       return true;
     } else {
-      console.log('not own gallery');
       return false;
     }
   }
