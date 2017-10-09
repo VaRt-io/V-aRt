@@ -21,4 +21,6 @@ export {default as ArtistDashboard} from './artist-dashboard';
 export {default as DisplayPaintings} from './display-paintings';
 export {default as OurPageHeader} from './display-ourPageHeader';
 export {default as OurJumbotron} from './display-ourJumbotron';
-
+export {default as DisplaySelectFromFS} from './display-selectFromFS';
+export {default as DisplaySelectForm} from './display-selectForm';
+export {default as PaintingDropdown} from  './display-paintingDropdown';
