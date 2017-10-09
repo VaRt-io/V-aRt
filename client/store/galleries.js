@@ -51,7 +51,7 @@ export const postGalleryThunk = (gallery, history) => dispatch => {
     .then(result => result.data)
     .then(newGallery => {
       createdGallery = newGallery;
-      console.log('newggallery', newGallery);      
+      console.log('newggallery', newGallery);
       return dispatch(getGalleriesThunk());
     })
     .then((thunk)=> {
@@ -63,6 +63,7 @@ export const postGalleryThunk = (gallery, history) => dispatch => {
 };
 
 export const updateGalleryThunk = (gallery) => dispatch => {
+  console.log('hitting that thunk good good')
   axios.put(`/api/galleries/${gallery.id}`, gallery)
     .then(result => result.data)
     .then(newGallery => {
