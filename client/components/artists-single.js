@@ -23,7 +23,9 @@ class SingleArtist extends Component {
       galleries,
     }; 
 
+    this.checkIfOwnProfile = this.checkIfOwnProfile.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleOnBlur = this.handleOnBlur.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,12 +47,28 @@ class SingleArtist extends Component {
     } 
   }
 
+  checkIfOwnProfile() {
+    // check if logged in user id is the same as the one on the url
+    const currentArtistId = +this.props.match.params.id;
+    const currentUser = this.props.currentUser;
+    if (currentUser.isLoggedIn && currentUser.id === currentArtistId) {
+      return true;
+    } 
+    return false;
+  }
+
   handleChange(evt) {
     const name = evt.target.name;
     const value = evt.target.value;
     this.setState({
       [name]: value
     });
+  }
+
+  handleOnBlur(evt) {
+    const name = evt.target.name;
+    const value = evt.target.value;
+    console.log('blurred', name, value);
   }
 
   render(){
@@ -64,7 +82,7 @@ class SingleArtist extends Component {
       <div className="singleArtistContainer">
         <div id="profileColumn" className="col-md-4">
            {
-             currentUser.isLoggedIn ? (
+             this.checkIfOwnProfile() ? (
               <div>
                 <input 
                 autoFocus 
@@ -73,6 +91,7 @@ class SingleArtist extends Component {
                 className="singleArtistDashboardNameInput" 
                 value={currentArtist.name} 
                 onChange={this.handleChange}
+                onBlur={this.handleOnBlur}
                 />
                 <span className="glyphicon glyphicon-edit floatLeft"></span>              
               </div>
@@ -84,7 +103,7 @@ class SingleArtist extends Component {
           <img id="profilePic" src={currentArtist.profileImageUrl} />
           <h4>Biography</h4>
           {
-            currentUser.isLoggedIn ? (
+            this.checkIfOwnProfile() ? (
             <div>
               <input  
               type="text" 
@@ -101,7 +120,7 @@ class SingleArtist extends Component {
           }
           <p />
           {
-            currentUser.isLoggedIn ? (
+            this.checkIfOwnProfile() ? (
             <div>
               <input  
                 type="text" 
@@ -121,7 +140,7 @@ class SingleArtist extends Component {
         <div className="galleriesAndPaintings">
         <div>
         {
-          currentUser.isLoggedIn && <Link className="btn btn-default" to="/gallery-create">New Gallery</Link>
+          this.checkIfOwnProfile() && <Link className="btn btn-default" to="/gallery-create">New Gallery</Link>
         }
         </div>
           <div className= "singleUserGalleries">
@@ -134,7 +153,7 @@ class SingleArtist extends Component {
                   <Link className="singleUserGalleryLink" to={`/galleries/${gallery.id}`}>{gallery.title}</Link>
                   <img className="singleUserGalleryThumb" src={gallery.thumbnailUrl} />
                   {
-                    currentUser.isLoggedIn && <Link className="btn btn-warning edit-gallery-btn" to={`/gallery-edit/${gallery.id}`}>Edit</Link>
+                    this.checkIfOwnProfile() && <Link className="btn btn-warning edit-gallery-btn" to={`/gallery-edit/${gallery.id}`}>Edit</Link>
                   }
                   </div>
                 );
