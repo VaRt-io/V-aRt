@@ -15,6 +15,10 @@ module.exports = function (app) {
       allowNull: true,
       defaultValue: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/The_Scream.jpg/220px-The_Scream.jpg'
     },
+    environment: {
+      type: DataTypes.STRING,
+      defaultValue: 'nightscene'
+    }
   }, {
     hooks: {
       beforeCount(options) {
