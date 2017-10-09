@@ -23,6 +23,7 @@ class SingleArtist extends Component {
       galleries,
     }; 
 
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,34 +42,80 @@ class SingleArtist extends Component {
         email,
         galleries
       });
-
     } 
- 
+  }
+
+  handleChange(evt) {
+    const name = evt.target.name;
+    const value = evt.target.value;
+    this.setState({
+      [name]: value
+    });
   }
 
   render(){
 
     const currentArtist = this.state;
     const currentUser = this.props.currentUser;
-   
+   // TODO: Add user input version of name, biography, and email
+   // TODO: Allow to delete galleries and images from dashboard
+   // TODO: Dispatch a thunk to put information
     return (
       <div className="singleArtistContainer">
         <div id="profileColumn" className="col-md-4">
-          <h2>{currentArtist.name}</h2>
-          {
-            currentUser.isLoggedIn &&
-            ( <div>
-              {/*TODO: Use a modal to edit user bio? */}
-              <Button>Edit Profile</Button>
-            </div>
-            )
-          }
+           {
+             currentUser.isLoggedIn ? (
+              <div>
+                <input 
+                autoFocus 
+                type="text" 
+                name="name"
+                className="singleArtistDashboardNameInput" 
+                value={currentArtist.name} 
+                onChange={this.handleChange}
+                />
+                <span className="glyphicon glyphicon-edit floatLeft"></span>              
+              </div>
+             ) : (
+              <h2>{currentArtist.name}</h2>          
+             )
+           }
 
           <img id="profilePic" src={currentArtist.profileImageUrl} />
           <h4>Biography</h4>
-          <h5 style={{color: "blue"}}>{currentArtist.bio}</h5>
+          {
+            currentUser.isLoggedIn ? (
+            <div>
+              <input  
+              type="text" 
+              name="bio"
+              className="singleArtistDashboardBioInput" 
+              value={currentArtist.bio} 
+              onChange={this.handleChange}
+              />
+              <span className="glyphicon glyphicon-edit floatLeft"></span> 
+            </div>
+            ) : (
+          <h5 style={{color: "blue"}}>{currentArtist.bio}</h5>          
+            )
+          }
           <p />
-          <p>{currentArtist.email}</p>
+          {
+            currentUser.isLoggedIn ? (
+            <div>
+              <input  
+                type="text" 
+                name="bio"
+                className="singleArtistDashboardEmailInput" 
+                value={currentArtist.email} 
+                onChange={this.handleChange}
+              />
+              <span className="glyphicon glyphicon-edit floatLeft"></span> 
+             </div>
+            ) : (
+              <p>{currentArtist.email}</p>          
+            )
+          }
         </div>
 
         <div className="galleriesAndPaintings">
@@ -103,7 +150,7 @@ class SingleArtist extends Component {
             {
               currentArtist.galleries && currentArtist.galleries.map(gallery =>{
                 return gallery.paintings.map(painting =>{
-                  console.log(painting.url);
+
                   return (
                     <div className="innerGalleryBox" key={painting.id}>
                       <img className="singleUserGalleryThumb" src={painting.url} />
@@ -132,3 +179,12 @@ const mapState = (state, ownProps) => {
 };
 
 export default connect(mapState)(SingleArtist);
+
+// {
+//   currentUser.isLoggedIn &&
+//   ( <div>
+//     {/*TODO: Use a modal to edit user bio? */}
+//     <Button>Edit Profile</Button>
+//   </div>
+//   )
+// }
