@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {attemptAuth} from './index';
 
 //
 //INITIAL STATE
@@ -49,11 +50,19 @@ export const fetchUsers = () => dispatch => {
     .catch(console.error);
 };
 
-export const postUser = user => dispatch => {
+export const postUser = (user, history) => dispatch => {
   axios.post('/api/users', user)
     .then(result => result.data)
     .then(newUser => {
-      dispatch(fetchUsers());
+      return dispatch(fetchUsers());
+    })
+    .then(() => {
+      const userLogin = {
+        email: user.email,
+        password: user.password
+      };
+      console.log('userLogin(**', userLogin);
+      return dispatch(attemptAuth(userLogin, history));
     })
     .catch(console.error);
 };
