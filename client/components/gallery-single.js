@@ -31,6 +31,7 @@ class SingleGallery extends Component{
     const galleries = this.props.galleryCollection;
     const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === +currentGalleryId)[0];
     const bgImage = currentGallery.thumbnailUrl;
+    const environment = currentGallery.environment;
     let artistName;
     let artistId;
     if(currentGallery){
@@ -41,7 +42,6 @@ class SingleGallery extends Component{
       <div className="singleGalleryContainer">
         <OurPageHeader artistName={artistName} artistId={artistId} 
         currentGallery={currentGallery}/>
-      
         <div id="enterVRButton" style={{textAlign: 'center', marginTop:'10px', marginBottom:'50px'}}>
           <Link to={`/vr/${currentGalleryId}/${environment}`} ><button className="btn btn-danger" style={{backgroundColor: 'red', fontSize:'20px'}}>Enter VR</button></Link>
         </div>
