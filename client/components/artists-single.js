@@ -7,17 +7,14 @@ import {Button} from 'react-bootstrap';
 class SingleArtist extends Component{
 
   render(){
-    // console.log('SINGL Artist PROPS', this.props);
     const currentArtistId = this.props.match.params.id;
-    // console.log(currentArtistId);
+
     const artists = this.props.artistsCollection;
-    console.log("ArTists", artists)
     const currentArtist = artists.length && artists.filter(artist => +artist.id === +currentArtistId)[0];
     const galleries = currentArtist.galleries;
     const paintings = currentArtist.galleries;
     const currentUser = this.props.currentUser;
-    // console.log('current Artist', currentArtist);
-    // console.log("GaLlERiEs", galleries);
+   
     return (
       <div className="singleArtistContainer">
         <div id="profileColumn" className="col-md-4">
