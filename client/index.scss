@@ -180,28 +180,56 @@ a {
 }
 
 //Gallery Edit
-.innerGalleryCover{
-    display: flex;
-    flex-direction: row;
-    h3{
-        margin: 0px 20px 0px 20px
-    }
-}
+
 .editGalleryContainer{
     display: flex;
     flex-direction: row;
 }
-.addAPaintingDiv {
+
+.galleryCover{
     display: flex;
     flex-direction: row;
 }
-.addAPaintingTextDiv {
-    margin: 0px 20px 0px 20px
+.innerGalleryCover{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    padding: 20px 20px;
+    background-color: #222;
+    border-radius: 30px;;
+    h3{
+        margin: 0px 20px 0px 20px
+    }
+}
+
+.editGalleryColumn{
+    display:flex;
+    flex-direction: column;
+    margin: 0px 20px
+    
+}
+
+.addAPaintingDiv {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    padding: 20px 20px;
+    background-color: #222;
+    border-radius: 30px;;
+    h3{
+        margin: 0px 20px 0px 20px
+    }
+}
+.addAPaintingColumn{
+    display:flex;
+    flex-direction: column;
+    // margin: auto;
+    text-align: center;
 }
 //Signup & Signin
 
 .formBoxLogin{
-    background-color: #222;
+    background-color: black;
     border: green 5px solid;
     width:50%;
     text-align: center;
@@ -217,6 +245,7 @@ a {
     display: inline;
     margin: 10em;
 }
+
 
 
 
