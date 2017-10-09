@@ -14,7 +14,7 @@ export default function DisplayPaintings (props){
 
                   <div className="paintingsBox" key={painting.id}>
                   <img className="singleUserGalleryThumb" src={painting.url}/>
-                  <Link to={`/paintings/${painting.id}`}>{painting.name}</Link>
+                  <Link to={`/paintings/${painting.id}`} className="single-gallery-image-link">{painting.name}</Link>
                   </div>
 
                 );
