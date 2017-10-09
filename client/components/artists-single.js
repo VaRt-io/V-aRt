@@ -74,7 +74,7 @@ class SingleArtist extends Component{
                   return (
                     <div className="innerGalleryBox" key={painting.id}>
                       <img className="singleUserGalleryThumb" src={painting.url}/>
-                      <Link to="#">Painting Name</Link>
+                      <Link to={`/paintings/${painting.id}`}>{painting.name}</Link>
                     </div>
                   );
                 });
