@@ -6,21 +6,21 @@ export default function DisplayPaintings (props){
     console.log("displayPaintings PrOps",props)
     const currentGallery= props.currentGallery;
     return(
-        
+
         <div className="userImagesInGalleryRow">
         {
             currentGallery && currentGallery.paintings.map(painting=>{
                 return(
-                
+
                   <div className="paintingsBox" key={painting.id}>
                   <img className="singleUserGalleryThumb" src={painting.url}/>
-                  <Link to="#" className="single-gallery-image-link">{painting.name}</Link>
+                  <Link to={`/paintings/${painting.id}`} className="single-gallery-image-link">{painting.name}</Link>
                   </div>
-                
+
                 );
               })
             }
-            
+
         </div>
         );
 
