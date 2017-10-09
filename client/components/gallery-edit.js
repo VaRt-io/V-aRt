@@ -8,8 +8,8 @@ import {DisplayPaintings, OurPageHeader, DisplaySelectFromFS, DisplaySelectForm,
 
 class GalleryEdit extends Component{
 
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state={
             title: '',
             environment: '',
