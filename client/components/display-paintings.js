@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 
 export default function DisplayPaintings (props){
-    console.log("displayPaintings PrOps",props)
+    // console.log("displayPaintings PrOps",props)
     const currentGallery= props.currentGallery;
     return(
         
