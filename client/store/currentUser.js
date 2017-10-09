@@ -82,7 +82,10 @@ const setCurrentUser = user => {
        dispatch(setCurrentUser(userArray[0]));
        history.push(`/artists/${userArray[0].id}`);
      })
-     .catch((err) => dispatch(authFail()));
+     .catch((err) => {
+       console.log('failed', err);
+       dispatch(authFail());
+      });
  };
 
  // export const deauthUser = user => dispatch => {

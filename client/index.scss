@@ -129,6 +129,9 @@ a {
 .singleUserGalleryLink{
     text-align: center;
 }
+.singleUserPaintingName {
+    margin: 0 auto;
+}
 
 //SINGLE GALLERY VIEW
 .edit-gallery-btn {
@@ -152,9 +155,15 @@ a {
     display: flex;
     flex-direction: row;
 }
-.paintingsBox{
+.paintingsBox {
     display: flex;
     flex-direction: column;
+}
+.single-gallery-image-link {
+    margin: 0 auto;
+}
+.single-gallery-create-painting-wrapper {
+    margin: 0 auto 3em auto;
 }
 
 //GalleryCreate
@@ -170,10 +179,57 @@ a {
     border-radius: 20px
 }
 
+//Gallery Edit
+
+.editGalleryContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.galleryCover{
+    display: flex;
+    flex-direction: row;
+}
+.innerGalleryCover{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    padding: 20px 20px;
+    background-color: #222;
+    border-radius: 30px;;
+    h3{
+        margin: 0px 20px 0px 20px
+    }
+}
+
+.editGalleryColumn{
+    display:flex;
+    flex-direction: column;
+    margin: 0px 20px
+    
+}
+
+.addAPaintingDiv {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    padding: 20px 20px;
+    background-color: #222;
+    border-radius: 30px;;
+    h3{
+        margin: 0px 20px 0px 20px
+    }
+}
+.addAPaintingColumn{
+    display:flex;
+    flex-direction: column;
+    // margin: auto;
+    text-align: center;
+}
 //Signup & Signin
 
 .formBoxLogin{
-    background-color: #222;
+    background-color: black;
     border: green 5px solid;
     width:50%;
     text-align: center;
@@ -182,5 +238,15 @@ a {
     padding: 15px 10px 0px 15px;
     border-radius: 20px
 }
+
+// canvas
+
+#name-form-wrapper {
+    display: inline;
+    margin: 10em;
+}
+
+
+
 
 

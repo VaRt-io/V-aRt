@@ -2,10 +2,11 @@ import axios from 'axios';
 
 
 //INITIAL STATE
+
 export const initialGalleryState = {
-  galleryCollection: [],
-  newGallery: {},
+  galleryCollection: []
 };
+
 //
 // ACTION TYPES
 //
@@ -37,7 +38,7 @@ export const removeGallery = gallery => {
 //
 
 export const getGalleriesThunk = () => (dispatch) => {
-  axios.get('/api/galleries')
+  return axios.get('/api/galleries')
     .then(result => result.data)
     .then(galleries => dispatch(getGalleries(galleries)))
     .catch(console.error);
@@ -45,11 +46,27 @@ export const getGalleriesThunk = () => (dispatch) => {
 
 export const postGalleryThunk = (gallery, history) => dispatch => {
   console.log(history);
+  var createdGallery;
   axios.post('/api/galleries', gallery)
     .then(result => result.data)
     .then(newGallery => {
-      dispatch(postGallery(newGallery));
-      history.push('/gallery-edit');
+      createdGallery = newGallery;
+      console.log('newggallery', newGallery);      
+      return dispatch(getGalleriesThunk());
+    })
+    .then((thunk)=> {
+      history.push(`/gallery-edit/${createdGallery.id}`);
+      // setTimeout(()=>{
+      // }, 1500);
+    })
+    .catch(console.error);
+};
+
+export const updateGalleryThunk = (gallery) => dispatch => {
+  axios.put(`/api/galleries/${gallery.id}`, gallery)
+    .then(result => result.data)
+    .then(newGallery => {
+      dispatch(getGalleriesThunk());
     })
     .catch(console.error);
 };
@@ -57,7 +74,7 @@ export const postGalleryThunk = (gallery, history) => dispatch => {
 export const deleteGalleryThunk = gallery => dispatch => {
   axios.delete('/api/galleries', gallery)
     .then(result => result.data)
-    .then(gallery => dispatch(removeGallery(gallery)))
+    .then(deletedGallery => dispatch(removeGallery(deletedGallery)))
     .catch(console.error);
 };
 
@@ -71,9 +88,13 @@ export default function reducer(state = initialGalleryState, action){
   case GET_GALLERIES:
     return Object.assign({}, state, {galleryCollection: action.galleries});
   case POST_GALLERY:
-    return [...state, action.gallery];
+    return Object.assign({}, state, {galleryCollection: [...state.galleryCollection, action.gallery]});
   case DELETE_GALLERY:
-    return state.filter(gallery => gallery.id !== action.gallery.id);
+    return Object.assign({}, state,
+      {galleryCollection: state.galleryCollection.filter(
+        gallery => gallery.id !== action.gallery.id)
+      }
+    );
   default:
     return state;
   }
