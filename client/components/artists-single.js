@@ -20,7 +20,7 @@ class SingleArtist extends Component {
       profileImageUrl,
       bio,
       email,
-      galleries
+      galleries,
     }; 
 
   }
@@ -47,8 +47,9 @@ class SingleArtist extends Component {
   }
 
   render(){
-    const currentUser = this.props.currentUser;
+
     const currentArtist = this.state;
+    const currentUser = this.props.currentUser;
    
     return (
       <div className="singleArtistContainer">
@@ -81,10 +82,10 @@ class SingleArtist extends Component {
             <div className="galleriesRow">
             {
               currentArtist.galleries && currentArtist.galleries.map(gallery=>{
-                return(
+                return (
                   <div className="innerGalleryBox" key={gallery.id}>
                   <Link className="singleUserGalleryLink" to={`/galleries/${gallery.id}`}>{gallery.title}</Link>
-                  <img className="singleUserGalleryThumb" src={gallery.thumbnailUrl}/>
+                  <img className="singleUserGalleryThumb" src={gallery.thumbnailUrl} />
                   {
                     currentUser.isLoggedIn && <Link className="btn btn-warning edit-gallery-btn" to={`/gallery-edit/${gallery.id}`}>Edit</Link>
                   }
@@ -100,19 +101,18 @@ class SingleArtist extends Component {
           <h3>Paintings</h3>
             <div className="paintingsRow">
             {
-              this.galleries && this.galleries.map(gallery=>{
-                return gallery.paintings.map(painting=>{
+              currentArtist.galleries && currentArtist.galleries.map(gallery =>{
+                return gallery.paintings.map(painting =>{
                   console.log(painting.url);
                   return (
                     <div className="innerGalleryBox" key={painting.id}>
-                      <img className="singleUserGalleryThumb" src={painting.url}/>
+                      <img className="singleUserGalleryThumb" src={painting.url} />
                       <Link to={`/paintings/${painting.id}`} className="singleUserPaintingName">{painting.name}</Link>
                     </div>
                   );
                 });
               })
             }
-
             </div>
           </div>
         </div>
