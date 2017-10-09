@@ -13,8 +13,12 @@ module.exports = function (app) {
     thumbnailUrl: {
       type: DataTypes.STRING,
       allowNull: true,
-      defaultValue: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/The_Scream.jpg/220px-The_Scream.jpg'
+      defaultValue: 'https://static-cdn.jtvnw.net/jtv_user_pictures/ninja-profile_image-aa970b6b22d0ebbe-300x300.jpeg'
     },
+    environment: {
+      type: DataTypes.STRING,
+      defaultValue: 'nightscene'
+    }
   }, {
     hooks: {
       beforeCount(options) {
