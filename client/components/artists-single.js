@@ -8,27 +8,29 @@ class SingleArtist extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      name: '',
-      profileImageUrl: '',
-      bio: '',
-      email: '',
-      galleries: []
-    }; 
-  }
 
-  
+    const currentArtistId = this.props.match.params.id;
+    const artists = this.props.artistsCollection;
+    const currentArtist = artists.length && artists.filter(artist => +artist.id === +currentArtistId)[0];
+
+    const {name, profileImageUrl, bio, email, galleries} = currentArtist;
+
+    this.state = {
+      name,
+      profileImageUrl,
+      bio,
+      email,
+      galleries
+    }; 
+
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.artistsCollection.length !== this.props.artistsCollection.length) {
-
       const currentArtistId = nextProps.match.params.id;
       const artists = nextProps.artistsCollection;
       const currentArtist = artists.length && artists.filter(artist => +artist.id === +currentArtistId)[0];
-      console.log('after filtering for curr artist', currentArtist);
       const galleries = currentArtist.galleries;
-      console.log('current artist galleries', galleries);
-      // this.paintings = currentArtist.galleries;
 
       const {name, profileImageUrl, bio, email} = currentArtist;
 
@@ -41,33 +43,12 @@ class SingleArtist extends Component {
       });
 
     } 
-    // else {
-    //   const currentArtistId = this.props.match.params.id;
-    //   const artists = this.props.artistsCollection;
-    //   const currentArtist = artists.length && artists.filter(artist => +artist.id === +currentArtistId)[0];
-    //   console.log('after filtering for curr artist', currentArtist);
-    //   const galleries = currentArtist.galleries;
-    //   // this.paintings = currentArtist.galleries;
-
-    //   const currentUser = this.props.currentUser;
-    //   const {name, profileImageUrl, bio, email} = currentUser;
-
-    //   this.setState({
-    //     name,
-    //     profileImageUrl,
-    //     bio,
-    //     email,
-    //     galleries
-    //   });
-    // }
  
   }
 
   render(){
     const currentUser = this.props.currentUser;
     const currentArtist = this.state;
-    console.log('currentUser', currentUser);
-    console.log('currentArtist state', currentArtist);
    
     return (
       <div className="singleArtistContainer">
