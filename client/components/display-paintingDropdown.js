@@ -10,9 +10,12 @@ export default function PaintingDropdown (props){
     // console.log("DrOpDowN PrOps",props);
     let currentGallery= props.currentGallery;
     let handleChange=props.handleChange;
+    let selected = props.selected;
     console.log("ninja", ninja);
     return(
+        
         <select name="thumbnailUrl" onChange={handleChange}>
+        
         <option value={ninja}>Ninja</option>
         <option value={mona}>Mona</option>
         <option value={starry}>Starry</option>
