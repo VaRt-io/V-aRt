@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import store from '../store';
+import store, {updateUserThunk} from '../store';
 import {Button} from 'react-bootstrap';
 
 class SingleArtist extends Component {
@@ -13,9 +13,10 @@ class SingleArtist extends Component {
     const artists = this.props.artistsCollection;
     const currentArtist = artists.length && artists.filter(artist => +artist.id === +currentArtistId)[0];
 
-    const {name, profileImageUrl, bio, email, galleries} = currentArtist;
+    const {id, name, profileImageUrl, bio, email, galleries} = currentArtist;
 
     this.state = {
+      id,
       name,
       profileImageUrl,
       bio,
@@ -35,9 +36,10 @@ class SingleArtist extends Component {
       const currentArtist = artists.length && artists.filter(artist => +artist.id === +currentArtistId)[0];
       const galleries = currentArtist.galleries;
 
-      const {name, profileImageUrl, bio, email} = currentArtist;
+      const {id, name, profileImageUrl, bio, email} = currentArtist;
 
       this.setState({
+        id,
         name,
         profileImageUrl,
         bio,
@@ -68,7 +70,9 @@ class SingleArtist extends Component {
   handleOnBlur(evt) {
     const name = evt.target.name;
     const value = evt.target.value;
-    console.log('blurred', name, value);
+    const userState = Object.assign({}, this.state, {password: this.props.currentUser.password} );
+    delete userState.galleries;
+    this.props.updateUser(userState);
   }
 
   render(){
@@ -111,6 +115,7 @@ class SingleArtist extends Component {
               className="singleArtistDashboardBioInput" 
               value={currentArtist.bio} 
               onChange={this.handleChange}
+              onBlur={this.handleOnBlur}
               />
               <span className="glyphicon glyphicon-edit floatLeft"></span> 
             </div>
@@ -119,22 +124,7 @@ class SingleArtist extends Component {
             )
           }
           <p />
-          {
-            this.checkIfOwnProfile() ? (
-            <div>
-              <input  
-                type="text" 
-                name="bio"
-                className="singleArtistDashboardEmailInput" 
-                value={currentArtist.email} 
-                onChange={this.handleChange}
-              />
-              <span className="glyphicon glyphicon-edit floatLeft"></span> 
-             </div>
-            ) : (
               <p>{currentArtist.email}</p>          
-            )
-          }
         </div>
 
         <div className="galleriesAndPaintings">
@@ -197,7 +187,15 @@ const mapState = (state, ownProps) => {
   };
 };
 
-export default connect(mapState)(SingleArtist);
+const mapDispatch = (dispatch) => {
+  return {
+    updateUser: (user) => {
+      dispatch(updateUserThunk(user));
+    }
+  };
+};
+
+export default connect(mapState, mapDispatch)(SingleArtist);
 
 // {
 //   currentUser.isLoggedIn &&
