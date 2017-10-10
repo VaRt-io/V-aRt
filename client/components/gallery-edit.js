@@ -40,7 +40,7 @@ class GalleryEdit extends Component{
         }
     }
     handleChange(evt){ //you can declare a key in an object as a variable if you wrap it in brackets
-        evt.preventDefault();
+        // evt.preventDefault();
         var value = evt.target.value;
         var name = evt.target.name;
         this.setState({
@@ -84,7 +84,7 @@ class GalleryEdit extends Component{
       
                     <div className="editGalleryColumn">
                         <h3 >Gallery Cover</h3>
-                        <PaintingDropdown currentGallery={currentGallery} handleChange={this.handleChange} />
+                        <PaintingDropdown currentGallery={currentGallery} handleChange={this.handleChange} selected={this.state.thumbnailUrl} />
                         <div id="enterVRButton" style={{textAlign: 'center', margin: 'auto'}}>
                         <Link to={`/vr/${currentGalleryId}/${this.state.environment}`}>
                         <button className="btn btn-danger" 
@@ -96,7 +96,7 @@ class GalleryEdit extends Component{
 
                         <div className="editGalleryColumn">
                             <h3>Gallery Environment</h3>
-                            <DisplaySelectForm handleChange={this.handleChange}/>
+                            <DisplaySelectForm handleChange={this.handleChange} selected={this.state.environment}/>
                             <Button onClick={()=>this.props.handleSubmit(this.state)}  className="btn btn-success" style={{ height: '60px',margin:'auto',color:'#101010'}}>Submit Changes</Button>
                         </div>
       {/*</form>*/}
