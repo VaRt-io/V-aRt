@@ -208,6 +208,14 @@ a {
 
 //Gallery Edit
 
+#glphpencil{
+    margin-top: -25px;
+}
+.headerContainer{
+    display: flex;
+    flex-direction:row;
+}
+
 .editGalleryContainer{
     display: flex;
     flex-direction: row;
@@ -273,6 +281,7 @@ a {
     margin: 10em;
 }
 
+//
 
 
 
