@@ -1,4 +1,5 @@
 import axios from 'axios';
+axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwt');
 import {attemptAuth} from './index';
 
 //
@@ -66,15 +67,14 @@ export const postUser = (user, history) => dispatch => {
     .catch(console.error);
 };
 // TODO: Need to pass auth token in header
-// export const updateUserThunk = (user) => dispatch => {
-//   console.log('hitting that thunk so bad its good')
-//   axios.put(`/api/users/${user.id}`, gallery)
-//     .then(result => result.data)
-//     .then(newGallery => {
-//       dispatch(getGalleriesThunk());
-//     })
-//     .catch(console.error);
-// };
+export const updateUserThunk = (user) => dispatch => {
+  return axios.put(`/api/users/${user.id}`, user)
+    .then(result => result.data)
+    .then(newGallery => {
+      dispatch(fetchUsers());
+    })
+    .catch(console.error);
+};
 
 export const fetchUserGalleries = user => dispatch => {
   axios.get('/api/galleries')
