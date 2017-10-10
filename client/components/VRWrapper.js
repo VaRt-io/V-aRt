@@ -23,7 +23,7 @@ export function AframeVR (props){
             return xyz.join(' ');
         });
             return(
-            <a-scene physics-world="gravity: 0 0 0">
+            <a-scene>
                 <a-assets>
                     <a-asset-item id="frame-obj" src="/models/Frame/Old_picture_frame.obj"></a-asset-item>
                     <a-asset-item id="frame-mtl" src="/models/Frame/Old_picture_frame.mtl"></a-asset-item>
@@ -31,12 +31,12 @@ export function AframeVR (props){
                     <a-asset-item id="button-mtl" src="/models/Button/button.mtl"></a-asset-item>
                 </a-assets>
 
-                <a-plane physics-body="boundingBox: 1 1 1" height="20" width="20" src="https://blogs.ancestry.com/ancestry/files/2014/09/Brickwall.jpg" position="-4.17 7.831 -1.71" rotation="0 90 0"></a-plane>
-                <a-plane height="20" width="20" src="https://blogs.ancestry.com/ancestry/files/2014/09/Brickwall.jpg" position="0.573 7.741 -9.667" rotation="0 0 0"></a-plane>
-                <a-plane height="20" width="20" src="https://blogs.ancestry.com/ancestry/files/2014/09/Brickwall.jpg" position="5.157 8.266 0.114" rotation="0 -90 0"></a-plane>
-                <a-plane height="20" width="20" src="https://blogs.ancestry.com/ancestry/files/2014/09/Brickwall.jpg" position="4.729 8.618 2.151" rotation="0 180 0"></a-plane>
-                <a-plane color="#CCC" height="20" width="20" position="-2.89 0.047 -4.31" rotation="-90 0 0"></a-plane>
-                <a-plane color="#CCC" height="20" width="20" position="5.680 7.015 0.019" rotation="90 0 0"></a-plane>
+                <a-plane height="20" width="20" repeat="10 10" src="https://blogs.ancestry.com/ancestry/files/2014/09/Brickwall.jpg" position="-4.17 7.831 -1.71" rotation="0 90 0"></a-plane>
+                <a-plane height="20" width="20" repeat="10 10" src="https://blogs.ancestry.com/ancestry/files/2014/09/Brickwall.jpg" position="0.573 7.741 -9.667" rotation="0 0 0"></a-plane>
+                <a-plane height="20" width="20" repeat="10 10" src="https://blogs.ancestry.com/ancestry/files/2014/09/Brickwall.jpg" position="5.157 8.266 0.114" rotation="0 -90 0"></a-plane>
+                <a-plane height="20" width="20" repeat="10 10" src="https://blogs.ancestry.com/ancestry/files/2014/09/Brickwall.jpg" position="4.729 8.618 2.151" rotation="0 180 0"></a-plane>
+                <a-plane color="#CCC" height="20" repeat="10 10" src="https://vignette.wikia.nocookie.net/recettear/images/f/f1/Tile_Floor_texture.png/revision/latest?cb=20140710081635" width="20" position="-2.89 0.047 -4.31" rotation="-90 0 0"></a-plane>
+                <a-plane color="#CCC" height="20" repeat="10 10" src="https://vignette.wikia.nocookie.net/recettear/images/f/f1/Tile_Floor_texture.png/revision/latest?cb=20140710081635" width="20" position="5.680 7.015 0.019" rotation="90 0 0"></a-plane>
                
                 <a-text value="Exit VR" position="1 4 -9.52" align="center"></a-text>
                 <a-entity obj-model="obj:#frame-obj" material="color:blue" position="1 2.759 -9.52" rotation="0 0 0" href={`/galleries/${currGalleryId}`}>
@@ -61,7 +61,7 @@ export function AframeVR (props){
                     </a-entity>
                 )})
                 }
-                <a-entity physics-body="boundingBox: 1 1 1" camera="userHeight: 1.6" look-controls wasd-controls>
+                <a-entity camera="userHeight: 2.9" look-controls wasd-controls>
                     <a-entity id="cursor" position="0 0 -2" cursor geometry="primitive: ring; radiusOuter: 0.11; radiusInner: 0.08" material="color: white"></a-entity>
                 </a-entity>
             </a-scene>
