@@ -25,12 +25,12 @@ export default class Main extends Component{
 
   render(){
     return (
-    
+
       <div id="landingBackground">
         <OurNavbar />
         <Switch>
           <Route exact path="/" component={LandingPage} />
-          <Route exact path="/vr/hub" component={VRHub} />
+
           <Route exact path="/artists/:id" component={SingleArtist} />
           <Route exact path="/artists" component={AllArtists} />
           <Route exact path="/galleries" component={AllGalleries} />
@@ -40,7 +40,7 @@ export default class Main extends Component{
           <Route exact path="/canvas" component={CanvasWrapper} />
           <Route exact path="/vr/nightscene" component={VRNightScene} />
           <Route exact path="/vr/:id/nightscene" component={VRNightScene} />
-          <Route exact path="/vr/:id/cube" component={VRCube} />    
+          <Route exact path="/vr/:id/cube" component={VRCube} />
           <Route exact path="/paintings/:id" component={SinglePainting} />
           <Route exact path="/dashboard" component={ArtistDashboard} />
           <Route exact path="/signup" component={Signup} />
