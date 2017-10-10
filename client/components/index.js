@@ -12,8 +12,8 @@ export {default as GalleryEdit} from './gallery-edit';
 export {default as VRCube} from './VRCube';
 export {default as VRNightScene} from './VRNightScene';
 export {default as CanvasWrapper} from './CanvasWrapper';
-export {default as VRWrapper} from './VRWrapper'
-export {default as VRHub} from './vrhub'
+export {default as VRWrapper} from './VRWrapper';
+export {default as VRHub} from './vrhub';
 export {default as SinglePainting} from './singlePainting';
 export {default as Signup} from './signup';
 export {default as Signin} from './signin';
@@ -26,3 +26,4 @@ export {default as DisplaySelectForm} from './display-selectForm';
 export {default as PaintingDropdown} from  './display-paintingDropdown';
 export {default as GalleryEditPageHeader} from './display-galleryEditPageHeader';
 export {default as VRDesert} from './VRDesert';
+export {default as VRCity} from './VRCity';
