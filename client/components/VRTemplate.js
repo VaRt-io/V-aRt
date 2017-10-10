@@ -31,7 +31,7 @@ class /*SCENENAME*/ extends Component{
 
 const mapState = function(state){
     return {
-        galleries: state.galleries.galleryCollection,
+        galleriesCollection: state.galleries.galleryCollection,
     }
 };
 
