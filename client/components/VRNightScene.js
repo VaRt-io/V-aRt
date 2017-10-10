@@ -9,19 +9,18 @@ import {connect} from 'react-redux';
 class VRNightScene extends Component{
 
   render(){
-    
-     console.log('VR PROPS', this.props);
-    
-     const currentGalleryId = this.props.match.params.id;
-     console.log("CURRENT GALLERY ID",currentGalleryId);
-     const galleries = this.props.galleriesCollection;
-     console.log("galleries", galleries)
-     const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === +currentGalleryId)[0];
-      console.log("Current Gallery", currentGallery);
-      let paintings;
+    const currentGalleryId = this.props.match.params.id;
+    const galleries = this.props.galleriesCollection;
+    const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === +currentGalleryId)[0]
+    const pedPositions = ["6.75 1 0", "3 1 6.2", "-2.644 1 6.353", "-6.619 1 0", "-2.862 1 -5.734", "3.000 1 -6.108"]
+    const boxPositions = ["6.75 1.8 0", "3 1.8 6.2", "-2.644 1.8 6.353", "-6.619 1.8 0", "-2.862 1.8 -5.734", "3.000 1.8 -6.108"]
+    const textPositions = ["6.75 3 0", "3 3 6.2", "-2.644 3 6.353", "-6.619 3 0", "-2.862 3 -5.734", "3.000 3 -6.108"]
+    const textRotations = ["0 -90 0", "0 -145 0", "0 -215 0", "0 -270 0", "0 -335 0", "0 -35 0"]
+    let paintings;
     if(currentGallery){
-        paintings= currentGallery.paintings;
+        paintings=currentGallery.paintings;
     }
+    console.log("NiGhTScEne PRops", this.props);
     console.log('Paintings', paintings);
 
 
@@ -35,19 +34,45 @@ class VRNightScene extends Component{
     
     return (
       paintings?
-        <Scene>
-        <Entity geometry={{primitive: 'box'}} material={{src: paintings[0].url}} position="-1 3 -3" rotation="0 90 0" />
-        <Entity geometry = {{primitive: 'sphere'}} material ={{src: cyberRust}} position="0 7 -10" radius="1.25" />
-        
-        <a-torus-knot src={cyberRust} position ="-5 2 -10"  />
-        <a-dodecahedron src={circutBoard} position= "5 8 -5"  />
-        <a-text value ="Hello V-aRt" position="-1 2 -3" color="white" />
-         <a-cylinder src={marbleTexture} position="-3 0.75 -3" radius="0.5" height="1.5" rotation="90 0 0" color="gold" />
-        
-        <a-plane src={groundTexture} position="0 0 -4" rotation="-90 0 0" width="90" height="90dssa" repeat="10 10"  />
+        <a-scene>
+            <a-assets>
+              <a-asset-item id="column-obj" src="/models/Column/column.obj"></a-asset-item>
+              <a-asset-item id="column-mtl" src="/models/Column/column.mtl"></a-asset-item>
+            </a-assets>
+            <a-sphere src={cyberRust} position="5 12.82 -37.6" radius="1.25" />
+            
+            <a-torus-knot src={cyberRust} position ="-5 2 -14"  />
+            <a-dodecahedron src={circutBoard} position= "-1 13 -32"  />
 
-        <a-sky src= {nightScape} />
-          </Scene>
+            { paintings && paintings.map((image, index) => {
+                        return(
+                          <a-text value={image.name} align="center" position={textPositions[index]} rotation={textRotations[index]} color="white" />
+            )})
+            }
+
+            { paintings && paintings.map((image, index) => {
+                        return(
+                          <a-entity obj-model='obj:#column-obj; mtl:#column-mtl' src={marbleTexture} position="-3 0.75 -3" radius="0.5" height="1.5" position={pedPositions[index]} scale=".001 .001 .001" rotation="90 0 0" scale="5 5 5"/>
+            )})
+            }
+
+            { paintings && paintings.map((image, index) => {
+                        return(
+                          <a-entity geometry={{primative: 'box'}} material={`src: ${paintings[index].url}`} position={boxPositions[index]} rotation="0 90 0" href>
+                            <a-animation attribute="rotation"
+                                dur="10000"
+                                fill="forwards"
+                                to="0 360 0"
+                                repeat="indefinite"></a-animation>
+                          </a-entity>
+            )})
+            }
+            
+            <a-plane src={groundTexture} position="0 0 -4" rotation="-90 0 0" width="90" height="90dssa" repeat="10 10"  />
+
+            <a-sky src= {nightScape} />
+            
+          </a-scene>
           :
           null
     );
@@ -61,5 +86,3 @@ const mapState = function(state){
       galleriesCollection: state.galleries.galleryCollection,
   };
 };
-
-export default connect(mapState)(VRNightScene);
