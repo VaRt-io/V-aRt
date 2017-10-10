@@ -1,4 +1,8 @@
 
+input:focus {
+    outline: none
+}
+
 //across all bodies
 #landingBackground {
     background-color: #333030;
@@ -126,11 +130,34 @@ a {
     height:100px;
     margin: 5px 10px 10px 10px;
 }
-.singleUserGalleryLink{
+.singleUserGalleryLink {
     text-align: center;
 }
 .singleUserPaintingName {
     margin: 0 auto;
+}
+
+.singleArtistDashboardNameInput {
+    background-color: #333031;
+    border-width: 0;
+    font-size: 2em;
+}
+
+.singleArtistDashboardBioInput {
+    background-color: #333031;
+    border-width: 0;
+    font-size: 1em;
+}
+
+.singleArtistDashboardEmailInput {
+    background-color: #333031;
+    border-width: 0;
+    font-size: 1em;
+}
+.floatLeft {
+    float: left;
+    color: yellow;
+    padding-right: 0.5em;
 }
 
 //SINGLE GALLERY VIEW
@@ -180,6 +207,14 @@ a {
 }
 
 //Gallery Edit
+
+#glphpencil{
+    margin-top: -25px;
+}
+.headerContainer{
+    display: flex;
+    flex-direction:row;
+}
 
 .editGalleryContainer{
     display: flex;
@@ -246,6 +281,7 @@ a {
     margin: 10em;
 }
 
+//
 
 
 
