@@ -30,6 +30,7 @@ export default class Main extends Component{
         <OurNavbar />
         <Switch>
           <Route exact path="/" component={LandingPage} />
+          <Route exact path="/vr/hub" component={VRHub} />
           <Route exact path="/artists/:id" component={SingleArtist} />
           <Route exact path="/artists" component={AllArtists} />
           <Route exact path="/galleries" component={AllGalleries} />
