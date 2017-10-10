@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 
 class VRNightScene extends Component{
 
-  render(){
+    render(){
     const currentGalleryId = this.props.match.params.id;
     const galleries = this.props.galleriesCollection;
     const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === +currentGalleryId)[0]
@@ -22,16 +22,11 @@ class VRNightScene extends Component{
     }
     console.log("NiGhTScEne PRops", this.props);
     console.log('Paintings', paintings);
-
-
-
     const circutBoard = 'https://ucarecdn.com/cbef09b9-d5dc-4402-a8b8-ba64210d9283/';
     const nightScape = 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg';
     const groundTexture = 'https://cdn.aframe.io/a-painter/images/floor.jpg';
     const cyberRust = 'https://ucarecdn.com/90bc2baf-a4c1-4237-b00c-a75f9db0b45a/';
     const marbleTexture = 'https://ucarecdn.com/1b213dc4-386d-4978-8fe5-9b021b23c945/';
-       
-    
     return (
       paintings?
         <a-scene>
@@ -52,7 +47,7 @@ class VRNightScene extends Component{
 
             { paintings && paintings.map((image, index) => {
                         return(
-                          <a-entity obj-model='obj:#column-obj; mtl:#column-mtl' src={marbleTexture} position="-3 0.75 -3" radius="0.5" height="1.5" position={pedPositions[index]} scale=".001 .001 .001" rotation="90 0 0" scale="5 5 5"/>
+                          <a-entity obj-model='obj:#column-obj; mtl:#column-mtl' position={pedPositions[index]} scale=".001 .001 .001" rotation="90 0 0" scale="5 5 5"/>
             )})
             }
 
@@ -76,13 +71,16 @@ class VRNightScene extends Component{
           :
           null
     );
-        
+  
   }
-
+        
 }
+
 
 const mapState = function(state){
   return {
       galleriesCollection: state.galleries.galleryCollection,
   };
 };
+
+export default connect(mapState)(VRNightScene)
