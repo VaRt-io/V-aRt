@@ -17,7 +17,7 @@ module.exports = {
         // Create 10 tenants for each apartment
         return seed({
           count: 2,
-          disabled: true,
+          disabled: false,
           delete: false,
           path: 'api/galleries',
           template: {
@@ -31,7 +31,7 @@ module.exports = {
           callback(gallery, seed) {
             return seed({
               count: 4,
-              disabled: true,
+              disabled: false,
               delete: false,
               path: 'api/paintings',
               template: {
