@@ -11,7 +11,9 @@ class SinglePainting extends Component{
     const currentPainting = paintings.length && paintings.filter(painting => +painting.id === +currentPaintingId)[0];
 
     function getPaintingName(address) {
-      let name = address.slice(38);
+      let addressArray = address.split('/');
+      let name = addressArray[addressArray.length - 1];
+
       while (name.indexOf('_') !== -1){
         name = name.replace('_', ' ');
       }
