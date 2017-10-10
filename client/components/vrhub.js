@@ -10,6 +10,11 @@ import store from '../store';
 export function VRHub (props){
             var galleries = props.galleries;
             var positions = ['-1.50 2.0 -9.65', '3.454 2.00 -9.65', '5.000 2.00 -6.20' , '5.000 2.00 -2.00', '2.50 2.0 2.10', '-1.50 2.0 2.10', '-4.00 2.0 -1.50', '-4.00 2.0 -7.00']
+            var textPositions = positions.map(position => {
+                var xyz = position.split(' ');
+                xyz[1] = '4.5';
+                return xyz.join(' ');
+            });
             var rotations = ['0 0 0', '0 0 0', '0 -90 0', '0 -90 0', '0 180 0', '0 180 0', '0 90 0', '0 90 0'];
             return(
             <a-scene physics="friction: 0.1; restitution: 0.5">
@@ -25,17 +30,28 @@ export function VRHub (props){
                 <a-plane color="#CCC" height="20" width="20" position="-2.89 0.047 -4.31" rotation="-90 0 0"></a-plane>
                 <a-plane color="#CCC" height="20" width="20" position="5.680 7.015 0.019" rotation="90 0 0"></a-plane>
  
-                <a-entity obj-model="obj:#frame-obj" material="color:blue" position="1 2.759 -9.52" rotation="90 0 0" href={`/galleries`}>
-                    <a-image src='https://blogs.ancestry.com/ancestry/files/2014/09/Brickwall.jpg.thumbnailUrl' position="0 .4 0" scale="1 .7 1"></a-image>
-                </a-entity>
-                
-                <a-entity obj-model="obj:#frame-obj" material="color:red" position=".537 3.138 1.285" rotation="-90 0 0" href="/vr/hub">
+                <a-text value="Exit VR" position="1 4 -9.52" align='center'></a-text>
+                <a-entity obj-model="obj:#frame-obj" material="color:blue" position="1 2.759 -9.52" rotation="0 0 0" href='/galleries'>
                     <a-image src='https://blogs.ancestry.com/ancestry/files/2014/09/Brickwall.jpg' position="0 .4 0" scale="1 .7 1"></a-image>
                 </a-entity>
+                
+                <a-text value="View All Artists" position=".537 4.5 2.1" rotation="0 180 0" align='center'></a-text>
+                <a-entity obj-model="obj:#frame-obj" material="color:red" position=".537 3.138 2.1" rotation="0 0 0" href="/artists">
+                    <a-image src='https://blogs.ancestry.com/ancestry/files/2014/09/Brickwall.jpg' position="0 .4 0" scale="1 .7 1"></a-image>
+                </a-entity>
+
+
+                { galleries && galleries.map((gallery, index) => {
+                    console.log(textPositions[index])
+                    return(
+                        <a-text value={gallery.title} position={textPositions[index]} rotation={rotations[index]} align='center'></a-text>
+                )})
+                }
 
                 { galleries && galleries.map((gallery, index) => {
                     console.log(gallery.thumbnailUrl)
                     return(
+
                     <a-entity key={gallery.id} obj-model="obj:#frame-obj" material= "color:blue" position={positions[index]} rotation={rotations[index]} scale="2.5 2.5 1" href={`/galleries/${gallery.id}`}>
                         <a-image src={gallery.thumbnailUrl} position="0 .4 0" scale="1 .7 1"></a-image>
                     </a-entity>
