@@ -22,6 +22,7 @@ class VRNightScene extends Component{
     if(currentGallery){
         paintings= currentGallery.paintings;
     }
+    console.log("NiGhTScEne PRops", this.props);
     console.log('Paintings', paintings);
 
 
