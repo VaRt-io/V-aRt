@@ -4,7 +4,7 @@ import {Entity, Scene} from 'aframe-react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-function VRCity(props){
+function VRStarry(props){
         const currentGalleryId = props.match.params.id;
         const galleries = props.galleriesCollection;
         const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === +currentGalleryId)[0];
@@ -12,10 +12,7 @@ function VRCity(props){
         if(currentGallery){
             paintings= currentGallery.paintings;
         }
-        // DEFINE ALL YOUR IMAGE TEXTURES HERE AND SAVE THEM AS CONSTANTS 
-        // EX.) const marbleTexture = 'https://ucarecdn.com/1b213dc4-386d-4978-8fe5-9b021b23c945/';
-        // YOU WILL BE USING THEM ON YOU OBJECTS BELOW
-        console.log('paintings', paintings);
+        // TODO: Add logic for rendering up to 4 images
         return(
             paintings?
             <Scene>
@@ -69,7 +66,7 @@ const mapState = function(state){
     }
 };
 
-export default connect(mapState)(VRCity);
+export default connect(mapState)(VRStarry);
 
 /*
            <Scene>
