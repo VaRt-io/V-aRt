@@ -5,23 +5,18 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 function VRArtistHub(props) {
+
     const currentArtistId = props.match.params.id;
     const artists = props.artistsCollection;
     const currentArtist = artists.length && artists.filter(artist => +artist.id === +currentArtistId)[0];
-    let galleries;
+    let galleries;  
     let gridCellPositions;
-
-    if (currentArtist){
-        let galleries = currentArtist.galleries;
-        let galleriesGrid = createGrid(galleries);
-        gridCellPositions = mapCellPositions(galleriesGrid);
-    }
-    console.log('rendering?', gridCellPositions);
 
     function createGrid(arr) {
         var newArr = [];
-        while (arr.length) {
-          newArr.push(arr.splice(0,3));
+        var clonedArr = arr.slice();
+        while (clonedArr.length) {
+          newArr.push(clonedArr.splice(0,3));
         }
         return newArr;
       }
@@ -33,24 +28,46 @@ function VRArtistHub(props) {
         for (var i = 0; i < grid.length; i++) {
           x += 3;
           // looping for each column
-          for (var j = 0; j < 3; j++) {
+          for (var j = 0; j < grid.length; j++) {
             y += 3;
-            cellPositions.push(`${x} ${y}`);
+            cellPositions.push(`${x} ${y} -10`);
           }
         }
         return cellPositions;
       }
 
-    return (
-        galleries?
-        <Scene>
-        <a-entity light="type: ambient; color: #BBB"></a-entity>
+      if (currentArtist){
+        galleries = currentArtist.galleries;
+        let grid = createGrid(galleries);
+        gridCellPositions = mapCellPositions(grid);
+        console.log('gridcellpositions', gridCellPositions);
+        console.log('LOGGING:***', galleries);
+    }
 
-            <a-entity environment="preset: contact"></a-entity>               
-        </Scene>
-        :
-        null
-    );
+      return (
+          galleries?
+          <Scene>
+          <a-entity light="type: ambient; color: #BBB"></a-entity>
+          {
+            gridCellPositions.map((position, index) => {
+                console.log('cell position', index, galleries[index]);
+                return (
+                    <a-entity 
+                    key={`${galleries[index].id}`} 
+                    id={`${galleries[index].id}`} 
+                    geometry={{primative: 'box'}} 
+                    material={`src: ${galleries[index].thumbnailUrl}`} 
+                    position={position} 
+                    >
+                </a-entity>  
+                );
+            })
+        }
+              <a-entity environment="preset: contact"></a-entity>               
+          </Scene>
+          :
+          null
+      );
 }
 
 // <a-entity 
@@ -69,17 +86,11 @@ const mapState = function(state){
 
 export default connect(mapState)(VRArtistHub);
 
+// <a-entity 
+// id={galleries[0].id} 
+// geometry={{primative: 'box'}} 
+// material={`src: ${galleries[0].thumbnailUrl}`} 
+// position={'0 3 -10'} 
+// >
+// </a-entity>  
 
-// {
-//     gridCellPositions.map((position, index) => {
-//         return (
-//             <a-entity 
-//             id={galleries[index].id} 
-//             geometry={{primative: 'box'}} 
-//             material={`src: ${galleries[index].thumbnailUrl}`} 
-//             position={position} 
-//             >
-//         </a-entity>  
-//         );
-//     })
-// }
