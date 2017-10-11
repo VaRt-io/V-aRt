@@ -43,8 +43,6 @@ class VRNightScene extends Component{
       paintings?
         <a-scene>
           <a-assets>
-            <a-asset-item id="agave-obj" src="/models/Agave/model.obj"></a-asset-item>
-            <a-asset-item id="agave-mtl" src="/models/Agave/material.mtl"></a-asset-item>
             <a-asset-item id="ghost-obj" src="/models/Ghost/model.obj"></a-asset-item>
             <a-asset-item id="ghost-mtl" src="/models/Ghost/material.mtl"></a-asset-item>
             <a-asset-item id="pumpkin-obj" src="/models/Pumpkin/pumpkin.obj"></a-asset-item>
