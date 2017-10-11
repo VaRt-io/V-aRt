@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {fetchUsers} from './users';
 
 
 //INITIAL STATE
@@ -51,7 +52,7 @@ export const postGalleryThunk = (gallery, history) => dispatch => {
     .then(result => result.data)
     .then(newGallery => {
       createdGallery = newGallery;
-
+      dispatch(fetchUsers());
       return dispatch(getGalleriesThunk());
     })
     .then((thunk)=> {
@@ -67,6 +68,7 @@ export const updateGalleryThunk = (gallery) => dispatch => {
   axios.put(`/api/galleries/${gallery.id}`, gallery)
     .then(result => result.data)
     .then(newGallery => {
+      dispatch(fetchUsers());
       dispatch(getGalleriesThunk());
     })
     .catch(console.error);
