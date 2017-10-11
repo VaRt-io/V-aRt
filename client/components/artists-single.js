@@ -190,6 +190,7 @@ const mapState = (state, ownProps) => {
 const mapDispatch = (dispatch) => {
   return {
     updateUser: (user) => {
+      delete user.password;
       dispatch(updateUserThunk(user));
     }
   };

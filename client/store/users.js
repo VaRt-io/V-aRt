@@ -52,6 +52,7 @@ export const fetchUsers = () => dispatch => {
 };
 
 export const postUser = (user, history) => dispatch => {
+  localStorage.removeItem("jwt");
   axios.post('/api/users', user)
     .then(result => result.data)
     .then((newUser) => newUser)
@@ -68,7 +69,7 @@ export const postUser = (user, history) => dispatch => {
 };
 // TODO: Need to pass auth token in header
 export const updateUserThunk = (user) => dispatch => {
-  return axios.put(`/api/users/${user.id}`, user)
+  return axios.patch(`/api/users/${user.id}`, user)
     .then(result => result.data)
     .then(newGallery => {
       dispatch(fetchUsers());
