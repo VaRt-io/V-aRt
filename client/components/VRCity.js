@@ -15,15 +15,16 @@ function VRCity(props){
         // DEFINE ALL YOUR IMAGE TEXTURES HERE AND SAVE THEM AS CONSTANTS 
         // EX.) const marbleTexture = 'https://ucarecdn.com/1b213dc4-386d-4978-8fe5-9b021b23c945/';
         // YOU WILL BE USING THEM ON YOU OBJECTS BELOW
-        
+        console.log('paintings', paintings);
         return(
             paintings?
             <Scene>
             <a-entity environment="preset: forest"></a-entity>
+            <a-image position="-20.9 3 3" rotation="0 90 0" src={paintings[0].url}></a-image>
           </Scene>
             :
             null
-        )
+        );
     
 }
 
