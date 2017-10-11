@@ -64,7 +64,7 @@ class GalleryEdit extends Component{
         return (
         <div className="editGalleryContainter">
             
-            <GalleryEditPageHeader classname="galleryEditPageHeader" title ={this.state.title} handleChange={this.handleChange}/>
+            <GalleryEditPageHeader className="galleryEditPageHeader" title ={this.state.title} handleChange={this.handleChange}/>
           
             
         
