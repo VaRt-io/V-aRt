@@ -12,10 +12,17 @@ class VRNightScene extends Component{
     const currentGalleryId = this.props.match.params.id;
     const galleries = this.props.galleriesCollection;
     const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === +currentGalleryId)[0]
-    const pedPositions = ["6.75 1 0", "3 1 6.2", "-2.644 1 6.353", "-6.619 1 0", "-2.862 1 -5.734", "3.000 1 -6.108"]
+    const pedPositions = ["6.75 .7 0", "3 .7 6.2", "-2.644 .7 6.353", "-6.619 .7 0", "-2.862 .7 -5.734", "3.000 .7 -6.108"]
     const boxPositions = ["6.75 1.8 0", "3 1.8 6.2", "-2.644 1.8 6.353", "-6.619 1.8 0", "-2.862 1.8 -5.734", "3.000 1.8 -6.108"]
     const textPositions = ["6.75 3 0", "3 3 6.2", "-2.644 3 6.353", "-6.619 3 0", "-2.862 3 -5.734", "3.000 3 -6.108"]
     const textRotations = ["0 -90 0", "0 -145 0", "0 -215 0", "0 -270 0", "0 -335 0", "0 -35 0"]
+    const lightPositions = boxPositions.map(position => {
+      var xyz = position.split(' ');
+      xyz[0] = '-' + xyz[0];
+      xyz[1] = '4.5';
+      xyz[2] = '-' + xyz[2]
+      return xyz.join(' ');
+  });
     let paintings;
     if(currentGallery){
         paintings=currentGallery.paintings;
@@ -30,12 +37,7 @@ class VRNightScene extends Component{
     return (
       paintings?
         <a-scene>
-            <a-assets>
-              <a-asset-item id="column-obj" src="/models/Column/column.obj"></a-asset-item>
-              <a-asset-item id="column-mtl" src="/models/Column/column.mtl"></a-asset-item>
-            </a-assets>
             <a-sphere src={cyberRust} position="5 12.82 -37.6" radius="1.25" />
-            
             <a-torus-knot src={cyberRust} position ="-5 2 -14"  />
             <a-dodecahedron src={circutBoard} position= "-1 13 -32"  />
 
@@ -47,22 +49,30 @@ class VRNightScene extends Component{
 
             { paintings && paintings.map((image, index) => {
                         return(
-                          <a-entity obj-model='obj:#column-obj; mtl:#column-mtl' position={pedPositions[index]} scale=".001 .001 .001" rotation="90 0 0" scale="5 5 5"/>
+                          <a-cylinder src={cyberRust} position={pedPositions[index]} rotation="0 0 0" scale=".3 1.2 .3">
+                            <a-animation attribute="rotation"
+                                  dur="10000"
+                                  fill="forwards"
+                                  to="0 360 0"
+                                  repeat="indefinite"></a-animation>
+                          </a-cylinder>
             )})
             }
 
             { paintings && paintings.map((image, index) => {
                         return(
-                          <a-entity geometry={{primative: 'box'}} material={`src: ${paintings[index].url}`} position={boxPositions[index]} rotation="0 90 0" href>
-                            <a-animation attribute="rotation"
-                                dur="10000"
-                                fill="forwards"
-                                to="0 360 0"
-                                repeat="indefinite"></a-animation>
-                          </a-entity>
+                          <a-light type="directional" position={lightPositions[index]} target={`#painting${index}`}>
+                            <a-entity id={`painting${index}`} geometry={{primative: 'box'}} material={`src: ${paintings[index].url}`} position={boxPositions[index]} rotation="0 90 0">
+                              <a-animation attribute="rotation"
+                                  dur="10000"
+                                  fill="forwards"
+                                  to="0 -360 0"
+                                  repeat="indefinite"></a-animation>
+                            </a-entity>
+                          </a-light>
             )})
             }
-            
+
             <a-plane src={groundTexture} position="0 0 -4" rotation="-90 0 0" width="90" height="90dssa" repeat="10 10"  />
 
             <a-sky src= {nightScape} />
