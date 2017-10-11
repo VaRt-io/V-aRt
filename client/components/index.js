@@ -26,4 +26,4 @@ export {default as DisplaySelectForm} from './display-selectForm';
 export {default as PaintingDropdown} from  './display-paintingDropdown';
 export {default as GalleryEditPageHeader} from './display-galleryEditPageHeader';
 export {default as VRDesert} from './VRDesert';
-export {default as VRCity} from './VRCity';
+export {default as VRStarry} from './VRStarry';
