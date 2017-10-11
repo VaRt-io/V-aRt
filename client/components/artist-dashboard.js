@@ -12,12 +12,12 @@ class ArtistDashboard extends Component {
 
   render(){
     const currentUser = this.props.currentUser;
-    if(currentUser.id) {
+    if (currentUser.id) {
       return (
         <div>
           <h1>Welcome, {currentUser.name}</h1>
         </div>
-      )
+      );
     } else {
       return (
         <div onClick={this.props.history.push('/signin')}>
@@ -31,5 +31,3 @@ class ArtistDashboard extends Component {
 const mapStateToProps = ({currentUser}) => ({currentUser});
 
 export default connect(mapStateToProps)(ArtistDashboard);
-
-
