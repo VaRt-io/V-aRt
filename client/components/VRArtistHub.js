@@ -45,19 +45,7 @@ function VRArtistHub(props) {
         galleries?
         <Scene>
         <a-entity light="type: ambient; color: #BBB"></a-entity>
-        {
-        gridCellPositions.map((position, index) => {
-            return (
-                <a-entity 
-                id={galleries[index].id} 
-                geometry={{primative: 'box'}} 
-                material={`src: ${galleries[index].thumbnailUrl}`} 
-                position={position} 
-                >
-            </a-entity>  
-            );
-        })
-    }
+
             <a-entity environment="preset: contact"></a-entity>               
         </Scene>
         :
@@ -81,12 +69,17 @@ const mapState = function(state){
 
 export default connect(mapState)(VRArtistHub);
 
-// <a-curvedimage
-// position="0 3 -16"
-// rotation="0 -27 0"
-// height="3.0"
-// radius="4.0"
-// theta-length="60"
-// src={galleries[0].thumbnailUrl}
-// >
-// </a-curvedimage>
+
+// {
+//     gridCellPositions.map((position, index) => {
+//         return (
+//             <a-entity 
+//             id={galleries[index].id} 
+//             geometry={{primative: 'box'}} 
+//             material={`src: ${galleries[index].thumbnailUrl}`} 
+//             position={position} 
+//             >
+//         </a-entity>  
+//         );
+//     })
+// }
