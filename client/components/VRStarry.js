@@ -12,7 +12,6 @@ function VRStarry(props){
         if(currentGallery){
             paintings= currentGallery.paintings;
         }
-        // TODO: Add logic for rendering up to 4 images
         return(
             paintings?
             <Scene>
@@ -61,14 +60,6 @@ function VRStarry(props){
                 src={paintings[3].url}>
             </a-curvedimage> 
             }
-
-
-        
-            
-
-
- 
-
             <a-entity environment="preset: starry"></a-entity>            
           </Scene>
             :
