@@ -19,8 +19,43 @@ function VRCity(props){
         return(
             paintings?
             <Scene>
-            <a-entity environment="preset: forest"></a-entity>
-            <a-image position="-20.9 3 3" rotation="0 90 0" src={paintings[0].url}></a-image>
+                <a-curvedimage 
+                    position="0 3 -16" 
+                    rotation="0 -27 0"
+                    height="3.0"
+                    radius="4.0"
+                    theta-length="60" 
+                    src={paintings[0].url}>
+                </a-curvedimage>
+
+                <a-curvedimage 
+                    position="16 3 0" 
+                    rotation="0 240 0"
+                    height="3.0"
+                    radius="4.0"
+                    theta-length="60" 
+                    src={paintings[1].url}>
+                </a-curvedimage>          
+            
+                <a-curvedimage 
+                    position="0 3 16" 
+                    rotation="0 150 0"
+                    height="3.0"
+                    radius="4.0"
+                    theta-length="60" 
+                    src={paintings[2].url}>
+                </a-curvedimage>
+
+                <a-curvedimage 
+                position="-15 3 3" 
+                rotation="0 60 0"
+                height="3.0"
+                radius="4.0"
+                theta-length="60" 
+                src={paintings[3].url}>
+            </a-curvedimage>  
+
+            <a-entity environment="preset: starry"></a-entity>            
           </Scene>
             :
             null
