@@ -12,6 +12,7 @@ function VRArtistHub(props) {
     if (currentArtist){
         galleries = currentArtist.galleries;
     }
+    console.log('rendering?', galleries);
     return (
         galleries?
         <Scene>
@@ -33,7 +34,7 @@ function VRArtistHub(props) {
 
 const mapState = function(state){
     return {
-        artistsCollection: state.users,
+        artistsCollection: state.users.artistsCollection
     }
 };
 
