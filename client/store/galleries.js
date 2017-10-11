@@ -45,13 +45,13 @@ export const getGalleriesThunk = () => (dispatch) => {
 };
 
 export const postGalleryThunk = (gallery, history) => dispatch => {
-  console.log(history);
+
   var createdGallery;
   axios.post('/api/galleries', gallery)
     .then(result => result.data)
     .then(newGallery => {
       createdGallery = newGallery;
-      console.log('newggallery', newGallery);
+
       return dispatch(getGalleriesThunk());
     })
     .then((thunk)=> {
