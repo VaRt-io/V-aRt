@@ -38,7 +38,7 @@ class VRNightScene extends Component{
       paintings?
         <a-scene>
           <a-assets>
-            <a-asset-item id="agave-obj" src="/models/Agave/"
+            <a-asset-item id="agave-obj" src="/models/Agave/"></a-asset-item>
           </a-assets>
             <a-sphere src={cyberRust} position="5 12.82 -37.6" radius="1.25" />
             <a-torus-knot src={cyberRust} position ="-5 2 -14"  />
