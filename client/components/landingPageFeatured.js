@@ -11,22 +11,22 @@ export default class ourCarousel extends Component{
           <Carousel.Item>
             <img className="carImg" width={500} height={500} alt="900x500" src="https://www.bloomberg.com/features/2017-art-auction-estimates-quiz/img/art-quiz-bloomberg-question-02.jpg" />
             <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              <h3></h3>
+              <p></p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="carImg" width={500} height={500} alt="900x500" src="https://www.bloomberg.com/features/2017-art-auction-estimates-quiz/img/art-quiz-bloomberg-question-02.jpg" />
+            <img className="carImg" width={500} height={500} alt="900x500" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1280px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg" />
             <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h3></h3>
+              <p></p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="carImg" width={500} height={500} alt="900x500" src="https://slack-imgs.com/?c=1&url=http%3A%2F%2Fthepaintshop.biz%2Fimg%2Fcanvas8708.png" />
+            <img className="carImg" width={500} height={500} alt="900x500" src="https://10mosttoday.com/wp-content/uploads/2013/09/The_Persistence_of_Memory.jpg" />
             <Carousel.Caption>
-              <h3>Third slide label</h3>
-              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+              <h3></h3>
+              <p></p>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
