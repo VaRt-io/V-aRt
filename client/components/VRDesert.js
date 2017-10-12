@@ -10,8 +10,10 @@ function VRDesert(props){
         const galleries = props.galleriesCollection;
         const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === currentGalleryId)[0];
         let paintings;   //current galleries will be async, we have to wait for it to come in before we can define paintings 
+        let artist;
         if(currentGallery){
-            paintings= currentGallery.paintings;
+            paintings = currentGallery.paintings;
+            artist = currentGallery.user;
         }
         // DEFINE ALL YOUR IMAGE TEXTURES HERE AND SAVE THEM AS CONSTANTS 
         // EX.) const marbleTexture = 'https://ucarecdn.com/1b213dc4-386d-4978-8fe5-9b021b23c945/';
@@ -110,8 +112,21 @@ function VRDesert(props){
                     <a-entity id="cursor" position="0 0 -2" cursor geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white"></a-entity>
                 </a-entity>
 
+                <a-link href={`/vr/artists/${artist.id}/hub`}>
+                <a-circle color="#008080" radius="1" position={'6.5 3 -1'}>
+                  <a-text 
+                      value={`${artist.name}'s hub`}                      
+                      align="center" 
+                      anchor="center"
+                      baseline="center"
+                      position="0 0 0"
+                      scale="1 1 1">
+                  </a-text>
+                </a-circle>
+                </a-link>
+
                 <a-link href={`/galleries/${currentGalleryId}`}>
-                    <a-circle color="#ff0000" radius="1" position={'8 3 -15'}>
+                    <a-circle color="#ff0000" radius="1" position={'9 3 -1'}>
                     <a-text 
                         value='Exit'                      
                         align="center" 

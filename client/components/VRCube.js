@@ -4,6 +4,8 @@ import {Entity, Scene} from 'aframe-react';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
+// THIS CODE/FILE IS BROKEN
+
 export default class VR extends Component{
 
   render(){
