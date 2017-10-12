@@ -28,7 +28,7 @@ function VRArtistHub(props) {
         var y = 0;
         var cellPositions = [];
         for (var i = 0; i < grid.length; i++) {
-          y += 1.5;
+          y += 1.75;
           x = -3;
           // looping for each column
           for (var j = 0; j < grid[i].length; j++) {
@@ -38,14 +38,21 @@ function VRArtistHub(props) {
         }
         return cellPositions;
       }
+      // Created with the assumption that inner entities are positioned absolutely,
+      // but they are positioned relatively within the entity they're containing
+    //   function createTitlePosition(stringPosition) {
+    //       const splitStringArr = stringPosition.split(' ');
+    //       const [X, oldY, Z] = splitStringArr;
+    //       const newY = (+oldY - 1).toString();
+    //       const newStringPosition = [X, newY, Z].join();
+    //       console.log('position', stringPosition, newStringPosition);
+    //       return newStringPosition;
+    //   }
 
       if (currentArtist){
         galleries = currentArtist.galleries;
         let grid = createGrid(galleries);
         gridCellPositions = mapCellPositions(grid);
-        console.log('galleries', galleries);
-        console.log('grid', grid);
-        console.log('gridcellpositions', gridCellPositions);
     }
 
       return (
@@ -54,20 +61,39 @@ function VRArtistHub(props) {
           <a-entity light="type: ambient; color: #BBB"></a-entity>
           {
             gridCellPositions.map((position, index) => {
-                console.log('cell position', index, galleries[index]);
                 return (
+                    <a-link href={`/vr/${galleries[index].id}/${galleries[index].environment}`} key={`${galleries[index].id}`}>
                     <a-entity 
-                    key={`${galleries[index].id}`} 
-                    id={`${galleries[index].id}`} 
-                    geometry={{primative: 'box'}} 
-                    material={`src: ${galleries[index].thumbnailUrl}`} 
-                    position={position} 
-                    >
-                </a-entity>  
+                        key={`${galleries[index].id}`} 
+                        id={`${galleries[index].id}`} 
+                        geometry={{primative: 'cube'}} 
+                        material={`src: ${galleries[index].thumbnailUrl}`} 
+                        position={position} 
+                        >
+                        <a-animation 
+                            attribute="scale"
+                            to="1.1 1.1 1.1"
+                            repeat="indefinite"
+                            dur="1000"
+                        ></a-animation>
+                        <a-text 
+                            value={`${galleries[index].title}`}                       
+                            align="center" 
+                            anchor="center"
+                            baseline="bottom"
+                            position="0 -1 0"
+                        ></a-text>
+                    </a-entity>  
+                    </a-link>
+
                 );
             })
         }
-              <a-entity environment="preset: contact"></a-entity>               
+            <a-entity camera="userHeight: 2.9" look-controls wasd-controls>
+                <a-entity id="cursor" position="0 0 -2" cursor geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white"></a-entity>
+            </a-entity>
+
+            <a-entity environment="preset: contact"></a-entity>               
           </Scene>
           :
           null
