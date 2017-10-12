@@ -206,21 +206,3 @@ const mapState = function(state){
 };
 
 export default connect(mapState)(VRNightScene)
-
-
-// <a-link href={`/vr/artists/${currentGalleryId}`}>
-// <a-entity geometry="primitive: triangle" material="side: double"></a-entity>
-// <a-circle color="#ff0000" radius="1" position={'8 3 -15'}>
-//   <a-text 
-//       value='Exit'                      
-//       align="center" 
-//       anchor="center"
-//       baseline="center"
-//       position="0 0 0"
-//       scale="1 1 1">
-//   </a-text>
-// </a-circle>
-// </a-link>
-
-
-
