@@ -96,7 +96,7 @@ function VRArtistHub(props) {
                 <a-entity id="cursor" position="0 0 -2" cursor geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white"></a-entity>
             </a-entity>
 
-            <a-link href={`/artists/${currentArtistId}`}>
+            <a-link href={'/artists'}>
             <a-circle color="#ff0000" radius="1" position={'8 3 -15'}>
               <a-text 
                   value='Exit'                      

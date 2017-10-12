@@ -29,10 +29,13 @@ class VRNightScene extends Component{
     const treeRotations = []
     const agavePositions = new Array(40).fill()
     let paintings;
+    let artist;
     if(currentGallery){
-        paintings=currentGallery.paintings;
+        paintings = currentGallery.paintings;
+        artist = currentGallery.user;
     }
-    
+    console.log("NiGhTScEne PRops", this.props);
+    console.log('Paintings', paintings);
     const circutBoard = 'https://ucarecdn.com/cbef09b9-d5dc-4402-a8b8-ba64210d9283/';
     const nightScape = 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg';
     const groundTexture = 'https://cdn.aframe.io/a-painter/images/floor.jpg';
@@ -49,6 +52,7 @@ class VRNightScene extends Component{
           </a-assets>
             <a-sphere src={cyberRust} position="5 12.82 -37.6" radius="1.25" />
             <a-dodecahedron src={circutBoard} position= "-1 13 -32"  />
+            <a-torus-knot src={cyberRust} position ="-5 2 -14"  />
             <a-entity obj-model="obj:#tree-obj;mtl:#tree-mtl"></a-entity>
 
 
@@ -68,7 +72,7 @@ class VRNightScene extends Component{
                                     repeat="indefinite"></a-animation>
                         <a-entity obj-model="obj:#ghost-obj;mtl:#ghost-mtl" position={ghostPositions[index]} rotation={ghostRotations[index]}></a-entity>
                       </a-entity>
-                          
+
             )})
             }
 
@@ -92,7 +96,7 @@ class VRNightScene extends Component{
                     coords = [x, y, z]
                     currCoords = coords.join(' ');
                     currRot = "0 180 0"
-
+                    console.log(currCoords)
                     return(
                       <a-entity obj-model="obj:#pumpkin-obj;mtl:#pumpkin-mtl" position={currCoords} rotation={currRot}></a-entity>
                     )
@@ -148,11 +152,27 @@ class VRNightScene extends Component{
                             </a-entity>
                       )}})
             }
-          <a-entity camera="userHeight: 2.9" look-controls wasd-controls>
-            <a-entity id="cursor" position="0 0 -2" cursor geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white"></a-entity>
-          </a-entity>
 
-          <a-link href={`/galleries/${currentGalleryId}`}>
+            <a-entity camera="userHeight: 2.9" look-controls wasd-controls>
+            <a-entity id="cursor" position="0 0 -2" cursor geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white"></a-entity>
+            </a-entity>
+            
+          
+
+            <a-link href={`/vr/artists/${artist.id}/hub`}>
+            <a-circle color="#008080" radius="1" position={'5 3 -15'}>
+              <a-text 
+                  value={`${artist.name}'s hub`}                      
+                  align="center" 
+                  anchor="center"
+                  baseline="center"
+                  position="0 0 0"
+                  scale="1 1 1">
+              </a-text>
+            </a-circle>
+            </a-link>
+            
+            <a-link href={`/galleries/${currentGalleryId}`}>
             <a-circle color="#ff0000" radius="1" position={'8 3 -15'}>
               <a-text 
                   value='Exit'                      
@@ -163,19 +183,19 @@ class VRNightScene extends Component{
                   scale="1 1 1">
               </a-text>
             </a-circle>
-          </a-link>
+            </a-link>
 
             <a-plane src={groundTexture} position="0 0 -4" rotation="-90 0 0" width="90" height="90" repeat="10 10"  />
 
             <a-sky src= {nightScape} />
-            
+
           </a-scene>
           :
           null
     );
-  
+
   }
-        
+
 }
 
 
@@ -186,3 +206,21 @@ const mapState = function(state){
 };
 
 export default connect(mapState)(VRNightScene)
+
+
+// <a-link href={`/vr/artists/${currentGalleryId}`}>
+// <a-entity geometry="primitive: triangle" material="side: double"></a-entity>
+// <a-circle color="#ff0000" radius="1" position={'8 3 -15'}>
+//   <a-text 
+//       value='Exit'                      
+//       align="center" 
+//       anchor="center"
+//       baseline="center"
+//       position="0 0 0"
+//       scale="1 1 1">
+//   </a-text>
+// </a-circle>
+// </a-link>
+
+
+
