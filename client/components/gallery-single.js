@@ -11,7 +11,7 @@ class SingleGallery extends Component{
   checkIfOwnGallery() {
       // get array of all artist's own galleries by filtering galleries by ones that have his user id
       // check if currentGalleryId is within that array of filtered gallaries
-    
+
     const currentUserId = this.props.currentUser.isLoggedIn && this.props.currentUser.id;
     const currentGalleryId = +this.props.match.params.id;
 
@@ -34,22 +34,23 @@ class SingleGallery extends Component{
     const environment = currentGallery.environment;
     let artistName;
     let artistId;
-    if(currentGallery){
-      artistName =currentGallery.user.name;
-      artistId= currentGallery.user.id;
+    if (currentGallery){
+      artistName = currentGallery.user.name;
+      artistId = currentGallery.user.id;
     }
     return (
       <div className="singleGalleryContainer">
-        <OurPageHeader artistName={artistName} artistId={artistId} 
+        <OurPageHeader artistName={artistName} artistId={artistId}
         currentGallery={currentGallery}/>
         <div id="enterVRButton" style={{textAlign: 'center', marginTop:'10px', marginBottom:'50px'}}>
           <Link to={`/vr/${currentGalleryId}/${environment}`} ><button className="btn btn-danger" style={{backgroundColor: 'red', fontSize:'20px'}}>Enter VR</button></Link>
         </div>
-        
+
         <OurJumbotron currentGallery={currentGallery} />
-      
-        <h3>My Paintings</h3>
-        <DisplayPaintings currentGallery={currentGallery} />   
+        <div>
+          <h3>My Paintings</h3>
+          <DisplayPaintings currentGallery={currentGallery} />
+        </div>
         <div className="single-gallery-create-painting-wrapper">
         {
           // Render if gallery belongs to user
