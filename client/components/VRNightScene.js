@@ -32,8 +32,7 @@ class VRNightScene extends Component{
     if(currentGallery){
         paintings=currentGallery.paintings;
     }
-    console.log("NiGhTScEne PRops", this.props);
-    console.log('Paintings', paintings);
+    
     const circutBoard = 'https://ucarecdn.com/cbef09b9-d5dc-4402-a8b8-ba64210d9283/';
     const nightScape = 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg';
     const groundTexture = 'https://cdn.aframe.io/a-painter/images/floor.jpg';
@@ -93,7 +92,7 @@ class VRNightScene extends Component{
                     coords = [x, y, z]
                     currCoords = coords.join(' ');
                     currRot = "0 180 0"
-                    console.log(currCoords)
+
                     return(
                       <a-entity obj-model="obj:#pumpkin-obj;mtl:#pumpkin-mtl" position={currCoords} rotation={currRot}></a-entity>
                     )
@@ -149,6 +148,22 @@ class VRNightScene extends Component{
                             </a-entity>
                       )}})
             }
+          <a-entity camera="userHeight: 2.9" look-controls wasd-controls>
+            <a-entity id="cursor" position="0 0 -2" cursor geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white"></a-entity>
+          </a-entity>
+
+          <a-link href={`/galleries/${currentGalleryId}`}>
+            <a-circle color="#ff0000" radius="1" position={'8 3 -15'}>
+              <a-text 
+                  value='Exit'                      
+                  align="center" 
+                  anchor="center"
+                  baseline="center"
+                  position="0 0 0"
+                  scale="1 1 1">
+              </a-text>
+            </a-circle>
+          </a-link>
 
             <a-plane src={groundTexture} position="0 0 -4" rotation="-90 0 0" width="90" height="90" repeat="10 10"  />
 

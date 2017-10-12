@@ -6,9 +6,9 @@ import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 
 function VRDesert(props){
-        const currentGalleryId = props.match.params.id;
+        const currentGalleryId = +props.match.params.id;
         const galleries = props.galleriesCollection;
-        const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === +currentGalleryId)[0];
+        const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === currentGalleryId)[0];
         let paintings;   //current galleries will be async, we have to wait for it to come in before we can define paintings 
         if(currentGallery){
             paintings= currentGallery.paintings;
@@ -104,9 +104,27 @@ function VRDesert(props){
             
             }
                
-               
                 <a-entity obj-model="obj:#marcus-obj" position="0 5 -25" scale="22 22 22" src="/MarcusAureliusTexture.jpg"></a-entity>
+
+                <a-entity camera="userHeight: 2.9" look-controls wasd-controls>
+                    <a-entity id="cursor" position="0 0 -2" cursor geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white"></a-entity>
+                </a-entity>
+
+                <a-link href={`/galleries/${currentGalleryId}`}>
+                    <a-circle color="#ff0000" radius="1" position={'8 3 -15'}>
+                    <a-text 
+                        value='Exit'                      
+                        align="center" 
+                        anchor="center"
+                        baseline="center"
+                        position="0 0 0"
+                        scale="1 1 1">
+                    </a-text>
+                    </a-circle>
+                </a-link>
+
                 <a-sky src={desert}  />
+                
                 <a-plane src={groundTexture} position="0 -2 -4" rotation="-90 0 0" width="90" height="90" repeat="10 10"  />
             </Scene>
             :
