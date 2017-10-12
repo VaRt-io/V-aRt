@@ -11,7 +11,7 @@ class AllGalleries extends Component{
 
     return (
       <div id="allGalleryBox">
-        <h1>allGalleries </h1>
+        <h1>Galleries</h1>
         <div id="allGalleryRender">
           {
             galleries && galleries.map(gallery => {
