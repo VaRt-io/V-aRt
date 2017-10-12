@@ -12,6 +12,7 @@ function VRArtistHub(props) {
     let galleries;  
     let gridCellPositions;
 
+    // Convert a 1D array to a 2D array of subarrays with a max length of 3
     function createGrid(arr) {
         var newArr = [];
         var clonedArr = arr.slice();
@@ -21,16 +22,18 @@ function VRArtistHub(props) {
         return newArr;
       }
 
+    // Takes a 2D array and creates a 1D array of grid positions using the 3D coordinate system
       function mapCellPositions(grid) {
-        var x = 0;
-        var y = 3;
+        var x = -3;
+        var y = 0;
         var cellPositions = [];
         for (var i = 0; i < grid.length; i++) {
-          x += 3;
+          y += 1.5;
+          x = -3;
           // looping for each column
-          for (var j = 0; j < grid.length; j++) {
-            y += 3;
-            cellPositions.push(`${x} ${y} -10`);
+          for (var j = 0; j < grid[i].length; j++) {
+            x += 1.5;
+            cellPositions.push(`${x} ${y} -5`);
           }
         }
         return cellPositions;
@@ -40,8 +43,9 @@ function VRArtistHub(props) {
         galleries = currentArtist.galleries;
         let grid = createGrid(galleries);
         gridCellPositions = mapCellPositions(grid);
+        console.log('galleries', galleries);
+        console.log('grid', grid);
         console.log('gridcellpositions', gridCellPositions);
-        console.log('LOGGING:***', galleries);
     }
 
       return (
