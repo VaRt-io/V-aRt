@@ -81,7 +81,7 @@ function VRStarry(props){
             </a-circle>
             </a-link>
 
-            <a-link href={`/galleries/${currentGalleryId}`}>
+            <a-link href={'/galleries'}>
                 <a-circle color="#ff0000" radius="1" position={'8 3 -15'}>
                 <a-text 
                     value='Exit'                      
