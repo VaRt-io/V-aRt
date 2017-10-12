@@ -29,8 +29,10 @@ class VRNightScene extends Component{
     const treeRotations = []
     const agavePositions = new Array(40).fill()
     let paintings;
+    let artist;
     if(currentGallery){
-        paintings=currentGallery.paintings;
+        paintings = currentGallery.paintings;
+        artist = currentGallery.user;
     }
     console.log("NiGhTScEne PRops", this.props);
     console.log('Paintings', paintings);
@@ -150,6 +152,38 @@ class VRNightScene extends Component{
                             </a-entity>
                       )}})
             }
+
+            <a-entity camera="userHeight: 2.9" look-controls wasd-controls>
+            <a-entity id="cursor" position="0 0 -2" cursor geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white"></a-entity>
+            </a-entity>
+            
+          
+
+            <a-link href={`/vr/artists/${artist.id}/hub`}>
+            <a-circle color="#008080" radius="1" position={'5 3 -15'}>
+              <a-text 
+                  value={`${artist.name}'s hub`}                      
+                  align="center" 
+                  anchor="center"
+                  baseline="center"
+                  position="0 0 0"
+                  scale="1 1 1">
+              </a-text>
+            </a-circle>
+            </a-link>
+            
+            <a-link href={'/galleries'}>
+            <a-circle color="#ff0000" radius="1" position={'8 3 -15'}>
+              <a-text 
+                  value='Exit'                      
+                  align="center" 
+                  anchor="center"
+                  baseline="center"
+                  position="0 0 0"
+                  scale="1 1 1">
+              </a-text>
+            </a-circle>
+            </a-link>
 
             <a-plane src={groundTexture} position="0 0 -4" rotation="-90 0 0" width="90" height="90" repeat="10 10"  />
 

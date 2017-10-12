@@ -6,9 +6,9 @@ import {connect} from 'react-redux';
 
 function VRArtistHub(props) {
 
-    const currentArtistId = props.match.params.id;
+    const currentArtistId = +props.match.params.id;
     const artists = props.artistsCollection;
-    const currentArtist = artists.length && artists.filter(artist => +artist.id === +currentArtistId)[0];
+    const currentArtist = artists.length && artists.filter(artist => +artist.id === currentArtistId)[0];
     let galleries;  
     let gridCellPositions;
 
@@ -59,6 +59,9 @@ function VRArtistHub(props) {
           galleries?
           <Scene>
           <a-entity light="type: ambient; color: #BBB"></a-entity>
+          {/*
+            Red stop sign with the word exit to allow user to exit to 2D artist page
+        */}
           {
             gridCellPositions.map((position, index) => {
                 return (
@@ -92,6 +95,19 @@ function VRArtistHub(props) {
             <a-entity camera="userHeight: 2.9" look-controls wasd-controls>
                 <a-entity id="cursor" position="0 0 -2" cursor geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white"></a-entity>
             </a-entity>
+
+            <a-link href={'/artists'}>
+            <a-circle color="#ff0000" radius="1" position={'8 3 -15'}>
+              <a-text 
+                  value='Exit'                      
+                  align="center" 
+                  anchor="center"
+                  baseline="center"
+                  position="0 0 0"
+                  scale="1 1 1">
+              </a-text>
+            </a-circle>
+          </a-link>
 
             <a-entity environment="preset: contact"></a-entity>               
           </Scene>

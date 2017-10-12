@@ -4,6 +4,8 @@ import {Entity, Scene} from 'aframe-react';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
+// THIS CODE/FILE IS BROKEN
+
 export default class VR extends Component{
 
   render(){
@@ -21,6 +23,21 @@ export default class VR extends Component{
         <Entity gltf-model={{src: 'virtualcity.gltf'}} />
         <Entity text={{value: 'Hello, WebVR!'}} />
         <Entity primitive="a-sky" color="blue" />
+        <a-entity camera="userHeight: 2.9" look-controls wasd-controls>
+          <a-entity id="cursor" position="0 0 -2" cursor geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white"></a-entity>
+        </a-entity>
+        <a-link href={`/galleries/${currentGalleryId}`}>
+          <a-circle color="#ff0000" radius="1" position={'8 3 -15'}>
+            <a-text 
+                value='Exit'                      
+                align="center" 
+                anchor="center"
+                baseline="center"
+                position="0 0 0"
+                scale="1 1 1">
+            </a-text>
+          </a-circle>
+        </a-link>
       </Scene>
     );
 
