@@ -1,0 +1,13 @@
+# Blender MTL File: 'None'
+# Material Count: 1
+
+newmtl initialShadingGroup
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.498039 0.498039 0.498039
+Ks 0.010000 0.010000 0.010000
+Ni 1.000000
+d 1.
+map_Ka initialShadingGroup_albedo.jpeg
+map_Kd initialShadingGroup_albedo.jpeg
+illum 2

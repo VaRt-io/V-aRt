@@ -23,6 +23,11 @@ class VRNightScene extends Component{
       xyz[2] = (Number(xyz[2]) > 0) ? ('-' + xyz[2]) : (xyz[2].slice(1));
       return xyz.join(' ');
   });
+    const ghostPositions = ["10 6 0", "-10 6 0", "0 6 10", "0 6 -10", "10 12 0", "-10 12 0", "0 12 10", "0 12 -10"]
+    const ghostRotations = ["0 -90 0", "0 90 0", "0 180 0", "0 0 0", "30 90 0", "30 -90 0", "30 90 0", "30 -90 0"]
+    const treePositions = []
+    const treeRotations = []
+    const agavePositions = new Array(40).fill()
     let paintings;
     if(currentGallery){
         paintings=currentGallery.paintings;
@@ -38,13 +43,36 @@ class VRNightScene extends Component{
       paintings?
         <a-scene>
           <a-assets>
-            <a-asset-item id="agave-obj" src="/models/Agave/"></a-asset-item>
+            <a-asset-item id="ghost-obj" src="/models/Ghost/model.obj"></a-asset-item>
+            <a-asset-item id="ghost-mtl" src="/models/Ghost/material.mtl"></a-asset-item>
+            <a-asset-item id="pumpkin-obj" src="/models/Pumpkin/pumpkin.obj"></a-asset-item>
+            <a-asset-item id="pumpkin-mtl" src="/models/Pumpkin/pumpkin.mtl"></a-asset-item>
           </a-assets>
             <a-sphere src={cyberRust} position="5 12.82 -37.6" radius="1.25" />
-            <a-torus-knot src={cyberRust} position ="-5 2 -14"  />
             <a-dodecahedron src={circutBoard} position= "-1 13 -32"  />
+            <a-torus-knot src={cyberRust} position ="-5 2 -14"  />
+            <a-entity obj-model="obj:#tree-obj;mtl:#tree-mtl"></a-entity>
 
 
+            { ghostPositions.map((image, index) => {
+                  let ghostDirection;
+                  if(index < 4){
+                    ghostDirection="0 360 0"
+                  } else{
+                    ghostDirection="0 -360 0"
+                  }
+                        return(
+                      <a-entity position="0 0 0">
+                        <a-animation attribute="rotation"
+                                    dur="50000"
+                                    fill="forwards"
+                                    to={ghostDirection}
+                                    repeat="indefinite"></a-animation>
+                        <a-entity obj-model="obj:#ghost-obj;mtl:#ghost-mtl" position={ghostPositions[index]} rotation={ghostRotations[index]}></a-entity>
+                      </a-entity>
+
+            )})
+            }
 
             { paintings && paintings.map((image, index) => {
                     if(index < 6){
@@ -53,15 +81,58 @@ class VRNightScene extends Component{
             )}})
             }
 
+            { agavePositions.map((image, index) => {
+                  let x
+                  let y = "1"
+                  let z
+                  let coords;
+                  let currCoords;
+                  let currRot;
+                  if(index < 10){
+                    x = ((Math.random() * 30) - 15).toString()
+                    z = ((Math.random() * 7) + 8).toString()
+                    coords = [x, y, z]
+                    currCoords = coords.join(' ');
+                    currRot = "0 180 0"
+                    console.log(currCoords)
+                    return(
+                      <a-entity obj-model="obj:#pumpkin-obj;mtl:#pumpkin-mtl" position={currCoords} rotation={currRot}></a-entity>
+                    )
+                  } else if(index < 20){
+                    x = ((Math.random() * 7) + 8).toString()
+                    z = ((Math.random() * 30) - 15).toString()
+                    coords = [x, y, z]
+                    currCoords = coords.join(' ');
+                    currRot = "0 -90 0"
+                    return(
+                      <a-entity obj-model="obj:#pumpkin-obj;mtl:#pumpkin-mtl" position={currCoords} rotation={currRot}></a-entity>
+                    )
+                  } else if(index < 30){
+                    x = ((Math.random() * 30) - 15).toString()
+                    z = '-' + ((Math.random() * 7) + 8).toString()
+                    coords = [x, y, z]
+                    currCoords = coords.join(' ');
+                    return(
+                      <a-entity obj-model="obj:#pumpkin-obj;mtl:#pumpkin-mtl" position={currCoords}></a-entity>
+                    )
+                  } else{
+                    x = '-' + ((Math.random() * 7) + 8).toString()
+                    z = ((Math.random() * 30) - 15).toString()
+                    coords = [x, y, z]
+                    currCoords = coords.join(' ');
+                    currRot = "0 90 0"
+                    return(
+                      <a-entity obj-model="obj:#pumpkin-obj;mtl:#pumpkin-mtl" position={currCoords} rotation={currRot}></a-entity>
+                    )
+
+                  }
+            })
+            }
+
             { paintings && paintings.map((image, index) => {
                   if(index < 6){
                         return(
-                          <a-cylinder src={cyberRust} position={pedPositions[index]} rotation="0 0 0" scale=".3 1.2 .3">
-                            <a-animation attribute="rotation"
-                                  dur="10000"
-                                  fill="forwards"
-                                  to="0 360 0"
-                                  repeat="indefinite"></a-animation>
+                          <a-cylinder src={marbleTexture} position={pedPositions[index]} rotation="0 0 0" scale=".3 1.2 .3">
                           </a-cylinder>
             )}})
             }
@@ -71,33 +142,26 @@ class VRNightScene extends Component{
                         return(
                             <a-entity id={`painting${index}`} geometry={{primative: 'box'}} material={`src: ${paintings[index].url}`} position={boxPositions[index]} rotation="0 90 0">
                               <a-animation attribute="rotation"
-                                  dur="10000"
-                                  fill="forwards"
-                                  to="0 -360 0"
-                                  repeat="indefinite"></a-animation>
+                                      dur="10000"
+                                      fill="forwards"
+                                      to="0 -360 0"
+                                      repeat="indefinite">
+                              </a-animation>
                             </a-entity>
                       )}})
             }
 
-            { paintings && paintings.map((image, index) => {
-                        if(index < 6){
-                        return(
-                          <a-light type="directional" position={lightPositions[index]} target={`#painting${index}`} intensity='.3'>
-                          </a-light>
-                      )}})
-            }
-
-            <a-plane src={groundTexture} position="0 0 -4" rotation="-90 0 0" width="90" height="90dssa" repeat="10 10"  />
+            <a-plane src={groundTexture} position="0 0 -4" rotation="-90 0 0" width="90" height="90" repeat="10 10"  />
 
             <a-sky src= {nightScape} />
-            
+
           </a-scene>
           :
           null
     );
-  
+
   }
-        
+
 }
 
 
