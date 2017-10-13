@@ -7,9 +7,9 @@ export default class ourCarousel extends Component{
 
     return (
       <div>
-      
+
         <Carousel className="ourCarousel" className="col-md-6 col-lg-6 col-xs-12">
-        
+
           <Carousel.Item>
             <img className="carImg" width="100%" height={350}  src="/COVERIMAGES/theDesert.png"  border="0" />
             <Carousel.Caption>
@@ -20,7 +20,7 @@ export default class ourCarousel extends Component{
           <Carousel.Item>
             <img className="carImg" width="100%" height={350} src="/COVERIMAGES/theRoom.png" border="0" />
             <Carousel.Caption>
-              <h3>Vangogh</h3>
+              <h3>VanGogh</h3>
               <p>A Celestial Scene</p>
             </Carousel.Caption>
           </Carousel.Item>
@@ -28,7 +28,7 @@ export default class ourCarousel extends Component{
             <img className="carImg" width="100%" height={350} src="/COVERIMAGES/halloween.png" border="0" />
             <Carousel.Caption>
               <h3>Nightscene</h3>
-              <p>Spook your Freinds with a haloween theme</p>
+              <p>Spook your friends with a Halloween theme</p>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
