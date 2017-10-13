@@ -8,6 +8,7 @@ function VRStarry(props){
         const currentGalleryId = props.match.params.id;
         const galleries = props.galleriesCollection;
         const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === +currentGalleryId)[0];
+        const currentArtistId = currentGallery.userId;
         let paintings;   //current galleries will be async, we have to wait for it to come in before we can define paintings 
         if(currentGallery){
             paintings= currentGallery.paintings;
@@ -60,6 +61,8 @@ function VRStarry(props){
                 src={paintings[3].url}>
             </a-curvedimage> 
             }
+            <a-box src="/img/exitsign.png" href={`/galleries/${currentGallery.id}`} position="-1 2 3.5"></a-box>
+            <a-box src="/img/back_button.png" href={`/vr/artists/${currentArtistId}/starry`} position="1 2 3.5"></a-box>
             <a-entity environment="preset: starry"></a-entity>            
           </Scene>
             :
