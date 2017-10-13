@@ -9,6 +9,8 @@ function VRDesert(props){
         const currentGalleryId = props.match.params.id;
         const galleries = props.galleriesCollection;
         const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === +currentGalleryId)[0];
+        const currentArtistId = currentGallery.userId;
+        console.log(currentGallery)
         let paintings;   //current galleries will be async, we have to wait for it to come in before we can define paintings 
         if(currentGallery){
             paintings= currentGallery.paintings;
@@ -104,7 +106,8 @@ function VRDesert(props){
             
             }
                
-               
+                <a-box src="/img/exitsign.png" href={`/galleries/${currentGalleryId}`} position="-1 2 3.5"></a-box>
+                <a-box src="/img/back_button.png" href={`/vr/artists/${currentArtistId}/starry`} position="1 2 3.5"></a-box>
                 <a-entity obj-model="obj:#marcus-obj" position="0 5 -25" scale="22 22 22" src="/MarcusAureliusTexture.jpg"></a-entity>
                 <a-sky src={desert}  />
                 <a-plane src={groundTexture} position="0 -2 -4" rotation="-90 0 0" width="90" height="90" repeat="10 10"  />
