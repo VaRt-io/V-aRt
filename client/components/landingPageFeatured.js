@@ -7,26 +7,28 @@ export default class ourCarousel extends Component{
 
     return (
       <div>
-        <Carousel className="col-md-6 col-lg-6 col-xs-12">
+      
+        <Carousel className="ourCarousel" className="col-md-6 col-lg-6 col-xs-12">
+        
           <Carousel.Item>
-            <img className="carImg" width={500} height={500} alt="900x500" src="https://www.bloomberg.com/features/2017-art-auction-estimates-quiz/img/art-quiz-bloomberg-question-02.jpg" />
+            <img className="carImg" width="100%" height={350} maxheight="400" src="/COVERIMAGES/theDesert.png"  border="0" />
             <Carousel.Caption>
-              <h3></h3>
-              <p></p>
+              <h3>The Desert</h3>
+              <p>Surrealistic Landscapes</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="carImg" width={500} height={500} alt="900x500" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1280px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg" />
+            <img className="carImg" width="100%" height={350} src="/COVERIMAGES/theRoom.png" border="0" />
             <Carousel.Caption>
-              <h3></h3>
-              <p></p>
+              <h3>Vangogh</h3>
+              <p>A Celestial Scene</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="carImg" width={500} height={500} alt="900x500" src="https://10mosttoday.com/wp-content/uploads/2013/09/The_Persistence_of_Memory.jpg" />
+            <img className="carImg" width="100%" height={400} src="/COVERIMAGES/halloween.png" />
             <Carousel.Caption>
-              <h3></h3>
-              <p></p>
+              <h3>Nightscene</h3>
+              <p>Spook your Freinds with a haloween theme</p>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
