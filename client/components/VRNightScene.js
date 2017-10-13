@@ -12,6 +12,7 @@ class VRNightScene extends Component{
     const currentGalleryId = this.props.match.params.id;
     const galleries = this.props.galleriesCollection;
     const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === +currentGalleryId)[0]
+    const currentArtistId = currentGallery.userId;
     const pedPositions = ["6.75 .7 0", "3 .7 6.2", "-2.644 .7 6.353", "-6.619 .7 0", "-2.862 .7 -5.734", "3.000 .7 -6.108"]
     const boxPositions = ["6.75 1.8 0", "3 1.8 6.2", "-2.644 1.8 6.353", "-6.619 1.8 0", "-2.862 1.8 -5.734", "3.000 1.8 -6.108"]
     const textPositions = ["6.75 3 0", "3 3 6.2", "-2.644 3 6.353", "-6.619 3 0", "-2.862 3 -5.734", "3.000 3 -6.108"]
@@ -151,10 +152,14 @@ class VRNightScene extends Component{
                       )}})
             }
 
+            <a-box src="/img/exitsign.png" href={`/galleries/${currentGallery.id}`} position="-1 2 10"></a-box>
+            <a-box src="/img/back_button.png" href={`/vr/artists/${currentArtistId}/starry`} position="1 2 10"></a-box>
             <a-plane src={groundTexture} position="0 0 -4" rotation="-90 0 0" width="90" height="90" repeat="10 10"  />
 
             <a-sky src= {nightScape} />
-
+            <a-entity camera="userHeight: 1.6" look-controls wasd-controls>
+                    <a-entity id="cursor" position="0 0 -2" cursor geometry="primitive: ring; radiusOuter: 0.11; radiusInner: 0.08" material="color: white"></a-entity>
+            </a-entity>
           </a-scene>
           :
           null
