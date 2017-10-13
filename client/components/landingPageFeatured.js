@@ -7,26 +7,28 @@ export default class ourCarousel extends Component{
 
     return (
       <div>
-        <Carousel className="col-md-6 col-lg-6 col-xs-12">
+      
+        <Carousel className="ourCarousel" className="col-md-6 col-lg-6 col-xs-12">
+        
           <Carousel.Item>
-            <img className="carImg" width={500} height={500} alt="900x500" src="https://www.bloomberg.com/features/2017-art-auction-estimates-quiz/img/art-quiz-bloomberg-question-02.jpg" />
+            <img className="carImg" width="100%" height={350} maxheight="400" src="/COVERIMAGES/theDesert.png"  border="0" />
             <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              <h3>The Desert</h3>
+              <p>Surrealistic Landscapes</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="carImg" width={500} height={500} alt="900x500" src="https://www.bloomberg.com/features/2017-art-auction-estimates-quiz/img/art-quiz-bloomberg-question-02.jpg" />
+            <img className="carImg" width="100%" height={350} src="/COVERIMAGES/theRoom.png" border="0" />
             <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h3>Vangogh</h3>
+              <p>A Celestial Scene</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="carImg" width={500} height={500} alt="900x500" src="https://slack-imgs.com/?c=1&url=http%3A%2F%2Fthepaintshop.biz%2Fimg%2Fcanvas8708.png" />
+            <img className="carImg" width="100%" height={400} src="/COVERIMAGES/halloween.png" />
             <Carousel.Caption>
-              <h3>Third slide label</h3>
-              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+              <h3>Nightscene</h3>
+              <p>Spook your Freinds with a haloween theme</p>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
