@@ -37,7 +37,8 @@ export default class Main extends Component{
           <Route exact path="/gallery-create" component={GalleryCreate} />
           <Route exact path="/gallery-edit/:id" component={GalleryEdit} />
           <Route exact path="/canvas" component={CanvasWrapper} />
-          <Route exact path="/vr/nightscene" component={VRNightScene} />
+          {/* artist hub will have env in case the artist wants to customize his hub environment*/}
+          <Route exact path="/vr/artists/:id/:env" component={VRArtistHub} />
           <Route exact path="/vr/:id/nightscene" component={VRNightScene} />
           <Route exact path="/vr/:id/desert" component={VRDesert} />
           <Route exact path="/vr/:id/cube" component={VRCube} />    

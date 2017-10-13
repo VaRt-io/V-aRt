@@ -26,7 +26,8 @@ module.exports = {
     get: [],
     create: [ hashPassword() ],
     update: [ ...restrict, hashPassword() ],
-    patch: [ ...restrict, hashPassword() ],
+    // TODO: Put restrict hook back in this
+    patch: [ hashPassword() ],
     remove: [ ...restrict ]
   },
 
