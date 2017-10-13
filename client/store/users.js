@@ -15,21 +15,12 @@ export const initialUserState = {
 //
 
 const GET_USERS = 'GET_USERS';
-// const ADD_USER = 'ADD_USER';
 const GET_USER_GALLERIES = 'GET_USER_GALLERIES';
 const DELETE_USER = 'DELETE_USER';
-
-/**
- * ACTION CREATORS
- */
 
 const getUsers = users => {
   return { type: GET_USERS, users };
 };
-
-// const addUser = user => {
-//   return { type: ADD_USER, user };
-// };
 
 const getUserGalleries = user => {
   return { type: GET_USER_GALLERIES, user };
@@ -52,6 +43,7 @@ export const fetchUsers = () => dispatch => {
 };
 
 export const postUser = (user, history) => dispatch => {
+  localStorage.removeItem("jwt");
   axios.post('/api/users', user)
     .then(result => result.data)
     .then((newUser) => newUser)
@@ -68,7 +60,7 @@ export const postUser = (user, history) => dispatch => {
 };
 // TODO: Need to pass auth token in header
 export const updateUserThunk = (user) => dispatch => {
-  return axios.put(`/api/users/${user.id}`, user)
+  return axios.patch(`/api/users/${user.id}`, user)
     .then(result => result.data)
     .then(newGallery => {
       dispatch(fetchUsers());
@@ -100,8 +92,6 @@ export default function reducer (state = initialUserState, action) {
   switch (action.type) {
   case GET_USERS:
     return Object.assign({}, state, {artistsCollection: action.users});
-  // case ADD_USER:
-  //   return [...state.artistsCollection, action.user];
   case GET_USER_GALLERIES:
     return state.filter(galleries => galleries.userId === action.user.id);
   case DELETE_USER:
