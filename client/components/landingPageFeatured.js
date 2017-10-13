@@ -25,7 +25,7 @@ export default class ourCarousel extends Component{
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="carImg"  height={350} src="/COVERIMAGES/halloween.png" />
+            <img className="carImg" width="100%" height={350} src="/COVERIMAGES/halloween.png" border="0" />
             <Carousel.Caption>
               <h3>Nightscene</h3>
               <p>Spook your Freinds with a haloween theme</p>
