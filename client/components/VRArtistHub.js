@@ -7,6 +7,10 @@ import {connect} from 'react-redux';
 function VRArtistHub(props) {
 
     const currentArtistId = props.match.params.id;
+    const currArtistIdNum = Number(currentArtistId)
+    const nextArtistId = (currArtistIdNum + 1).toString();
+    const previousArtistId = (currArtistIdNum - 1).toString();
+    console.log(nextArtistId)
     const artists = props.artistsCollection;
     const currentArtist = artists.length && artists.filter(artist => +artist.id === +currentArtistId)[0];
     let galleries;  
@@ -93,10 +97,23 @@ function VRArtistHub(props) {
                 <a-entity id="cursor" position="0 0 -2" cursor geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white"></a-entity>
             </a-entity>
 
+            <a-box src="/img/exitsign.png" href={`/artists/${currentArtistId}`} position="0 2 3.5"></a-box>
+            <a-box src="/img/next.png" href={`/vr/artists/${currentArtistId + 1}/starry`} position="3.5 2 0"></a-box>
+            <a-box src="/img/previous.jpeg" href={`/vr/artists/${currentArtistId - 1}/starry`} position="-3.5 2 0"></a-box>
             <a-entity environment="preset: contact"></a-entity>               
           </Scene>
           :
-          null
+          <Scene>
+              <a-entity camera="userHeight: 2.9" look-controls wasd-controls>
+                <a-entity id="cursor" position="0 0 -2" cursor geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white"></a-entity>
+            </a-entity>
+
+            <a-box src="/img/exitsign.png" href={`/artists/${currentArtistId}`} position="0 2 3.5"></a-box>
+            <a-box src="/img/next.png" href={`/vr/artists/${nextArtistId}/starry`} position="3.5 2 0"></a-box>
+            <a-box src="/img/previous.jpeg" href={`/vr/artists/${previousArtistId}/starry`} position="-3.5 2 0"></a-box>
+            <a-entity environment="preset: contact"></a-entity>   
+        </Scene>
+
       );
 }
 
