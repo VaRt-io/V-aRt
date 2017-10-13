@@ -93,11 +93,18 @@ function VRArtistHub(props) {
                 );
             })
         }
-            <a-entity camera="userHeight: 2.9" look-controls wasd-controls>
-                <a-entity id="cursor" position="0 0 -2" cursor geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white"></a-entity>
-            </a-entity>
+        <a-entity camera="userHeight: 2.9" look-controls wasd-controls>
+                <a-entity 
+                cursor="fuse: true; fuseTimeout: 1500"
+                id="cursor" position="0 0 -2" geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white">
+                <a-animation begin="click" easing="ease-in" attribute="scale" dur="150"
+                fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+                <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500"
+                fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+                </a-entity>
+        </a-entity>
 
-            <a-box src="/img/exitsign.png" href={`/artists/${currentArtistId}`} position="0 2 3.5"></a-box>
+            <a-box src="/img/exitsign.png" href={'/artists'} position="0 2 3.5"></a-box>
             <a-box src="/img/next.png" href={`/vr/artists/${currentArtistId + 1}/starry`} position="3.5 2 0"></a-box>
             <a-box src="/img/previous.jpeg" href={`/vr/artists/${currentArtistId - 1}/starry`} position="-3.5 2 0"></a-box>
             <a-entity environment="preset: contact"></a-entity>               
@@ -105,10 +112,17 @@ function VRArtistHub(props) {
           :
           <Scene>
               <a-entity camera="userHeight: 2.9" look-controls wasd-controls>
-                <a-entity id="cursor" position="0 0 -2" cursor geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white"></a-entity>
+                <a-entity 
+                cursor="fuse: true; fuseTimeout: 1500"
+                id="cursor" position="0 0 -2" geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white">
+                    <a-animation begin="click" easing="ease-in" attribute="scale" dur="150"
+                    fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+                    <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500"
+                    fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+                </a-entity>
             </a-entity>
 
-            <a-box src="/img/exitsign.png" href={`/artists/${currentArtistId}`} position="0 2 3.5"></a-box>
+            <a-box src="/img/exitsign.png" href={'/artists'} position="0 2 3.5"></a-box>
             <a-box src="/img/next.png" href={`/vr/artists/${nextArtistId}/starry`} position="3.5 2 0"></a-box>
             <a-box src="/img/previous.jpeg" href={`/vr/artists/${previousArtistId}/starry`} position="-3.5 2 0"></a-box>
             <a-entity environment="preset: contact"></a-entity>   
