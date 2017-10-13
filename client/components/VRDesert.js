@@ -111,6 +111,10 @@ function VRDesert(props){
                 <a-entity obj-model="obj:#marcus-obj" position="0 5 -25" scale="22 22 22" src="/MarcusAureliusTexture.jpg"></a-entity>
                 <a-sky src={desert}  />
                 <a-plane src={groundTexture} position="0 -2 -4" rotation="-90 0 0" width="90" height="90" repeat="10 10"  />
+
+                <a-entity camera="userHeight: 1.5" look-controls wasd-controls>
+                <a-entity id="cursor" position="0 0 -2" cursor geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white"></a-entity>
+            </a-entity>
             </Scene>
             :
             null
