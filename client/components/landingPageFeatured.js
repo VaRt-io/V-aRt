@@ -11,7 +11,7 @@ export default class ourCarousel extends Component{
         <Carousel className="ourCarousel" className="col-md-6 col-lg-6 col-xs-12">
         
           <Carousel.Item>
-            <img className="carImg" width="100%" height={350} maxheight="400" src="/COVERIMAGES/theDesert.png"  border="0" />
+            <img className="carImg" width="100%" height={350}  src="/COVERIMAGES/theDesert.png"  border="0" />
             <Carousel.Caption>
               <h3>The Desert</h3>
               <p>Surrealistic Landscapes</p>
@@ -25,7 +25,7 @@ export default class ourCarousel extends Component{
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="carImg" width="100%" height={400} src="/COVERIMAGES/halloween.png" />
+            <img className="carImg"  height={350} src="/COVERIMAGES/halloween.png" />
             <Carousel.Caption>
               <h3>Nightscene</h3>
               <p>Spook your Freinds with a haloween theme</p>

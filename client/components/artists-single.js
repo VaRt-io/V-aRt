@@ -134,7 +134,12 @@ class SingleArtist extends Component {
         }
         </div>
           <div className= "singleUserGalleries">
-            <h3>Galleries</h3>
+            <h3>Galleries
+            <Link to={`/vr/artists/${currentArtist.id}/:env`}>
+            <Button style={{backgroundColor:'red', color:'#222', marginLeft: '50px',padding: '10px 15px'}}className="btn btn-danger">Enter VR</Button>
+            </Link>
+            </h3>
+            
             <div className="galleriesRow">
             {
               currentArtist.galleries && currentArtist.galleries.map(gallery=>{
