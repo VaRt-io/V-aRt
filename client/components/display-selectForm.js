@@ -15,6 +15,7 @@ export default function DisplaySelectFromFS (props){
             <option  value="cube">cube</option>
             <option value="desert">desert</option>
             <option value="starry">starry</option>
+            <option value="vangogh">vanGogh</option>
         </select>
         );
 

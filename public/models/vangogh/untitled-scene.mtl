@@ -1,0 +1,32 @@
+# Blender MTL File: 'None'
+# Material Count: 3
+
+newmtl CoarseBristles
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.010000 0.010000 0.010000
+Ni 1.000000
+d 0.800000
+illum 2
+map_Ka CoarseBristles.png
+map_Kd CoarseBristles.png
+map_Ks CoarseBristles.png
+
+newmtl FlatDeprecated
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.010000 0.010000 0.010000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Wire
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.010000 0.010000 0.010000
+Ni 1.000000
+d 1.000000
+illum 2
