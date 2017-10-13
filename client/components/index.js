@@ -17,7 +17,7 @@ export {default as VRHub} from './vrhub';
 export {default as SinglePainting} from './singlePainting';
 export {default as Signup} from './signup';
 export {default as Signin} from './signin';
-export {default as ArtistDashboard} from './artist-dashboard';
+// export {default as ArtistDashboard} from './artist-dashboard';
 export {default as DisplayPaintings} from './display-paintings';
 export {default as OurPageHeader} from './display-ourPageHeader';
 export {default as OurJumbotron} from './display-ourJumbotron';
@@ -28,3 +28,4 @@ export {default as GalleryEditPageHeader} from './display-galleryEditPageHeader'
 export {default as VRDesert} from './VRDesert';
 export {default as VRStarry} from './VRStarry';
 export {default as VRVanGogh} from './VRVanGogh';
+export {default as VRArtistHub} from './VRArtistHub';

@@ -24,13 +24,6 @@ class OurNavbar extends Component{
               <Nav>
                 <LinkContainer to="/galleries"><NavItem >Galleries</NavItem></LinkContainer>
                 <LinkContainer to="/artists"><NavItem >Artists</NavItem></LinkContainer>
-                <NavDropdown eventKey={3} title="SearchBar" id="basic-nav-dropdown">
-                  <MenuItem eventKey={3.1}>Action</MenuItem>
-                  <MenuItem eventKey={3.2}>Another action</MenuItem>
-                  <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey={3.3}>Separated link</MenuItem>
-                </NavDropdown>
               </Nav>
               <Nav pullRight>
                 {currentUser.isLoggedIn ? <NavItem onClick={() => this.props.history.push(`/artists/${currentUser.id}`)}>Dashboard </NavItem> : <NavItem onClick={() => this.props.history.push('/signup')}>Sign Up</NavItem>}
@@ -55,4 +48,3 @@ return {
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OurNavbar));
-
