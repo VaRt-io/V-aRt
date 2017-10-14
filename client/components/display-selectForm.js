@@ -13,7 +13,7 @@ export default function DisplaySelectFromFS (props){
     const vangogh={name:'vangogh', environmentPic: '/COVERIMAGES/theRoom.png'};
     
     return(
-        <select name="environment" onChange={handleChangeForEnvironment}>
+        <select name="environment" onChange={handleChangeForEnvironment} style={{backgroundColor:'grey'}}>
             <option>Selected-{selected}</option>
             <option  value={JSON.stringify(nightscene)}>Nightscene</option>
             

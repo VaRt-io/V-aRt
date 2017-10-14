@@ -14,8 +14,9 @@ export default function PaintingDropdown (props){
 
     return(
 
-        <select name="thumbnailUrl" onChange={handleChange}>
-
+        
+        <select name="thumbnailUrl" onChange={handleChange} style={{backgroundColor: 'grey'}}>
+        
         <option value={starry}>Starry</option>
         <option value={mona}>Mona</option>
         <option value={memory}>Memory</option>
@@ -24,7 +25,7 @@ export default function PaintingDropdown (props){
         {
             currentGallery && currentGallery.paintings.map(painting=>{
                 return(
-                  <option  key={painting.id}  value={painting.url}>{painting.name}</option>
+                  <option   key={painting.id}  value={painting.url}>{painting.name}</option>
                 );
               })
         }
