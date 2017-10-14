@@ -15,11 +15,11 @@ export default function DisplaySelectFromFS (props){
     return(
         <select name="environment" onChange={handleChangeForEnvironment} style={{backgroundColor:'grey'}}>
             <option>Selected-{selected}</option>
-            <option  value={JSON.stringify(nightscene)}>nightscene</option>
+            <option  value={JSON.stringify(nightscene)}>Nightscene</option>
             
-            <option value={JSON.stringify(desert)}>desert</option>
-            <option value={JSON.stringify(vangogh)}>starry</option>
-            <option value={JSON.stringify(vangogh)}>vanGogh</option>
+            <option value={JSON.stringify(desert)}>Desert</option>
+            <option value={JSON.stringify(vangogh)}>Starry</option>
+            <option value={JSON.stringify(vangogh)}>VanGogh</option>
         </select>
         );
 
