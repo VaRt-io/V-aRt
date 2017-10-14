@@ -15,7 +15,8 @@ export default function OurJumbotron (props){
         backgroundPosition: 'center center',
         color: 'white',
         fontSize: '30px',
-        marginTop: '0px'}}>
+        marginTop: '0px',
+        marginBottom: '40px'}}>
         </Jumbotron>
        
         );

@@ -12,9 +12,9 @@ export default function DisplayPaintings (props){
             currentGallery && currentGallery.paintings.map(painting=>{
                 return(
 
-                  <div className="paintingsBox" key={painting.id}>
+                  <div className="innerGalleryBox" key={painting.id}>
                   <img className="singleUserGalleryThumb" src={painting.url}/>
-                  <Link to={`/paintings/${painting.id}`} className="single-gallery-image-link">{painting.name}</Link>
+                  <Link to={`/paintings/${painting.id}`} className="singleUserPaintingName">{painting.name}</Link>
                   </div>
 
                 );
