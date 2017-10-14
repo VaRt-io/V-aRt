@@ -9,8 +9,8 @@ export default function OurPageHeader (props){
 
     return (
       <PageHeader>{currentGallery.title} &nbsp;
-        <small style={{color: 'blue'}}> By: &nbsp;
-        <Link to={`/artists/${artistId}`}>{`${artistName}`}</Link>
+        <small style={{color: '#c32aff'}}> By: &nbsp;
+        <Link style={{color: '#c32aff'}}to={`/artists/${artistId}`}>{`${artistName}`}</Link>
         </small>
       </PageHeader>
 
