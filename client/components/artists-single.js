@@ -128,17 +128,19 @@ class SingleArtist extends Component {
         </div>
 
         <div className="galleriesAndPaintings">
-        <div>
+        <div style={{marginBottom: '40px', marginTop: '20px'}}>
         {
           this.checkIfOwnProfile() && <Link className="btn btn-default" to="/gallery-create">New Gallery</Link>
         }
+        
+        <Link to={`/vr/artists/${currentArtist.id}/:env`}>
+        <Button style={{backgroundColor:'red', color:'#222', marginLeft: '50px',padding: '10px 15px'}} className="btn btn-danger">Enter VR</Button>
+        </Link>
+        
         </div>
           <div className= "singleUserGalleries">
-            <h3>Galleries
-            <Link to={`/vr/artists/${currentArtist.id}/:env`}>
-            <Button style={{backgroundColor:'red', color:'#222', marginLeft: '50px',padding: '10px 15px'}}className="btn btn-danger">Enter VR</Button>
-            </Link>
-            </h3>
+            <h3>Galleries</h3>
+            <hr/>
             
             <div className="galleriesRow">
             {
@@ -148,7 +150,10 @@ class SingleArtist extends Component {
                   <img className="singleUserGalleryThumb" src={gallery.thumbnailUrl} />
                   <Link className="singleUserGalleryLink" to={`/galleries/${gallery.id}`}>{gallery.title}</Link>
                   {
-                    this.checkIfOwnProfile() && <Link className="btn btn-warning edit-gallery-btn" to={`/gallery-edit/${gallery.id}`}>Edit</Link>
+                    this.checkIfOwnProfile() && <Link style={{backgroundColor:'#c32aff', color: 'black'}} className="btn btn edit-gallery-btn" to={`/gallery-edit/${gallery.id}`}>Edit</Link>
+                  }
+                  {
+                    this.checkIfOwnProfile() && <Link  style={{ backgroundColor: 'maroon',marginTop: '5px', color: 'black'}} className="btn btn-danger  edit-gallery-btn" to={`/gallery-edit/${gallery.id}`}>Delete</Link>
                   }
                   </div>
                 );
@@ -160,6 +165,7 @@ class SingleArtist extends Component {
 
           <div className= "singleUserPaintings">
           <h3>Paintings</h3>
+          <hr/>
             <div className="paintingsRow">
             {
               currentArtist.galleries && currentArtist.galleries.map(gallery =>{

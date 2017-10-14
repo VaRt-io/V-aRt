@@ -21,6 +21,7 @@ export {default as DisplayPaintings} from './display-paintings';
 export {default as OurPageHeader} from './display-ourPageHeader';
 export {default as OurJumbotron} from './display-ourJumbotron';
 // export {default as DisplaySelectFromFS} from './display-selectFromFS';
+export {default as VRVanGogh} from './VRVanGogh';
 export {default as DisplaySelectForm} from './display-selectForm';
 export {default as PaintingDropdown} from  './display-paintingDropdown';
 export {default as GalleryEditPageHeader} from './display-galleryEditPageHeader';
