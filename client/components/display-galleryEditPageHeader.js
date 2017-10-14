@@ -25,7 +25,7 @@ export default function GalleryEditPageHeader (props){
               className = "galleryEditNameHead"
               value= {title}
               onChange={handleChange}
-              style={{backgroundColor: '#333030', color: '#1ec503', border: 'none', fontSize: '36px', width: '50%'}} />
+              style={{backgroundColor: '#333030', color: '#1ec503', border: 'none', fontSize: '36px', width: '50%', height:'48px'}} />
           </Col>
         </FormGroup>
         </Form>

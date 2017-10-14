@@ -46,10 +46,10 @@ class SingleGallery extends Component{
 
 
         <div id="jumbotronBox">
-        <div id="enterVRButton" style={{textAlign: 'center', marginTop:'10px', marginBottom:'50px'}}>
-        <Link to={`/vr/${currentGalleryId}/${environment}`} ><button className="btn btn-danger" style={{backgroundColor: 'red', fontSize:'20px'}}>Enter VR</button></Link>
-      </div>
-        <OurJumbotron currentGallery={currentGallery} />
+            <div id="enterVRButton" style={{textAlign: 'center', marginTop:'10px', marginBottom:'50px'}}>
+            <Link to={`/vr/${currentGalleryId}/${environment}`} ><button className="btn btn-danger" style={{backgroundColor: 'red', fontSize:'20px'}}>Enter VR</button></Link>
+          </div>
+          <OurJumbotron currentGallery={currentGallery} />
         </div>
         <div id ="galleryPaintings">
           <h3>Gallery Paintings</h3>

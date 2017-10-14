@@ -68,14 +68,17 @@ export default class CanvasWrapper extends Component {
         <div id='userId' title={userId}></div>
 
         <div id='name-form-wrapper'>
-          <form>
+          <form id="paintingNameForm">
+            <h2>Name Your Masterpiece</h2>
             <input
+           
               id="title"
               type="text"
               name="name"
               value= {this.state.name}
               placeholder="Enter title"
-              onChange={handleChange} />
+              onChange={handleChange} 
+              style={{backgroundColor: 'grey', borderColor:'black', fontSize: '16px'}}/>
           </form>
         </div>
 
