@@ -14,7 +14,7 @@ export default function PaintingDropdown (props){
     console.log("ninja", ninja);
     return(
         
-        <select name="thumbnailUrl" onChange={handleChange}>
+        <select name="thumbnailUrl" onChange={handleChange} style={{backgroundColor: 'grey'}}>
         
         <option value={ninja}>Ninja</option>
         <option value={mona}>Mona</option>
@@ -25,7 +25,7 @@ export default function PaintingDropdown (props){
         {
             currentGallery && currentGallery.paintings.map(painting=>{
                 return(
-                  <option  key={painting.id}  value={painting.url}>{painting.name}</option>
+                  <option   key={painting.id}  value={painting.url}>{painting.name}</option>
                 );
               })
         }
