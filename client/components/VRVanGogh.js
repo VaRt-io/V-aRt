@@ -20,6 +20,8 @@ class VRVanGogh extends Component{
         // YOU WILL BE USING THEM ON YOU OBJECTS BELOW
         var nightSky='http://chrusion.com/public_files/tycho/Stars_Tycho2+Milkyway_3000.png';
         var snowyGround= 'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX1726024.jpg';
+        console.log('HIT VAN GOGH');
+        console.log(paintings);
         return(
             paintings?
             <Scene>
@@ -50,7 +52,7 @@ class VRVanGogh extends Component{
 const mapState = function(state){
     return {
         galleriesCollection: state.galleries.galleryCollection,
-    }
+    };
 };
 
 export default connect(mapState)(VRVanGogh);
