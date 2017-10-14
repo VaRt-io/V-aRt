@@ -12,11 +12,11 @@ export default function GalleryEditPageHeader (props){
     }
 
     return(
-        <Form horizontal onSubmit={(e)=> e.preventDefault()}>
+        <Form horizontal style={{marginTop: '20px'}} onSubmit={(e)=> e.preventDefault()}>
         <FormGroup controlId="formHorizontalTitle" id="editGalleryPageHeader">
           <Col style={{marginTop: '-30px', marginLeft:'-80px', marginBottom: '-30px',marginRight: '-20px'}}
           componentClass={ControlLabel} sm={2}>
-          <h1><span id= "glyphpencil" class="glyphicon glyphicon-pencil"></span></h1>
+          <h1><span id= "glyphpencil" style={{color: '#c32aff'}} className="glyphicon glyphicon-pencil"></span></h1>
           </Col>
           <Col sm={10}>
             <FormControl
@@ -25,7 +25,7 @@ export default function GalleryEditPageHeader (props){
               className = "galleryEditNameHead"
               value= {title}
               onChange={handleChange}
-              style={{backgroundColor: '#333030', color: 'green', border: 'none', fontSize: '36px', width: '50%'}} />
+              style={{backgroundColor: '#333030', color: '#1ec503', border: 'none', fontSize: '36px', width: '50%'}} />
           </Col>
         </FormGroup>
         </Form>
