@@ -336,6 +336,7 @@ a.singleUserPaintingName:hover{
 .galleryCover{
     display: flex;
     flex-direction: row;
+    margin: auto;
 }
 .innerGalleryCover{
     display: flex;
@@ -344,6 +345,7 @@ a.singleUserPaintingName:hover{
     padding: 20px 20px;
     background-color: black;
     border-radius: 30px;;
+    margin: auto;
     h3{
         margin: 0px 20px 0px 20px
     }
@@ -363,6 +365,7 @@ a.singleUserPaintingName:hover{
     padding: 20px 20px;
     background-color: black;
     border-radius: 30px;;
+    margin: auto;
     h3{
         margin: 0px 20px 0px 20px
     }
@@ -393,4 +396,15 @@ a.singleUserPaintingName:hover{
     margin: 10em;
 }
 
+#paintingNameForm{
+    margin:auto;
+    text-align: center;
+    margin-top: 40px;
+    
+}
+
+#drawingBoard{
+    margin:auto;
+    margin-top: 40px;
+}
 //
