@@ -42,13 +42,18 @@ class SingleGallery extends Component{
       <div className="singleGalleryContainer">
         <OurPageHeader artistName={artistName} artistId={artistId}
         currentGallery={currentGallery}/>
-        <div id="enterVRButton" style={{textAlign: 'center', marginTop:'10px', marginBottom:'50px'}}>
-          <Link to={`/vr/${currentGalleryId}/${environment}`} ><button className="btn btn-danger" style={{backgroundColor: 'red', fontSize:'20px'}}>Enter VR</button></Link>
-        </div>
+       
 
+
+        <div id="jumbotronBox">
+        <div id="enterVRButton" style={{textAlign: 'center', marginTop:'10px', marginBottom:'50px'}}>
+        <Link to={`/vr/${currentGalleryId}/${environment}`} ><button className="btn btn-danger" style={{backgroundColor: 'red', fontSize:'20px'}}>Enter VR</button></Link>
+      </div>
         <OurJumbotron currentGallery={currentGallery} />
-        <div>
-          <h3>My Paintings</h3>
+        </div>
+        <div id ="galleryPaintings">
+          <h3>Gallery Paintings</h3>
+          <hr/>
           <DisplayPaintings currentGallery={currentGallery} />
         </div>
         <div className="single-gallery-create-painting-wrapper">
