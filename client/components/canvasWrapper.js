@@ -68,7 +68,7 @@ export default class CanvasWrapper extends Component {
         <div id='userId' title={userId}></div>
 
         <div id='name-form-wrapper'>
-          <form id="paintingNameForm">
+          <form id="paintingNameForm" onSubmit={(e)=> e.preventDefault()}>
             <h2>Name Your Masterpiece</h2>
             <input
            

@@ -84,10 +84,11 @@ class SingleArtist extends Component {
    // TODO: Dispatch a thunk to put information
     return (
       <div className="singleArtistContainer">
-        <div id="profileColumn" className="col-md-4">
+        <div id="profileColumn" className="col-md-3">
            {
              this.checkIfOwnProfile() ? (
               <div>
+              <span className="glyphicon glyphicon-edit floatLeft"></span> 
                 <input 
                 autoFocus 
                 type="text" 
@@ -97,15 +98,20 @@ class SingleArtist extends Component {
                 onChange={this.handleChange}
                 onBlur={this.handleOnBlur}
                 />
-                <span className="glyphicon glyphicon-edit floatLeft"></span>              
+                <hr/>
+                            
               </div>
              ) : (
-              <h2>{currentArtist.name}</h2>          
+               <div>
+              <h2>{currentArtist.name}</h2>
+              <hr /> 
+              </div>         
              )
            }
-
+          
+         
           <img id="profilePic" src={currentArtist.profileImageUrl} />
-          <h4>Biography:</h4>
+          <h3>Biography:</h3>
           {
             this.checkIfOwnProfile() ? (
             <div>
@@ -121,21 +127,23 @@ class SingleArtist extends Component {
               <span className="glyphicon glyphicon-edit floatLeft"></span> 
             </div>
             ) : (
-          <h5 style={{color: "blue"}}>{currentArtist.bio}</h5>          
+          <h4 style={{color: 'blue'}}>{currentArtist.bio}</h4>          
             )
           }
           <p />
               <p>{currentArtist.email}</p>          
         </div>
 
+        <div id="spacer" className="col-md-1"></div>
+
         <div className="galleriesAndPaintings">
-        <div style={{marginBottom: '40px', marginTop: '20px'}}>
+        <div style={{marginBottom: '40px', marginTop: '40px'}}>
         {
           this.checkIfOwnProfile() && <Link className="btn btn-default" to="/gallery-create">New Gallery</Link>
         }
         
         <Link to={`/vr/artists/${currentArtist.id}/:env`}>
-        <Button style={{backgroundColor:'red', color:'#222', marginLeft: '50px',padding: '10px 15px'}} className="btn btn-danger">Enter VR</Button>
+        <Button style={{backgroundColor:'red', color:'black', marginLeft: '50px',padding: '15px 15px', fontSize: '16px'}} className="btn btn-danger">Enter Artist's VR Hub</Button>
         </Link>
         
         </div>
@@ -163,6 +171,7 @@ class SingleArtist extends Component {
 
             </div>
           </div>
+        
 
           <div className= "singleUserPaintings">
           <h3>Paintings</h3>
