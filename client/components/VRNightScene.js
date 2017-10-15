@@ -48,11 +48,13 @@ class VRNightScene extends Component{
             <a-asset-item id="ghost-mtl" src="/models/Ghost/material.mtl"></a-asset-item>
             <a-asset-item id="pumpkin-obj" src="/models/Pumpkin/pumpkin.obj"></a-asset-item>
             <a-asset-item id="pumpkin-mtl" src="/models/Pumpkin/pumpkin.mtl"></a-asset-item>
+            <a-asset-item id="pineTree-obj" src="/models/pineTree/pineTree.obj"></a-asset-item>
+            <a-asset-item id="pineTree-mtl" src="/models/pineTree/pineTree.mtl"></a-asset-item>
           </a-assets>
             <a-sphere src={cyberRust} position="5 12.82 -37.6" radius="1.25" />
             <a-dodecahedron src={circutBoard} position= "-1 13 -32"  />
             <a-torus-knot src={cyberRust} position ="-5 2 -14"  />
-            <a-entity obj-model="obj:#tree-obj;mtl:#tree-mtl"></a-entity>
+           
 
 
             { ghostPositions.map((image, index) => {
@@ -151,7 +153,21 @@ class VRNightScene extends Component{
                             </a-entity>
                       )}})
             }
+            {/*PINE TREES */}
+            <a-entity obj-model="obj:#pineTree-obj;mtl:#pineTree-mtl" 
+            position="-2 12 -16.5" scale="4 7 4"></a-entity>
+            <a-entity obj-model="obj:#pineTree-obj;mtl:#pineTree-mtl" 
+            position="18 12 0" scale="4 7 4"></a-entity>
+            <a-entity obj-model="obj:#pineTree-obj;mtl:#pineTree-mtl" 
+            position="24 12 14" scale="4 7 4"></a-entity>
+            <a-entity obj-model="obj:#pineTree-obj;mtl:#pineTree-mtl" 
+            position="-24 12 0" scale="4 7 4"></a-entity>
+            <a-entity obj-model="obj:#pineTree-obj;mtl:#pineTree-mtl" 
+            position="-24 12 23" scale="4 7 4"></a-entity>
+            <a-entity obj-model="obj:#pineTree-obj;mtl:#pineTree-mtl" 
+            position="0 12 30" scale="4 7 4"></a-entity>
 
+            {/*FLOOR AND SKY*/}
             <a-box src="/img/exitsign.png" href={'/galleries'} position="-1 2 10"></a-box>
             <a-box src="/img/back_button.png" href={`/vr/artists/${currentArtistId}/starry`} position="1 2 10"></a-box>
             <a-plane src={groundTexture} position="0 0 -4" rotation="-90 0 0" width="90" height="90" repeat="10 10"  />
