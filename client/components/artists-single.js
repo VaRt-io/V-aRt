@@ -105,17 +105,18 @@ class SingleArtist extends Component {
            }
 
           <img id="profilePic" src={currentArtist.profileImageUrl} />
-          <h4>Biography</h4>
+          <h4>Biography:</h4>
           {
             this.checkIfOwnProfile() ? (
             <div>
-              <input  
+              <textarea  
               type="text" 
               name="bio"
               className="singleArtistDashboardBioInput" 
               value={currentArtist.bio} 
               onChange={this.handleChange}
               onBlur={this.handleOnBlur}
+              style={{height:'400px', width: '400px'}}
               />
               <span className="glyphicon glyphicon-edit floatLeft"></span> 
             </div>
