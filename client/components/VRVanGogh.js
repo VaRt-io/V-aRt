@@ -29,15 +29,31 @@ class VRVanGogh extends Component{
             <a-asset-item id="starryNight-mtl" src="/models/vangogh/untitled-scene.mtl"></a-asset-item>
             <a-asset-item id="room" src="/models/vangogh/room.obj"></a-asset-item>
             <a-asset-item id="room-mtl" src="/models/vangogh/room.mtl"></a-asset-item>
+            <a-asset-item id="saturn-obj" src="/models/saturn/saturn.obj"></a-asset-item>
+            <a-asset-item id="saturn-mtl" src="/models/saturn/saturn.mtl"></a-asset-item>
+            <a-asset-item id="jupiter-obj" src="/models/jupiter/jupiter.obj"></a-asset-item>
+            <a-asset-item id="jupiter-mtl" src="/models/jupiter/jupiter.mtl"></a-asset-item>
 
             <a-entity obj-model="obj:#starryNight; mtl:#starryNight-mtl"
             position="0 -45 50" scale="50 50 50"
             rotation="0 0 0"></a-entity>
+            <a-entity obj-model="obj:#starryNight; mtl:#starryNight-mtl"
+            position="0 -45 -60" scale="50 50 50"
+            rotation="0 180 0"></a-entity>
 
             <a-entity obj-model="obj:#room; mtl:#room-mtl"
             position="0 0 -15" scale="1 1 1"></a-entity>
 
+            <a-entity obj-model="obj:#saturn-obj; mtl:#saturn-mtl"
+            position="-130 50 -100"
+            rotation="130 0 0"
+            scale="1000 1000 1000"
+            ></a-entity>
 
+            <a-entity obj-model="obj:#jupiter-obj; mtl:#jupiter-mtl"
+            position="130 0 0"
+            scale="1000 1000 1000"
+            ></a-entity>
                 <a-sky src={nightSky} />
                 <a-plane src={snowyGround} position="0 -2 -4" rotation="-90 0 0" width="90" height="90" repeat="10 10"  />
                 <Entity particle-system={{preset: 'snow'}} />
