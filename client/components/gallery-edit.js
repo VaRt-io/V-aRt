@@ -17,13 +17,13 @@ class GalleryEdit extends Component{
         const currentGalleryId = this.props.match.params.id;
         const galleries = this.props.galleryCollection;
         const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === +currentGalleryId)[0];
-        const {title, environment, thumbnailUrl} = currentGallery;
+        const {title, environment, thumbnailUrl, environmentPic} = currentGallery;
 
         this.state = {
             title,
             environment,
             thumbnailUrl,
-            environmentPic: noWherePic
+            environmentPic,
 
         };
         this.handleChange = this.handleChange.bind(this);
@@ -35,11 +35,13 @@ class GalleryEdit extends Component{
         const currentGalleryId = nextProps.match.params.id;
         const galleries = nextProps.galleryCollection;
         const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === +currentGalleryId)[0];
-        const {title, environment, thumbnailUrl} = currentGallery;
+        const {title, environment, thumbnailUrl, environmentPic} = currentGallery;
+        console.log('Current Gallery',environmentPic );
         this.setState({
             title,
             environment,
-            thumbnailUrl
+            thumbnailUrl,
+            environmentPic,
         });
         }
     }
@@ -185,8 +187,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       const title = galleryState.title;
       const environment = galleryState.environment;
       const thumbnailUrl = galleryState.thumbnailUrl;
-
-      dispatch(updateGalleryThunk( { id, title, environment, thumbnailUrl, userId } ));
+      const environmentPic =galleryState.environmentPic;
+        console.log("FROM DISPATCH", environmentPic);
+      dispatch(updateGalleryThunk( { id, title, environment, thumbnailUrl, userId, environmentPic } ));
     }
   };
 };
