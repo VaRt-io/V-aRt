@@ -142,14 +142,46 @@ a {
     flex-direction: column;
     overflow:hidden;
     text-overflow: ellipsis;
-    margin: 0px 0px 0px 50px;
+    margin: 20px 0px 0px 50px;
+    background-color: black;
+    border-radius: 30px;
+    padding: 20px 20px;
 
     #profilePic {
         width: 300px;
         height: 400px;
+        margin: auto;
         margin-top: 10px;
+        margin-bottom: 20px;
+
     }
 }
+.singleArtistDashboardNameInput {
+    background-color: black;
+    border-width: 0;
+    font-size: 2em;
+}
+
+.singleArtistDashboardBioInput {
+    background-color: #333031;
+    border-width: 0;
+    font-size: 1em;
+    background-color: black
+}
+
+.singleArtistDashboardEmailInput {
+    background-color: #333031;
+    border-width: 0;
+    font-size: 1em;
+}
+.floatLeft {
+    float: left;
+    color: yellow;
+    padding-right: 0.5em;
+}
+
+
+
 
 .galleriesAndPaintings{
     display: flex;
@@ -170,7 +202,7 @@ a {
         width: 90%;
         background-color: black;
         border-radius: 30px;
-        margin-top: 40px;
+        margin-top: 30px;
     }
 
 .singleUserPaintings{
@@ -229,28 +261,7 @@ a.singleUserPaintingName:hover{
     text-align: center;
 }
 
-.singleArtistDashboardNameInput {
-    background-color: #333031;
-    border-width: 0;
-    font-size: 2em;
-}
 
-.singleArtistDashboardBioInput {
-    background-color: #333031;
-    border-width: 0;
-    font-size: 1em;
-}
-
-.singleArtistDashboardEmailInput {
-    background-color: #333031;
-    border-width: 0;
-    font-size: 1em;
-}
-.floatLeft {
-    float: left;
-    color: yellow;
-    padding-right: 0.5em;
-}
 
 //SINGLE GALLERY VIEW
 .edit-gallery-btn {
