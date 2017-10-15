@@ -13,11 +13,15 @@ module.exports = function (app) {
     thumbnailUrl: {
       type: DataTypes.STRING,
       allowNull: true,
-      defaultValue: 'https://static-cdn.jtvnw.net/jtv_user_pictures/ninja-profile_image-aa970b6b22d0ebbe-300x300.jpeg'
+      defaultValue: 'https://www.moma.org/wp/moma_learning/wp-content/uploads/2012/07/Van-Gogh.-Starry-Night-469x376.jpg'
     },
     environment: {
       type: DataTypes.STRING,
       defaultValue: 'nightscene'
+    },
+    environmentPic: {
+      type: DataTypes.STRING,
+      defaultValue: 'http://www.kansascyclist.com/img/photos/KansasCyclingPhotos_005.jpg'
     }
   }, {
     hooks: {
