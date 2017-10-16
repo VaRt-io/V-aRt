@@ -17,7 +17,7 @@
       "header": {
         "type": "access"
       },
-      "audience": "https://yourdomain.com",
+      "audience": "https://tranquil-island-62126.herokuapp.com",
       "subject": "anonymous",
       "issuer": "feathers",
       "algorithm": "HS256",
