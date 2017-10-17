@@ -6,7 +6,6 @@ const users = app.service('api/users');
 const galleries = app.service('api/galleries');
 const paintings = app.service('api/paintings');
 const db = app.settings.sequelizeClient;
-// TODO: import the user, gallery, and painting service
 
 describe('s3/images service', () => {
   before(() => {
@@ -24,9 +23,11 @@ describe('s3/images service', () => {
         }
       });
 
+    return db.sync().then(() => {
       return paintingsModel.truncate({cascade: true})
         .then(() => galleriesModel.truncate({cascade: true}))
         .then(() => usersModel.truncate({cascade: true}))
+    })
   });
 
   it('registered the service', () => {
@@ -34,8 +35,6 @@ describe('s3/images service', () => {
     expect(service).to.satisfy((response) => response)
   });
 
-  // TODO: Write a before hook that empties database & s3 bucket
-  // TODO: Write a before hook that seeds db with a user and gallery
   // TODO: Writer a delete image service hook
   // TODO: Write a after hook that cleans up s3 & database
 
