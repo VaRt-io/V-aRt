@@ -8,7 +8,6 @@ const FacebookStrategy = require('passport-facebook');
 module.exports = function () {
   const app = this;
   const config = app.get('authentication');
-  console.log('LOGGING***', config.strategies);
 
   // Set up authentication with the secret
   app.configure(authentication(config));
