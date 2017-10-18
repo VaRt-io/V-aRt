@@ -27,7 +27,7 @@ class Signup extends Component {
     const handleChange = this.handleChange;
 
       return (
-        <Form horizontal className="formBoxLogin" onSubmit={(e) => this.props.handleSubmit(e, this.props.history)}>
+        <Form horizontal className="formBoxLogin" onSubmit={(evt) => this.props.handleSubmit(evt, this.props.history)}>
 
         <FormGroup controlId="formHorizontalName">
           <Col componentClass={ControlLabel} sm={3}>

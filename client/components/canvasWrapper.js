@@ -49,14 +49,13 @@ export default class CanvasWrapper extends Component {
 
     var idObject = getMatchObj(this.props.location.search.toString());
 
-    var galId = idObject['galleryid'];
+    var galId = idObject['galleryid']; // DO NOT SWITCH TO DOT NOTATION - doesn't work in this case
     var userId;
 
     // Try to get userId from jwt (if it exists), else route user to signin page
     try {
       userId = jwt_decode(localStorage.getItem('jwt')).userId;
     } catch (err) {
-      console.log(this.props, 'route user to signin page now');
       this.props.history.push('/signin');
     }
 
@@ -64,26 +63,25 @@ export default class CanvasWrapper extends Component {
 
     return (
       <div>
-        <div id='galleryId' title={galId}></div>
-        <div id='userId' title={userId}></div>
+        <div id="galleryId" title={galId} />
+        <div id="userId" title={userId} />
 
-        <div id='name-form-wrapper'>
-          <form id="paintingNameForm" onSubmit={(e)=> e.preventDefault()}>
+        <div id="name-form-wrapper">
+          <form id="paintingNameForm" onSubmit={(evt) => evt.preventDefault()}>
             <h2>Name Your Masterpiece</h2>
             <input
-           
               id="title"
               type="text"
               name="name"
               value= {this.state.name}
               placeholder="Enter title"
-              onChange={handleChange} 
-              style={{backgroundColor: 'grey', borderColor:'black', fontSize: '16px'}}/>
+              onChange={handleChange}
+              style={{backgroundColor: 'grey', borderColor: 'black', fontSize: '16px'}} />
           </form>
         </div>
 
         <div id='drawingBoard' style={boardStyle}></div>
-        
+
       </div>
     );
   }

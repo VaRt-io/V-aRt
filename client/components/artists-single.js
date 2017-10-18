@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { NavLink, Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-import store, {updateUserThunk} from '../store';
-import {Button} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { updateUserThunk } from '../store';
+import { Button } from 'react-bootstrap';
 
 class SingleArtist extends Component {
 
@@ -22,7 +22,7 @@ class SingleArtist extends Component {
       bio,
       email,
       galleries,
-    }; 
+    };
 
     this.checkIfOwnProfile = this.checkIfOwnProfile.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -46,7 +46,7 @@ class SingleArtist extends Component {
         email,
         galleries
       });
-    } 
+    }
   }
 
   checkIfOwnProfile() {
@@ -55,7 +55,7 @@ class SingleArtist extends Component {
     const currentUser = this.props.currentUser;
     if (currentUser.isLoggedIn && currentUser.id === currentArtistId) {
       return true;
-    } 
+    }
     return false;
   }
 
@@ -67,9 +67,7 @@ class SingleArtist extends Component {
     });
   }
 
-  handleOnBlur(evt) {
-    const name = evt.target.name;
-    const value = evt.target.value;
+  handleOnBlur() {
     const userState = Object.assign({}, this.state, {password: this.props.currentUser.password} );
     delete userState.galleries;
     this.props.updateUser(userState);
@@ -88,81 +86,81 @@ class SingleArtist extends Component {
            {
              this.checkIfOwnProfile() ? (
               <div>
-              <span className="glyphicon glyphicon-edit floatLeft"></span> 
-                <input 
-                autoFocus 
-                type="text" 
+              <span className="glyphicon glyphicon-edit floatLeft" />
+                <input
+                autoFocus
+                type="text"
                 name="name"
-                className="singleArtistDashboardNameInput" 
-                value={currentArtist.name} 
+                className="singleArtistDashboardNameInput"
+                value={currentArtist.name}
                 onChange={this.handleChange}
                 onBlur={this.handleOnBlur}
                 />
-                <hr/>
-                            
+                <hr />
+
               </div>
              ) : (
                <div>
               <h2>{currentArtist.name}</h2>
-              <hr /> 
-              </div>         
+              <hr />
+              </div>
              )
            }
-          
-         
+
+
           <img id="profilePic" src={currentArtist.profileImageUrl} />
           <h3>Biography:</h3>
           {
             this.checkIfOwnProfile() ? (
             <div>
-              <textarea  
-              type="text" 
+              <textarea
+              type="text"
               name="bio"
-              className="singleArtistDashboardBioInput" 
-              value={currentArtist.bio} 
+              className="singleArtistDashboardBioInput"
+              value={currentArtist.bio}
               onChange={this.handleChange}
               onBlur={this.handleOnBlur}
-              style={{height:'400px', width: '400px'}}
+              style={{height: '400px', width: '400px'}}
               />
-              <span className="glyphicon glyphicon-edit floatLeft"></span> 
+            <span className="glyphicon glyphicon-edit floatLeft" />
             </div>
             ) : (
-          <h4 style={{color: 'blue'}}>{currentArtist.bio}</h4>          
+          <h4 style={{color: 'blue'}}>{currentArtist.bio}</h4>
             )
           }
           <p />
-              <p>{currentArtist.email}</p>          
+              <p>{currentArtist.email}</p>
         </div>
 
-        <div id="spacer" className="col-md-1"></div>
+        <div id="spacer" className="col-md-1" />
 
         <div className="galleriesAndPaintings">
         <div style={{marginBottom: '40px', marginTop: '40px'}}>
         {
           this.checkIfOwnProfile() && <Link className="btn btn-default" to="/gallery-create">New Gallery</Link>
         }
-        
+
         <Link to={`/vr/artists/${currentArtist.id}/:env`}>
-        <Button style={{backgroundColor:'red', color:'black', marginLeft: '50px',padding: '15px 15px', fontSize: '16px'}} className="btn btn-danger">Enter Artist's VR Hub</Button>
+        <Button style={{backgroundColor: 'red', color: 'black', marginLeft: '50px', padding: '15px 15px', fontSize: '16px'}} className="btn btn-danger">Enter Artist's VR Hub</Button>
         </Link>
-        
+
         </div>
           <div className= "singleUserGalleries">
             <h3>Galleries</h3>
-            <hr/>
-            
+            <hr />
+
             <div className="galleriesRow">
             {
-              currentArtist.galleries && currentArtist.galleries.map(gallery=>{
+              currentArtist.galleries && currentArtist.galleries.map(gallery => {
                 return (
                   <div className="innerGalleryBox" key={gallery.id}>
                   <img className="singleUserGalleryThumb" src={gallery.thumbnailUrl} />
                   <Link className="singleUserGalleryLink" to={`/galleries/${gallery.id}`}>{gallery.title}</Link>
                   {
-                    this.checkIfOwnProfile() && <Link style={{backgroundColor:'#c32aff', color: 'black'}} className="btn btn edit-gallery-btn" to={`/gallery-edit/${gallery.id}`}>Edit</Link>
+                    this.checkIfOwnProfile() && <Link style={{backgroundColor: '#c32aff', color: 'black'}} className="btn btn edit-gallery-btn" to={`/gallery-edit/${gallery.id}`}>Edit</Link>
                   }
                   {
-                    this.checkIfOwnProfile() && <Link  style={{ backgroundColor: 'maroon',marginTop: '5px', color: 'black'}} className="btn btn-danger  edit-gallery-btn" to={`/gallery-edit/${gallery.id}`}>Delete</Link>
+                    this.checkIfOwnProfile() && <Link  style={{ backgroundColor: 'maroon', marginTop: '5px', color: 'black'}} className="btn btn-danger  edit-gallery-btn" to={`/gallery-edit/${gallery.id}`}>Delete</Link>
                   }
                   </div>
                 );
@@ -171,15 +169,15 @@ class SingleArtist extends Component {
 
             </div>
           </div>
-        
+
 
           <div className= "singleUserPaintings">
           <h3>Paintings</h3>
-          <hr/>
+          <hr />
             <div className="paintingsRow">
             {
-              currentArtist.galleries && currentArtist.galleries.map(gallery =>{
-                return gallery.paintings.map(painting =>{
+              currentArtist.galleries && currentArtist.galleries.map(gallery => {
+                return gallery.paintings.map(painting => {
 
                   return (
                     <div className="innerGalleryBox" key={painting.id}>

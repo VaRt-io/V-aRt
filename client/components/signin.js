@@ -28,7 +28,7 @@ class Signin extends Component {
 
     if (currentUser.id) {
       return (
-        <div onClick={this.props.history.push('/dashboard')}></div>
+        <div onClick={this.props.history.push('/dashboard')} />
       );
     } else {
       return (
