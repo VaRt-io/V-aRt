@@ -1,10 +1,12 @@
-# clam-backend
+# V-aRt
 
-> 
+>
 
 ## About
 
 This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
+
+This project uses Drawingboard.js (http://leimi.github.io/drawingboard.js/). An open source library for an HTML / jQuery canvas.
 
 ## Getting Started
 

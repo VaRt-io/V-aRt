@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import store, { postGalleryThunk } from '../store';
-import {FormGroup, FieldGroup, FormControl, HelpBlock, ControlLabel, Form, Col, Checkbox, Button,PageHeader } from 'react-bootstrap';
+import { postGalleryThunk } from '../store';
+import { FormGroup, FormControl, ControlLabel, Form, Col, Button } from 'react-bootstrap';
 
 class CreateGallery extends Component{
 
@@ -10,8 +9,7 @@ class CreateGallery extends Component{
     super(props);
     this.state = {
       title: '',
-      thumbnailUrl: '',
-     
+      thumbnailUrl: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -32,44 +30,37 @@ class CreateGallery extends Component{
     else if (length > 0) return 'error';
   }
 
-
-
   render(){
     const userId = this.props.currentUser.id;
-    const currentGalleryId = this.props.match.params.id;
 
     const handleChange = this.handleChange;
 
-    const galleries = this.props.galleryCollection;
-    console.log(this.state.title);
-    console.log(this.props)
-
     return (
-    
-      <Form horizontal className=" formBox" onSubmit={(e) => this.props.handleSubmit(e, userId)}>
+
+      <Form horizontal className=" formBox" onSubmit={(evt) => this.props.handleSubmit(evt, userId)}>
       <FormGroup controlId="formHorizontalTitle">
         <Col componentClass={ControlLabel} sm={2}>
           Gallery Name
         </Col>
         <Col sm={10}>
-          <FormControl 
-            type="text" 
+          <FormControl
+            type="text"
             name="title"
             value= {this.state.title}
             placeholder="Enter new gallery name"
             onChange={handleChange}
-            style={{backgroundColor:'grey', color: 'lightgreen'}}/>
+            style={{backgroundColor: 'grey', color: 'lightgreen'}} />
         </Col>
       </FormGroup>
-  
-  
+
+
       <FormGroup>
         <Col smOffset={2} sm={10}>
-        <Button type="submit" className="btn btn-success" style={{color:'#222'}} >Submit</Button>
+        <Button type="submit" className="btn btn-success" style={{color: '#222'}} >Submit</Button>
         </Col>
       </FormGroup>
     </Form>
-   
+
     );
   }
 
