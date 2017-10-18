@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import {connect} from 'react-redux';
-import store, {updateGalleryThunk} from '../store';
+import { connect } from 'react-redux';
+import {updateGalleryThunk} from '../store';
 import jwt_decode from 'jwt-decode';
 import {Button} from 'react-bootstrap';
-import {DisplayPaintings, OurPageHeader, DisplaySelectFromFS, DisplaySelectForm, PaintingDropdown, GalleryEditPageHeader } from './index';
+import {DisplayPaintings, DisplaySelectForm, PaintingDropdown, GalleryEditPageHeader } from './index';
 
-const noWherePic='http://www.kansascyclist.com/img/photos/KansasCyclingPhotos_005.jpg'
+const noWherePic = 'http://www.kansascyclist.com/img/photos/KansasCyclingPhotos_005.jpg';
 
 
 class GalleryEdit extends Component{
@@ -27,16 +27,16 @@ class GalleryEdit extends Component{
 
         };
         this.handleChange = this.handleChange.bind(this);
-        this.handleChangeForEnvironment=this.handleChangeForEnvironment.bind(this)
+        this.handleChangeForEnvironment = this.handleChangeForEnvironment.bind(this);
     }
-   
+
     componentWillReceiveProps(nextProps){
         if (nextProps.galleryCollection.length !== this.props.galleryCollection){
         const currentGalleryId = nextProps.match.params.id;
         const galleries = nextProps.galleryCollection;
         const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === +currentGalleryId)[0];
         const {title, environment, thumbnailUrl, environmentPic} = currentGallery;
-        console.log('Current Gallery',environmentPic );
+
         this.setState({
             title,
             environment,
@@ -45,26 +45,20 @@ class GalleryEdit extends Component{
         });
         }
     }
-    handleChange(evt){ //you can declare a key in an object as a variable if you wrap it in brackets
-        // evt.preventDefault();
-        console.log("HANDLE CHANGE REGISTERED",evt.target.value);
+    handleChange(evt){
         var value = evt.target.value;
         var name = evt.target.name;
-        
+
         this.setState({
             [name]: value
         });
     }
 
     handleChangeForEnvironment(evt){
-        console.log("HANDLE CHANGE FOR ENVIRONMENT REGISTERED",evt.target.value);
         const parsedEnvironmentObj = JSON.parse(evt.target.value);
-        console.log("PaRsED Object",parsedEnvironmentObj);
-        var environment = parsedEnvironmentObj.name;
-        var environmentPic= parsedEnvironmentObj.environmentPic;
 
-        console.log("environmentName", environment);
-        console.log("environmentPic", environmentPic);
+        var environment = parsedEnvironmentObj.name;
+        var environmentPic = parsedEnvironmentObj.environmentPic;
 
         this.setState({
             environment,
@@ -74,7 +68,6 @@ class GalleryEdit extends Component{
     }
 
       render(){
-        console.log("STATE",this.state);
         const currentGalleryId = this.props.match.params.id;
         const galleries = this.props.galleryCollection;
         const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === +currentGalleryId)[0];
@@ -86,25 +79,17 @@ class GalleryEdit extends Component{
         }
 
         return (
-       
+
         <div className="editGalleryContainter">
         <h1 style={{marginLeft: '20px'}}>Gallery Edit</h1>
-            <div id="galleryEditPageHeader">
-           <GalleryEditPageHeader className="galleryEditPageHeader" title ={this.state.title} handleChange={this.handleChange}/> 
-                {/*<span id= "glyphpencil" className="glyphicon glyphicon-pencil"></span>
-                <form>
-                <input></input>
-                </form>
-        */}
-       
-            </div>
-            
-        
+          <div id="galleryEditPageHeader">
+           <GalleryEditPageHeader className="galleryEditPageHeader" title ={this.state.title} handleChange={this.handleChange} />
+          </div>
+
+
             <div className="galleryCover">
 
                 <div className="innerGalleryCover">
-                    <div>
-                    </div>
 
                     <div className="editGalleryColumn">
                         <h3>Gallery Cover Image</h3>
@@ -113,14 +98,15 @@ class GalleryEdit extends Component{
                           src={this.state.thumbnailUrl}
                           style={{height: '300px', width: '400px'}} />
                     </div>
-      
+
                     <div className="editGalleryColumn">
                         <h3 >Gallery Cover</h3>
                         <PaintingDropdown currentGallery={currentGallery} handleChange={this.handleChange} selected={this.state.thumbnailUrl} />
                         <div id="enterVRButton" style={{textAlign: 'center', margin: 'auto'}}>
                         <Link to={`/vr/${currentGalleryId}/${this.state.environment}`}>
-                        <button className="btn btn-danger" 
-                        style={{backgroundColor: 'red', fontSize:'14px', margin: 'auto', color:'#222'}}>
+                        <button
+                          className="btn btn-danger"
+                          style={{backgroundColor: 'red', fontSize: '14px', margin: 'auto', color: '#222'}}>
                         Enter VR</button>
                         </Link>
                       </div>
@@ -128,8 +114,8 @@ class GalleryEdit extends Component{
 
                     <div className="editGalleryColumn">
                          <h3>Gallery Environment</h3>
-                        <DisplaySelectForm handleChangeForEnvironment={this.handleChangeForEnvironment} selected={this.state.environment}/>
-                        <Button onClick={()=>this.props.handleSubmit(this.state)}  className="btn btn-success" style={{ height: '60px',margin:'auto',color:'#101010'}}>Submit Changes</Button>
+                        <DisplaySelectForm handleChangeForEnvironment={this.handleChangeForEnvironment} selected={this.state.environment} />
+                        <Button onClick={() => this.props.handleSubmit(this.state)} className="btn btn-success" style={{ height: '60px', margin: 'auto', color: '#101010'}}>Submit Changes</Button>
                     </div>
 
                     <div className="editGalleryColumn">
@@ -139,21 +125,16 @@ class GalleryEdit extends Component{
                       src={this.state.environmentPic}
                       style={{height: '300px', width: '400px'}} />
                 </div>
-
-
-      {/*</form>*/}
                 </div>
              </div>
 
-
-
-
-            <div className="addAPaintingDiv" style={{marginTop:'40px'}}>
+            <div className="addAPaintingDiv" style={{marginTop: '40px'}}>
                 <div className="addAPaintingColumn">
                     <h3>Add a painting</h3>
-                        <Link to={`/canvas?galleryid=${currentGalleryId}`}><Button type="submit"
-                                    className="btn btn-success"
-                                    style={{margin: 'auto', marginTop: '45px',color:'#222'}} >Canvas
+                        <Link to={`/canvas?galleryid=${currentGalleryId}`}><Button
+                            type="submit"
+                            className="btn btn-success"
+                            style={{margin: 'auto', marginTop: '45px', color: '#222'}} >Canvas
                         </Button></Link>
                 </div>
                 <div className="addAPaintingColumn">
@@ -187,8 +168,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       const title = galleryState.title;
       const environment = galleryState.environment;
       const thumbnailUrl = galleryState.thumbnailUrl;
-      const environmentPic =galleryState.environmentPic;
-        console.log("FROM DISPATCH", environmentPic);
+      const environmentPic = galleryState.environmentPic;
       dispatch(updateGalleryThunk( { id, title, environment, thumbnailUrl, userId, environmentPic } ));
     }
   };
