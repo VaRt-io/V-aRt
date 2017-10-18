@@ -38,15 +38,15 @@ jobs:
       # Wait for Postgres connection to open.
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
       # Run validation checks & generate coverage reports
-      - run: yarn start validate.withCoverage
-      # Send coverage report to Codecov
-      - run: yarn start reportCoverage
-      - store_artifacts:
-          path: ./coverage/clover.xml
-          prefix: tests
-      - store_artifacts:
-          path: coverage
-          prefix: coverage
-      - store_test_results:
-          path: ./coverage/clover.xml
+      # - run: yarn start validate.withCoverage
+      # # Send coverage report to Codecov
+      # - run: yarn start reportCoverage
+      # - store_artifacts:
+      #     path: ./coverage/clover.xml
+      #     prefix: tests
+      # - store_artifacts:
+      #     path: coverage
+      #     prefix: coverage
+      # - store_test_results:
+      #     path: ./coverage/clover.xml
       - run: yarn run mocha
