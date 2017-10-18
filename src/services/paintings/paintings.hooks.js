@@ -5,9 +5,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [function log(hook){
-      console.log('creating', hook.data)
-    }],
+    create: [],
     update: [],
     patch: [],
     remove: []
