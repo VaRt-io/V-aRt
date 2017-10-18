@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery, VR, VR2, CanvasWrapper, GalleryCreate, SinglePainting, GalleryEdit, Signup, Signin, ArtistDashboard, VRWrapper, VRNightScene, VRCube, VRDesert, VRStarry, VRVanGogh, VRArtistHub} from './index';
+import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery, VR, VR2, CanvasWrapper, GalleryCreate, SinglePainting, GalleryEdit, Signup, Signin, ArtistDashboard, VRWrapper, VRNightScene, VRCube, VRDesert, VRStarry, VRVanGogh, VRArtistHub, LogoPage} from './index';
 
 
 // import AframeVR from '../containers/wrapper';
@@ -29,6 +29,7 @@ export default class Main extends Component{
       <div id="landingBackground">
         <OurNavbar />
         <Switch>
+          
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/artists/:id" component={SingleArtist} />
           <Route exact path="/artists" component={AllArtists} />
@@ -48,6 +49,7 @@ export default class Main extends Component{
           <Route exact path="/dashboard" component={ArtistDashboard} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/signin" component={Signin} />
+          <Route exact path ="/logopage" component={LogoPage} />
         </Switch>
       </div>
     );
