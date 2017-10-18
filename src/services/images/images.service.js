@@ -90,13 +90,8 @@ module.exports = function () {
             hook.data.paintingSaved = true;
           })
           .catch((err) => {
-            if(process.env.NODE_ENV === 'test') {
-              throw new Error('failed paintings post');
-            } else {
               // hook.result.paintingSaved = false;
               hook.data.paintingSaved = false;
-              console.log('failed paintings post');
-            }
           });
 
        
