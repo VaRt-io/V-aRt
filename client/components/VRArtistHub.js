@@ -1,19 +1,18 @@
 import 'aframe';
 import 'aframe-particle-system-component';
-import {Entity, Scene} from 'aframe-react';
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import { Scene } from 'aframe-react';
+import React from 'react';
+import { connect } from 'react-redux';
 
 function VRArtistHub(props) {
 
     const currentArtistId = props.match.params.id;
-    const currArtistIdNum = Number(currentArtistId)
+    const currArtistIdNum = Number(currentArtistId);
     const nextArtistId = (currArtistIdNum + 1).toString();
     const previousArtistId = (currArtistIdNum - 1).toString();
-    console.log(nextArtistId)
     const artists = props.artistsCollection;
     const currentArtist = artists.length && artists.filter(artist => +artist.id === +currentArtistId)[0];
-    let galleries;  
+    let galleries;
     let gridCellPositions;
 
     // Convert a 1D array to a 2D array of subarrays with a max length of 3
@@ -21,7 +20,7 @@ function VRArtistHub(props) {
         var newArr = [];
         var clonedArr = arr.slice();
         while (clonedArr.length) {
-          newArr.push(clonedArr.splice(0,3));
+          newArr.push(clonedArr.splice(0, 3));
         }
         return newArr;
       }
@@ -60,98 +59,96 @@ function VRArtistHub(props) {
     }
 
       return (
-          galleries?
+          galleries ?
           <Scene>
-          <a-entity light="type: ambient; color: #BBB"></a-entity>
+          <a-entity light="type: ambient; color: #BBB" />
           {
             gridCellPositions.map((position, index) => {
                 return (
                     <a-link href={`/vr/${galleries[index].id}/${galleries[index].environment}`} key={`${galleries[index].id}`}>
-                    <a-entity 
-                        key={`${galleries[index].id}`} 
-                        id={`${galleries[index].id}`} 
-                        geometry={{primative: 'cube'}} 
-                        material={`src: ${galleries[index].thumbnailUrl}`} 
-                        position={position} 
+                    <a-entity
+                        key={`${galleries[index].id}`}
+                        id={`${galleries[index].id}`}
+                        geometry={{primative: 'cube'}}
+                        material={`src: ${galleries[index].thumbnailUrl}`}
+                        position={position}
                         >
-                        <a-animation 
+                        <a-animation
                             attribute="scale"
                             to="1.1 1.1 1.1"
                             repeat="indefinite"
                             dur="1000"
-                        ></a-animation>
-                        <a-text 
-                            value={`${galleries[index].title}`}                       
-                            align="center" 
+                        />
+                        <a-text
+                            value={`${galleries[index].title}`}
+                            align="center"
                             anchor="center"
                             baseline="bottom"
                             position="0 -1 0"
-                        ></a-text>
-                    </a-entity>  
+                        />
+                    </a-entity>
                     </a-link>
 
                 );
             })
         }
         <a-entity camera="userHeight: 2.9" look-controls wasd-controls>
-                <a-entity 
-                cursor="fuse: true; fuseTimeout: 1500"
-                id="cursor" position="0 0 -2" geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white">
-                <a-animation begin="click" easing="ease-in" attribute="scale" dur="150"
-                fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
-                <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500"
-                fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+                <a-entity
+                  cursor="fuse: true; fuseTimeout: 1500"
+                  id="cursor" position="0 0 -2" geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white">
+                <a-animation
+                  begin="click"
+                  easing="ease-in"
+                  attribute="scale" dur="150"
+                  fill="forwards" from="0.1 0.1 0.1" to="1 1 1" />
+                <a-animation
+                  begin="cursor-fusing"
+                  easing="ease-in"
+                  attribute="scale"
+                  dur="1500"
+                  fill="backwards" from="1 1 1" to="0.1 0.1 0.1" />
                 </a-entity>
         </a-entity>
 
-            <a-box src="/img/exitsign.png" href={'/artists'} position="0 2 3.5"></a-box>
-            <a-box src="/img/next.png" href={`/vr/artists/${currentArtistId + 1}/starry`} position="3.5 2 0"></a-box>
-            <a-box src="/img/previous.jpeg" href={`/vr/artists/${currentArtistId - 1}/starry`} position="-3.5 2 0"></a-box>
-            <a-entity environment="preset: contact"></a-entity>               
+            <a-box src="/img/exitsign.png" href={'/artists'} position="0 2 3.5" />
+            <a-box src="/img/next.png" href={`/vr/artists/${currentArtistId + 1}/starry`} position="3.5 2 0" />
+            <a-box src="/img/previous.jpeg" href={`/vr/artists/${currentArtistId - 1}/starry`} position="-3.5 2 0" />
+            <a-entity environment="preset: contact" />
           </Scene>
           :
           <Scene>
               <a-entity camera="userHeight: 2.9" look-controls wasd-controls>
-                <a-entity 
+                <a-entity
                 cursor="fuse: true; fuseTimeout: 1500"
                 id="cursor" position="0 0 -2" geometry="primitive: ring; radiusOuter: 0.08; radiusInner: 0.05" material="color: white">
-                    <a-animation begin="click" easing="ease-in" attribute="scale" dur="150"
-                    fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
-                    <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500"
-                    fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+                    <a-animation
+                      begin="click"
+                      easing="ease-in"
+                      attribute="scale"
+                      dur="150"
+                      fill="forwards" from="0.1 0.1 0.1" to="1 1 1" />
+                    <a-animation
+                      begin="cursor-fusing"
+                      easing="ease-in"
+                      attribute="scale"
+                      dur="1500"
+                      fill="backwards" from="1 1 1" to="0.1 0.1 0.1" />
                 </a-entity>
             </a-entity>
 
-            <a-box src="/img/exitsign.png" href={'/artists'} position="0 2 3.5"></a-box>
-            <a-box src="/img/next.png" href={`/vr/artists/${nextArtistId}/starry`} position="3.5 2 0"></a-box>
-            <a-box src="/img/previous.jpeg" href={`/vr/artists/${previousArtistId}/starry`} position="-3.5 2 0"></a-box>
-            <a-entity environment="preset: contact"></a-entity>   
+            <a-box src="/img/exitsign.png" href={'/artists'} position="0 2 3.5" />
+            <a-box src="/img/next.png" href={`/vr/artists/${nextArtistId}/starry`} position="3.5 2 0" />
+            <a-box src="/img/previous.jpeg" href={`/vr/artists/${previousArtistId}/starry`} position="-3.5 2 0" />
+            <a-entity environment="preset: contact" />
         </Scene>
 
       );
 }
 
-// <a-entity 
-// id={galleries[0].id} 
-// geometry={{primative: 'box'}} 
-// material={`src: ${galleries[0].thumbnailUrl}`} 
-// position={'0 3 -10'} 
-// >
-// </a-entity>  
-
 const mapState = function(state){
     return {
         artistsCollection: state.users.artistsCollection
-    }
+    };
 };
 
 export default connect(mapState)(VRArtistHub);
-
-// <a-entity 
-// id={galleries[0].id} 
-// geometry={{primative: 'box'}} 
-// material={`src: ${galleries[0].thumbnailUrl}`} 
-// position={'0 3 -10'} 
-// >
-// </a-entity>  
-
