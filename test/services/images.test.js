@@ -23,7 +23,7 @@ describe('s3/images service', () => {
         }
       });
       
-      return db.sync();
+      return db.sync({force: true});
       
       // paintingsModel.truncate({cascade: true})
       //   .then(() => galleriesModel.truncate({cascade: true}))
