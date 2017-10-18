@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
-import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery, VR, VR2, CanvasWrapper, GalleryCreate, SinglePainting, GalleryEdit, Signup, Signin, ArtistDashboard, VRWrapper, VRNightScene, VRCube, VRDesert, VRStarry, VRVanGogh, VRArtistHub, LogoPage} from './index';
-
-
-// import AframeVR from '../containers/wrapper';
+import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery, CanvasWrapper, GalleryCreate, SinglePainting, GalleryEdit, Signup, Signin, ArtistDashboard, VRNightScene, VRDesert, VRStarry, VRVanGogh, VRArtistHub, LogoPage} from './index';
 
 import store, {getGalleriesThunk, fetchUsers, getPaintingsThunk, checkIfLoggedIn} from '../store';
 
 export default class Main extends Component{
 
   componentDidMount(){
-    console.log('MAIN COMPONENT MOUNTED');
-        // console.log(getGalleriesThunk)
     const galleryAction = getGalleriesThunk();
     const userAction = fetchUsers();     ///USERS = ARTISTS
     const paintingsAction = getPaintingsThunk();
@@ -42,7 +37,6 @@ export default class Main extends Component{
           <Route exact path="/vr/artists/:id/:env" component={VRArtistHub} />
           <Route exact path="/vr/:id/nightscene" component={VRNightScene} />
           <Route exact path="/vr/:id/desert" component={VRDesert} />
-          <Route exact path="/vr/:id/cube" component={VRCube} />    
           <Route exact path="/vr/:id/starry" component={VRStarry} />
           <Route exact path="/vr/:id/vangogh" component={VRVanGogh} />
           <Route exact path="/paintings/:id" component={SinglePainting} />

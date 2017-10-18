@@ -47,10 +47,10 @@ const setCurrentUser = user => {
    const jwtOptions = {
     	strategy: 'jwt',
       accessToken: localStorage.getItem('jwt')
-    };    
+    };
   let decodedJwt;
   try {
-    decodedJwt = jwt_decode(jwtOptions.accessToken);    
+    decodedJwt = jwt_decode(jwtOptions.accessToken);
   } catch (e) {
     decodedJwt = null;
   }
@@ -87,15 +87,6 @@ const setCurrentUser = user => {
        dispatch(authFail());
       });
  };
-
- // export const deauthUser = user => dispatch => {
- //   axios.post('/api/authentiction', user)
- //     .then(result => result.data)
- //     .then(newUser => {
- //       dispatch(de(newUser));
- //     })
- //     .catch(console.error);
- // };
 
  /**
   * REDUCER

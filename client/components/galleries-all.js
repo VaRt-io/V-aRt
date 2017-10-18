@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
-import store from '../store';
 
 class AllGalleries extends Component{
 
   render(){
     const galleries = this.props.galleryCollection;
-    const artistName = galleries.user;
 
     return (
       <div id="allGalleryBox">
@@ -42,7 +40,6 @@ class AllGalleries extends Component{
 const mapState = (state, ownProps) => {
   return {
     galleryCollection: state.galleries.galleryCollection,
-
   };
 };
 
