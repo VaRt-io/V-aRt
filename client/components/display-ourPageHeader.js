@@ -14,6 +14,6 @@ export default function OurPageHeader (props){
         </small>
       </PageHeader>
 
-        );
+    );
 
 }

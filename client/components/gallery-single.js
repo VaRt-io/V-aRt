@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { NavLink, Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-import store from '../store';
-import {Jumbotron} from 'react-bootstrap';
-import {OurPageHeader, DisplayPaintings, OurJumbotron } from './index';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { OurPageHeader, DisplayPaintings, OurJumbotron } from './index';
 
 
 class SingleGallery extends Component{
@@ -30,7 +28,6 @@ class SingleGallery extends Component{
     const currentGalleryId = this.props.match.params.id;
     const galleries = this.props.galleryCollection;
     const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === +currentGalleryId)[0];
-    const bgImage = currentGallery.thumbnailUrl;
     const environment = currentGallery.environment;
     let artistName;
     let artistId;
@@ -40,20 +37,20 @@ class SingleGallery extends Component{
     }
     return (
       <div className="singleGalleryContainer">
-        <OurPageHeader artistName={artistName} artistId={artistId}
-        currentGallery={currentGallery}/>
-       
-
+        <OurPageHeader
+          artistName={artistName}
+          artistId={artistId}
+          currentGallery={currentGallery} />
 
         <div id="jumbotronBox">
-            <div id="enterVRButton" style={{textAlign: 'center', marginTop:'10px', marginBottom:'50px'}}>
-            <Link to={`/vr/${currentGalleryId}/${environment}`} ><button className="btn btn-danger" style={{backgroundColor: 'red', fontSize:'20px'}}>Enter VR</button></Link>
+            <div id="enterVRButton" style={{textAlign: 'center', marginTop: '10px', marginBottom: '50px'}}>
+            <Link to={`/vr/${currentGalleryId}/${environment}`} ><button className="btn btn-danger" style={{backgroundColor: 'red', fontSize: '20px'}}>Enter VR</button></Link>
           </div>
           <OurJumbotron currentGallery={currentGallery} />
         </div>
         <div id ="galleryPaintings">
           <h3>Gallery Paintings</h3>
-          <hr/>
+          <hr />
           <DisplayPaintings currentGallery={currentGallery} />
         </div>
         <div className="single-gallery-create-painting-wrapper">

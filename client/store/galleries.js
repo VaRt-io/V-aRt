@@ -55,16 +55,14 @@ export const postGalleryThunk = (gallery, history) => dispatch => {
       dispatch(fetchUsers());
       return dispatch(getGalleriesThunk());
     })
-    .then((thunk)=> {
+    .then((thunk) => {
       history.push(`/gallery-edit/${createdGallery.id}`);
-      // setTimeout(()=>{
-      // }, 1500);
+
     })
     .catch(console.error);
 };
 
 export const updateGalleryThunk = (gallery) => dispatch => {
-  console.log('hitting that thunk good good');
   axios.put(`/api/galleries/${gallery.id}`, gallery)
     .then(result => console.log("RESULT DATA",result.data))
     .then(newGallery => {
