@@ -92,7 +92,6 @@ module.exports = function () {
           .catch((err) => {
               // hook.result.paintingSaved = false;
               hook.data.paintingSaved = false;
-              console.log('failed paintings post', err);
           });
 
        
