@@ -18,20 +18,26 @@ class VRVanGogh extends Component{
         // DEFINE ALL YOUR IMAGE TEXTURES HERE AND SAVE THEM AS CONSTANTS
         // EX.) const marbleTexture = 'https://ucarecdn.com/1b213dc4-386d-4978-8fe5-9b021b23c945/';
         // YOU WILL BE USING THEM ON YOU OBJECTS BELOW
-        var nightSky = 'http://chrusion.com/public_files/tycho/Stars_Tycho2+Milkyway_3000.png';
-        var snowyGround = 'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX1726024.jpg';
 
-        return (
-            paintings ?
+        
+        var snowyGround= 'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX1726024.jpg';
+
+    
+        return(
+            paintings?
             <Scene>
-            <a-asset-item id="starryNight" src="/models/vangogh/untitled-scene.obj" />
-            <a-asset-item id="starryNight-mtl" src="/models/vangogh/untitled-scene.mtl" />
-            <a-asset-item id="room" src="/models/vangogh/room.obj" />
-            <a-asset-item id="room-mtl" src="/models/vangogh/room.mtl" />
-            <a-asset-item id="saturn-obj" src="/models/saturn/saturn.obj" />
-            <a-asset-item id="saturn-mtl" src="/models/saturn/saturn.mtl" />
-            <a-asset-item id="jupiter-obj" src="/models/jupiter/jupiter.obj" />
-            <a-asset-item id="jupiter-mtl" src="/models/jupiter/jupiter.mtl" />
+
+            <a-assets>
+            <a-asset-item id="starryNight" src="/models/vangogh/untitled-scene.obj"></a-asset-item>
+            <a-asset-item id="starryNight-mtl" src="/models/vangogh/untitled-scene.mtl"></a-asset-item>
+            <a-asset-item id="room" src="/models/vangogh/room.obj"></a-asset-item>
+            <a-asset-item id="room-mtl" src="/models/vangogh/room.mtl"></a-asset-item>
+            <a-asset-item id="saturn-obj" src="/models/saturn/saturn.obj"></a-asset-item>
+            <a-asset-item id="saturn-mtl" src="/models/saturn/saturn.mtl"></a-asset-item>
+            <a-asset-item id="jupiter-obj" src="/models/jupiter/jupiter.obj"></a-asset-item>
+            <a-asset-item id="jupiter-mtl" src="/models/jupiter/jupiter.mtl"></a-asset-item>
+            </a-assets>
+
 
             <a-entity
               obj-model="obj:#starryNight; mtl:#starryNight-mtl"
@@ -53,12 +59,12 @@ class VRVanGogh extends Component{
               scale="1000 1000 1000"
             />
 
-            <a-entity
-              obj-model="obj:#jupiter-obj; mtl:#jupiter-mtl"
-              position="130 0 0"
-              scale="1000 1000 1000"
-            />
-                <a-sky src={nightSky} />
+
+            <a-entity obj-model="obj:#jupiter-obj; mtl:#jupiter-mtl"
+            position="130 20 0"
+            scale="2000 2000 2000"
+            ></a-entity>
+                <a-sky src='/models/vangogh/sky/milkyWay.png' />
                 <a-plane src={snowyGround} position="0 -2 -4" rotation="-90 0 0" width="90" height="90" repeat="10 10"  />
                 <Entity particle-system={{preset: 'snow'}} />
                 {
