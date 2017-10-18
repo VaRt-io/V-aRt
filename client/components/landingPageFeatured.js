@@ -8,7 +8,7 @@ export default class ourCarousel extends Component{
     return (
       <div>
 
-        <Carousel className="ourCarousel" className="col-md-6 col-lg-6 col-xs-12">
+        <Carousel className="ourCarousel" className="col-md-6 col-lg-6 col-xs-12" interval={3000} >
 
           <Carousel.Item>
             <img className="carImg" width="100%" height={350}  src="/COVERIMAGES/theDesert.png"  border="0" />

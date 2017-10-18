@@ -20,5 +20,5 @@ Ks 0.010000 0.010000 0.010000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd jupiterTexture.jpeg
-map_Ka jupiterTexture.jpeg
+map_Kd jupiterTexture.jpg
+map_Ka jupiterTexture.jpg
