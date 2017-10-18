@@ -20,10 +20,10 @@ class SinglePainting extends Component{
       return name;
     }
 
-    var artName = getPaintingName(currentPainting['url'] + '');
+    var artName = getPaintingName(currentPainting['url'] + ''); // DO NOT SWITCH TO DOT NOTATION, doesn't work in this case
 
     return (
-      <div className='carImg'>
+      <div className="carImg">
         <h1>{artName}</h1>
         <img src={currentPainting.url} />
       </div>

@@ -12,7 +12,7 @@ module.exports = {
     ],
     get: [],
     create: [],
-    update: [(hook)=>console.log(hook.data)],
+    update: [(hook) => console.log(hook.data)],
     patch: [],
     remove: []
   },

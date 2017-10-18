@@ -5,14 +5,13 @@ import {Provider} from 'react-redux';
 import store from './store';
 import {BrowserRouter as Router} from 'react-router-dom';
 import Main from './components/main';
-// import store from './store'
 
 
 ReactDOM.render(
     <Provider store={store} >
-        <Router>
-            <Main />
-        </Router>
-        </Provider>,
+      <Router>
+        <Main />
+      </Router>
+    </Provider>,
     document.getElementById('mainView')
 );
