@@ -1,0 +1,41 @@
+a {
+    color: #2525E6;
+}
+// ALL GALLERIES & ALL ARTISTS
+#allGalleryBox {
+    margin: 0px 0px 0px 40px
+}
+#allGalleryRender {
+    margin: 0px 0px 0px 40px
+}
+
+ .renderedBox{
+    // background-color: black;
+    margin: 10px 0px 20px 10px;
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+    border-radius: 15px;
+
+    .innerRenderedBox{
+        display: flex;
+        flex-direction: row;
+
+    }
+    #allGalleryThumb {
+    width:  150px;
+    height: 150px;
+    float: left;
+    margin: 10px 20px 10px 10px;
+    border: white solid 3px;
+    }
+
+    #byline{
+        align-self: flex-end;
+        text-align: left;
+    }
+    #allGalleriesText{
+        font-size: 20px;
+        margin: 20px 0px 0px 0px
+    }
+}

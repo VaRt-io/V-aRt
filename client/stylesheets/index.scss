@@ -1,0 +1,25 @@
+$bodyColor: #333030;
+$themeGreen: #1ec503;
+$themePurple: #c32aff;
+
+@import 'landingPage';
+@import 'navbar';
+@import 'all-galleries-artists';
+@import 'artists-single.scss';
+@import 'gallery-single';
+@import 'gallery-edit';
+@import 'signup-signin';
+@import 'logoPage';
+
+
+input:focus {
+    outline: none
+}
+
+//across all bodies (landing background si the container for our routes)
+#landingBackground {
+    background-color: $bodyColor;
+    font-family: 'Orbitron', sans-serif;
+    color: $themeGreen;
+   
+}
