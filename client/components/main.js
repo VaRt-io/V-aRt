@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery, CanvasWrapper, GalleryCreate, SinglePainting, GalleryEdit, Signup, Signin, ArtistDashboard, VRNightScene, VRDesert, VRStarry, VRVanGogh, VRArtistHub, LogoPage} from './index';
+import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery, CanvasWrapper, 
+  GalleryCreate, SinglePainting, GalleryEdit, Signup, Signin, ArtistDashboard, VRNightScene, VRDesert, 
+  VRStarry, VRVanGogh, VRArtistHub, LogoPage} from './index';
 
 import store, {getGalleriesThunk, fetchUsers, getPaintingsThunk, checkIfLoggedIn} from '../store';
 

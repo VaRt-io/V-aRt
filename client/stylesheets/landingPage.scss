@@ -1,0 +1,49 @@
+//LandingPage
+
+
+.carousel{
+    width: 100%;
+    margin: auto;
+    float: none;
+    
+
+}
+#landingPageHeader{
+    margin-left: 27vw;
+    margin: 0px;
+    position: absolute;
+    top: 100px;
+    z-index: 99;
+    color: $themePurple;
+    font-weight: bold;
+    
+}
+
+#landingPageDescriptors{
+    text-align: center;
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+// .spacer{
+//     background-color: grey;
+//     height:200px
+// }
+//carousel
+.carousel-caption{
+    color: $themePurple;
+}
+.carImg{
+    text-align: center;
+    margin: auto;
+    max-height: 575px;
+
+.footer{
+    background-color: black;
+    color:  white;
+    text-align: center;
+}
+    
+}
