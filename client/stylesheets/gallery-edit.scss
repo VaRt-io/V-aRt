@@ -1,0 +1,58 @@
+.galleryEditPageHeader{
+    display: flex;
+    flex-direction: row;
+}
+.headerContainer{
+    display: flex;
+    flex-direction:row;
+}
+
+.editGalleryContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.galleryCover{
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+}
+.innerGalleryCover{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    padding: 20px 20px;
+    background-color: black;
+    border-radius: 30px;;
+    margin: auto;
+    h3{
+        margin: 0px 20px 0px 20px
+    }
+}
+
+.editGalleryColumn{
+    display:flex;
+    flex-direction: column;
+    margin: 0px 20px
+
+}
+
+.addAPaintingDiv {
+    display: flex;
+    flex-direction: row;
+    
+    width: 90%;
+    padding: 20px 20px;
+    background-color: black;
+    border-radius: 30px;;
+    margin: auto;
+    h3{
+        margin: 0px 20px 0px 20px
+    }
+}
+.addAPaintingColumn{
+    display:flex;
+    flex-direction: column;
+    // margin: auto;
+    text-align: center;
+}

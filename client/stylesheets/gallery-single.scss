@@ -1,0 +1,81 @@
+.singleUserGalleryThumb{
+    width: 200px;
+    height:200px;
+    margin: auto;
+}
+.singleUserGalleryLink {
+    text-align: center;
+    color: white;
+    margin: auto;
+    font-size: 18px;       
+}
+a.singleUserGalleryLink:hover {
+    color: #c32aff;
+    text-decoration: none
+}
+.singleUserPaintingName {
+    margin: 0 auto;
+    color: white; 
+    font-size: 20px;
+    overflow:hidden; 
+    text-overflow: ellipsis;
+    width: 150px;  
+}
+a.singleUserPaintingName:hover{
+    color: #c32aff;
+    text-decoration: none;
+    text-align: center;
+}
+
+
+
+//SINGLE GALLERY VIEW
+.edit-gallery-btn {
+    width: 65%;
+    margin: 0 auto;
+}
+
+.page-header {
+    margin-top: 0px;
+}
+#enterVRButton .btn {
+    height: 60px;
+    width: 150px
+}
+.singleGalleryContainer{
+    display: flex;
+    flex-direction: column;
+
+}
+#jumbotronBox {
+    width: 90%;
+    background-color: black;
+    border-radius: 30px;
+    padding: 20px 20px;
+    margin: auto;
+    margin-bottom: 40px;
+}
+#galleryPaintings{
+    width: 90%;
+    background-color: black;
+    border-radius: 30px;
+    padding: 20px 20px;
+    margin: auto;
+}
+.userImagesInGalleryRow{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+   
+}
+.paintingsBox {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.single-gallery-image-link {
+    margin: 0 auto;
+}
+.single-gallery-create-painting-wrapper {
+    margin: 0 auto 3em auto;
+}
