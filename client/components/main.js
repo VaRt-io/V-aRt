@@ -45,7 +45,7 @@ export default class Main extends Component{
           <Route exact path="/dashboard" component={ArtistDashboard} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/signin" component={Signin} />
-          <Route exact path ="/hello" component={LogoPage} />
+          <Route exact path ="/logoPage" component={LogoPage} />
         </Switch>
       </div>
     );
