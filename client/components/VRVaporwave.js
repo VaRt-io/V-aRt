@@ -149,7 +149,7 @@ class VRVaporwave extends Component{
                     position= {position} 
                     rotation= {rotation}
                     />
-                    )
+                    );
                 })
             }
             {
@@ -163,7 +163,7 @@ class VRVaporwave extends Component{
                     position= {position} 
                     rotation= {rotation}
                     />
-                    )
+                    );
                 })
             }
             <a-entity
