@@ -1,12 +1,19 @@
 import 'aframe';
 import 'aframe-particle-system-component';
 import {Entity, Scene} from 'aframe-react';
-import React from 'react';
+import React, {Component}  from 'react';
 import {connect} from 'react-redux';
 
-function VRDesert(props){
-        const currentGalleryId = props.match.params.id;
-        const galleries = props.galleriesCollection;
+class  VRDesert extends Component{
+
+    componentWillUnmount(){
+        console.log('UNMOUNT HIT');
+        window.location.reload();
+    }
+
+    render(){
+        const currentGalleryId = this.props.match.params.id;
+        const galleries = this.props.galleriesCollection;
         const currentGallery = galleries.length && galleries.filter(gallery => +gallery.id === +currentGalleryId)[0];
         const currentArtistId = currentGallery.userId;
         let paintings;   //current galleries will be async, we have to wait for it to come in before we can define paintings
@@ -133,7 +140,7 @@ function VRDesert(props){
             :
             null
         );
-
+    }
 }
 
 const mapState = function(state){

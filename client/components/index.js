@@ -25,3 +25,4 @@ export {default as VRDesert} from './VRDesert';
 export {default as VRStarry} from './VRStarry';
 export {default as VRArtistHub} from './VRArtistHub';
 export {default as LogoPage} from './logopage.js';
+export {default as VRVaporwave} from './VRVaporwave.js';
