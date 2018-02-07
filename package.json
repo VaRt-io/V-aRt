@@ -33,11 +33,12 @@
     "start-dev": "npm run build-client-watch & npm start",
     "start-server": "NODE_ENV='development' nodemon server -e html,js,scss --ignore public",
     "build-client": "webpack",
-    "deploy": "git checkout -b deploy && webpack -p && git add -f public/bundle.js public/bundle.js.map && git commit --allow-empty -m 'Deploying' && git push --force heroku deploy:master && git checkout master && git branch -D deploy"    
+    "deploy": "git checkout -b deploy && webpack -p && git add -f public/bundle.js public/bundle.js.map && git commit --allow-empty -m 'Deploying' && git push --force heroku deploy:master && git checkout master && git branch -D deploy"
   },
   "dependencies": {
     "aframe": "^0.7.0",
     "aframe-href-component": "^0.5.1",
+    "aframe-mountain-component": "^0.3.3",
     "aframe-particle-system-component": "^1.0.10",
     "aframe-physics-components": "^1.1.0",
     "aframe-physics-system": "^2.0.0",

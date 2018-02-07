@@ -6,6 +6,11 @@ import {connect} from 'react-redux';
 
 class VRNightScene extends Component{
 
+  componentWillUnmount(){
+    console.log('UNMOUNT HIT');
+    window.location.reload();
+  }
+  
     render(){
     const currentGalleryId = this.props.match.params.id;
     const galleries = this.props.galleriesCollection;
