@@ -108,8 +108,13 @@ class VRVaporwave extends Component{
                         position= {position} 
                         rotation = {rotation} 
                         color='#4CC3D9'
-                        >
+                        >{
+                            paintings[index] ?
                             <a-entity geometry={{primative: 'box'}} material ={`src: ${paintings[index].url}`} position = '-60.2 535.6 -70.8' scale ='300 230 1' rotation='0 90 0'/>
+                            :
+                            null
+                        }
+                            
                         </a-entity>
 
                     );
@@ -127,8 +132,13 @@ class VRVaporwave extends Component{
                         position= {position} 
                         rotation = {rotation} 
                         color='#4CC3D9'
-                        >
+                        >{
+                            paintings[backIndex]?
                             <a-entity geometry={{primative: 'box'}} material ={`src: ${paintings[backIndex++].url}`} position = '-60.2 535.6 -70.8' scale ='300 230 1' rotation='0 90 0'/>
+                            :
+                            null
+                        }
+                            
                         </a-entity>
 
                     );
