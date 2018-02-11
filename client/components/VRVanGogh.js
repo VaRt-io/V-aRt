@@ -78,7 +78,7 @@ class VRVanGogh extends Component{
             <a-ring material={'src: /photos/ringTexture.jpg'} 
             radius-inner="40" 
             radius-outer="60"
-            rotation='-45 0 0'/>
+            rotation='-45çç 0 0'/>
 
             </a-entity>   
 

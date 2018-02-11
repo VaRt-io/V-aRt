@@ -1,23 +1,33 @@
 //LandingPage
 
+.clearfix::before, .clearfix:after{}
 
-.carousel{
+@mixin carouselHeights($height){
     width: 100%;
-    margin: auto;
-    float: none;
-    
+    height: $height;
+    .carousel-inner{
+        height: 100%;
+        .carImg{
+            height: $height
+        }
+    }
+}
+.carousel{  
+    @media(min-width:375px) { @include carouselHeights(45vh) }
+    @media(min-width:1028px)  {@include carouselHeights(70vh) }  
+}
 
-}
-#landingPageHeader{
-    margin-left: 27vw;
-    margin: 0px;
-    position: absolute;
-    top: 100px;
-    z-index: 99;
-    color: $themePurple;
-    font-weight: bold;
+//IF WE WANT TO ADD ANY TEXT OVER JUMBO
+// #landingPageHeader{
+//     margin-left: 27vw;
+//     margin: 0px;
+//     position: absolute;
+//     top: 100px;
+//     z-index: 99;
+//     color: $themePurple;
+//     font-weight: bold;
     
-}
+// }
 
 #landingPageDescriptors{
     text-align: center;
@@ -25,25 +35,16 @@
     margin: auto;
     margin-top: 30px;
     margin-bottom: 50px;
+    min-height: 30vh;
 }
 
-// .spacer{
-//     background-color: grey;
-//     height:200px
-// }
-//carousel
-.carousel-caption{
-    color: $themePurple;
-}
-.carImg{
-    text-align: center;
-    margin: auto;
-    max-height: 575px;
 
 .footer{
     background-color: black;
     color:  white;
     text-align: center;
+    height: 100px;
+    margin: auto;
+    bottom: 0;
 }
     
-}
