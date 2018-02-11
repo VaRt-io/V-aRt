@@ -1,8 +1,8 @@
 //LandingPage
 
-.clearfix::before, .clearfix:after{}
 
-@mixin carouselHeights($height){
+
+@mixin carouselHeightConstructor($height){
     width: 100%;
     height: $height;
     .carousel-inner{
@@ -13,8 +13,11 @@
     }
 }
 .carousel{  
-    @media(min-width:375px) { @include carouselHeights(45vh) }
-    @media(min-width:1028px)  {@include carouselHeights(70vh) }  
+    @media(min-width:375px) { @include carouselHeightConstructor(40vh) }
+    @media(min-width:1028px)  {@include carouselHeightConstructor(70vh) }
+    .carousel-caption{
+        color: $themePurple;
+    }  
 }
 
 //IF WE WANT TO ADD ANY TEXT OVER JUMBO
@@ -35,9 +38,17 @@
     margin: auto;
     margin-top: 30px;
     margin-bottom: 50px;
-    min-height: 30vh;
+    min-height: 37vh;
+    @media(min-width: 1300px){
+        h3{
+            font-size: 32px;
+        }
+        h4{
+            font-size: 24px;
+        }
+    }
+   
 }
-
 
 .footer{
     background-color: black;
