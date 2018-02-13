@@ -167,7 +167,7 @@ class SingleArtist extends Component {
 
         
 
-        <div className="galleriesAndPaintings col-xs-12 col-md-8 col-lg-8">
+        <div className="galleriesAndPaintings col-xs-12  col-md-8 col-lg-8">
           {/*<div id='buttonsLine' style={{marginBottom: '40px', marginTop: '40px'}}>
             {
               this.checkIfOwnProfile() && <Link className="btn btn-default" to="/gallery-create">New Gallery</Link>
