@@ -1,23 +1,36 @@
 //LandingPage
 
 
-.carousel{
-    width: 100%;
-    margin: auto;
-    float: none;
-    
 
+@mixin carouselHeightConstructor($height){
+    width: 100%;
+    height: $height;
+    .carousel-inner{
+        height: 100%;
+        .carImg{
+            height: $height
+        }
+    }
 }
-#landingPageHeader{
-    margin-left: 27vw;
-    margin: 0px;
-    position: absolute;
-    top: 100px;
-    z-index: 99;
-    color: $themePurple;
-    font-weight: bold;
+.carousel{  
+    @media(min-width:375px) { @include carouselHeightConstructor(40vh) }
+    @media(min-width:1028px)  {@include carouselHeightConstructor(70vh) }
+    .carousel-caption{
+        color: $themePurple;
+    }  
+}
+
+//IF WE WANT TO ADD ANY TEXT OVER JUMBO
+// #landingPageHeader{
+//     margin-left: 27vw;
+//     margin: 0px;
+//     position: absolute;
+//     top: 100px;
+//     z-index: 99;
+//     color: $themePurple;
+//     font-weight: bold;
     
-}
+// }
 
 #landingPageDescriptors{
     text-align: center;
@@ -25,25 +38,24 @@
     margin: auto;
     margin-top: 30px;
     margin-bottom: 50px;
+    min-height: 37vh;
+    @media(min-width: 1300px){
+        h3{
+            font-size: 32px;
+        }
+        h4{
+            font-size: 24px;
+        }
+    }
+   
 }
-
-// .spacer{
-//     background-color: grey;
-//     height:200px
-// }
-//carousel
-.carousel-caption{
-    color: $themePurple;
-}
-.carImg{
-    text-align: center;
-    margin: auto;
-    max-height: 575px;
 
 .footer{
     background-color: black;
     color:  white;
     text-align: center;
+    height: 100px;
+    margin: auto;
+    bottom: 0;
 }
     
-}

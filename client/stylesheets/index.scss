@@ -16,6 +16,10 @@ input:focus {
     outline: none
 }
 
+html{
+    font-size: 16px;
+}
+
 //across all bodies (landing background si the container for our routes)
 #landingBackground {
     background-color: $bodyColor;
