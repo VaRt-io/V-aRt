@@ -8,7 +8,6 @@ export default class Main extends Component{
     return (
           <div>
 
-        <h1>TESTTOOO</h1>
             <OurCarousel />
             <div id="landingPageDescriptors">
               <div className="col-md-4">
