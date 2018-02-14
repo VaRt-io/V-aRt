@@ -1,33 +1,46 @@
+@mixin thumbnail($size){
+    width: $size;
+    height: $size;
+    border: white solid 3px;
+}
+
+
 a {
     color: #2525E6;
 }
-// ALL GALLERIES & ALL ARTISTS
-#allGalleryBox {
+%pageMargin{
     margin: 0px 0px 0px 40px
 }
+// ALL GALLERIES & ALL ARTISTS
+#allGalleryBox {
+    @extend %pageMargin;
+}
 #allGalleryRender {
-    margin: 0px 0px 0px 40px
+    @extend %pageMargin;
+    min-height: 100vh;
+    margin: auto;
 }
 
  .renderedBox{
     // background-color: black;
-    margin: 10px 0px 20px 10px;
+    padding: 10px 0px 20px 10px;
     display: flex;
     flex-direction: row;
-    background-color: black;
-    border-radius: 15px;
-
+    background-color: transparent;
+    
     .innerRenderedBox{
         display: flex;
         flex-direction: row;
-
+        background-color: black;
+        padding: 10px;
+        width: 90%;
+        border-radius: 15px;
     }
     #allGalleryThumb {
-    width:  150px;
-    height: 150px;
+    @include thumbnail(150px);
     float: left;
     margin: 10px 20px 10px 10px;
-    border: white solid 3px;
+    
     }
 
     #byline{

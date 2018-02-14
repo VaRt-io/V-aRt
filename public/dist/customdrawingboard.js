@@ -16,7 +16,7 @@ DrawingBoard.Board.prototype.fetchUploadURI =  function(uri, name, galleryId, us
         // TODO: Route to galleries page
         setTimeout(() => {
           window.location.href = `/gallery-edit/${galleryId}`;
-        }, 500);
+        }, 200);
       })
       .catch((err) => {
       // TODO: Render an error message

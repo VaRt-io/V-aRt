@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import {LandingPage,  OurNavbar, AllArtists, SingleArtist, AllGalleries, SingleGallery, CanvasWrapper, 
   GalleryCreate, SinglePainting, GalleryEdit, Signup, Signin, ArtistDashboard, VRNightScene, VRDesert, 
-  VRStarry, VRVanGogh, VRArtistHub, LogoPage} from './index';
+  VRStarry, VRVanGogh, VRArtistHub, VRVaporwave, LogoPage} from './index';
 
 import store, {getGalleriesThunk, fetchUsers, getPaintingsThunk, checkIfLoggedIn} from '../store';
 
@@ -42,6 +42,7 @@ export default class Main extends Component{
           <Route exact path="/vr/:id/starry" component={VRStarry} />
           <Route exact path="/vr/:id/vangogh" component={VRVanGogh} />
           <Route exact path="/paintings/:id" component={SinglePainting} />
+          <Route exact path="/vr/:id/vaporwave" component={VRVaporwave} />
           <Route exact path="/dashboard" component={ArtistDashboard} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/signin" component={Signin} />

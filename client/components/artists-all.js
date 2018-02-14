@@ -9,12 +9,12 @@ class AllArtists extends Component {
     const artists = this.props.artistsCollection;
     return (
       <div id="allGalleryBox">
-      <h1>Artists</h1>
+      <h1>All Artists</h1>
         <div id="allGalleryRender">
           {
             artists && artists.map(artist => {
               return (
-              <div className="renderedBox col-md-3" key={artist.id}>
+              <div className="renderedBox col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3" key={artist.id}>
                 <div className="innerRenderedBox">
                   <img id="allGalleryThumb" src={artist.profileImageUrl} />
                   <div style={{marginTop: '15px'}}>

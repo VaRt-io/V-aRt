@@ -9,12 +9,12 @@ class AllGalleries extends Component{
 
     return (
       <div id="allGalleryBox">
-        <h1>Galleries</h1>
+        <h1>All Galleries</h1>
         <div id="allGalleryRender">
           {
             galleries && galleries.map(gallery => {
               return (
-                <div className="renderedBox col-md-3" key={gallery.id}>
+                <div className="renderedBox col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3" key={gallery.id}>
                   <div className="innerRenderedBox">
                     <img id="allGalleryThumb" src={gallery.thumbnailUrl} />
                     <div style={{marginTop: '15px'}}>
