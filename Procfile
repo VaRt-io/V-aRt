@@ -1,1 +1,1 @@
-web: npm run build-client-watch & npm start
+web: node src/index.js
