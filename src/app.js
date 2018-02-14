@@ -64,7 +64,7 @@ app.configure(seeder(seederConfig));
 app.hooks(appHooks);
 
 app.use('*', (req, res, next) =>
-  res.sendFile(path.join(__dirname, '..', 'public/index.html','public'))
+  res.sendFile(path.join(__dirname, '..', 'public/index.html'))
 );
 
 app.use(notFound());
