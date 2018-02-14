@@ -4,14 +4,12 @@ import {OurCarousel} from './index';
 export default class Main extends Component{
 
   // OUR CAROUSEL LOCATED IN landingPageFeatured.js
-
+  //redeploytest
   render(){
     return (
 
           <div>
- 
             <OurCarousel /> 
-
             <div id="landingPageDescriptors">
               <div className=" col-xs-12 col-md-6 col-lg-4">
               <h3>Paint <span className="glyphicon glyphicon-pencil" /></h3>
