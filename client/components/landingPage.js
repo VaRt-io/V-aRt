@@ -9,7 +9,7 @@ export default class Main extends Component{
     return (
 
           <div>
-          <h1>HEROKU TESST</h1>
+ 
             <OurCarousel /> 
 
             <div id="landingPageDescriptors">
