@@ -9,6 +9,7 @@ export default class Main extends Component{
     return (
           <div>
 
+
             <OurCarousel />
             <div id="landingPageDescriptors">
               <div className="col-md-4">
@@ -34,11 +35,11 @@ export default class Main extends Component{
                       margin: 'auto',
                       marginTop: '50px'
           }}>
+
             <h5 style={{margin: '45px'}}>
             By Tawsif Ahmed, Jason Rosso, Alex Press, James Dooley
             </h5>
             </div>
-
 
 
            </div>
