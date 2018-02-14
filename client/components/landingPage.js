@@ -3,13 +3,12 @@ import {OurCarousel} from './index';
 
 export default class Main extends Component{
 
-  // OUR CAROUSEL LOCATED IN landingPageFeatured.js
-  //redeploytest
+
   render(){
     return (
           <div>
 
-
+        <h1>TESTTOOO</h1>
             <OurCarousel />
             <div id="landingPageDescriptors">
               <div className="col-md-4">
