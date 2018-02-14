@@ -6,10 +6,8 @@ export default class Main extends Component{
 
   render(){
     return (
-
           <div>
             <OurCarousel />
-
             <div id="landingPageDescriptors">
               <div className="col-md-4">
               <h3>Paint <span className="glyphicon glyphicon-pencil" /></h3>
