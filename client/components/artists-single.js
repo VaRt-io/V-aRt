@@ -95,6 +95,7 @@ class SingleArtist extends Component {
 
     return (
       <div className="singleArtistContainer clearfix ">
+        
       {
         mq.matches ? <h5>BIG SCREEEN</h5>:<h5>SMALL SCREEN</h5>
       }

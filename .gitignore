@@ -111,5 +111,6 @@ $RECYCLE.BIN/
 lib/
 data/
 
-
+bundle,js
+bundle.map.js
 public/models/column-tall/column-tall.obj
