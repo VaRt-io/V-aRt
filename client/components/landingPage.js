@@ -7,7 +7,7 @@ export default class Main extends Component{
 
   render(){
     return (
-
+      //small test change
           <div>
             <OurCarousel /> 
 
